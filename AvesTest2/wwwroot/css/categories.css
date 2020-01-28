@@ -1,0 +1,27 @@
+﻿body {
+}
+
+.letter-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.letter-key {
+    padding: 10px;
+    background-color: #0094ff;
+    color: #ffffdd;
+    font-size: 24px;
+    margin: 5px;
+}
+
+    .letter-key:hover, letter-key:enabled {
+        color: #0c0c20;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+.button-mod {
+    border-radius: 0;
+    margin: 5px;
+    font-size: 24px;
+}

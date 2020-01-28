@@ -2,7 +2,55 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@*<div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>*@
+
+@{
+    //Layout = "~/_SiteLayout.cshtml";
+    //Page.Title = "Home Page";
+
+    @*<link href="/Content/Default.css" rel="stylesheet" type="text/css" />
+        <script src="/scripts/Default.js" type="text/javascript"></script>*@
+
+    string[] Months = { "", "January", "February", "March", "April", "May", "June", "July", "August", "September", "Octuber", "November", "December" };
+}
+
+<div class="home">
+    <div class="container">
+        <div class="jumbotron" id="intro">
+            <h1>Intro to site</h1>
+            <div>
+                @*@foreach (var bird in Model.Birds)
+                {
+                    <p>
+                        <span class="temp-text">@bird.Name</span>
+                        <span class="temp-text">(@bird.ScientificName)</span>
+                        <span class="temp-text">@bird.Location</span>
+                        <span class="temp-text">@Months[@bird.Month] @bird.Year</span>
+                    </p>
+                }*@
+            </div>
+        </div>
+        <div class="row" id="location-selectors">
+            <div class="location col-lg-4 col-md-4 col-sm-4" id="sweden-link">
+                <h1><a class="location-head" asp-controller="Alphabetical">Alphabetical Order</a></h1>
+                <p class="description-text">Select from the list of all the birds in the site.</p>
+            </div>
+            <div class="location col-lg-4 col-md-4 col-sm-4" id="peru-link">
+                <h1><a class="location-head" asp-controller="Family">Family</a></h1>
+                <p class="description-text">Select by Bird Family category.</p>
+            </div>
+            <div class="location col-lg-4 col-md-4 col-sm-4" id="usa-link">
+                <h1><a class="location-head" asp-controller="Location">Location</a></h1>
+                <p class="description-text">Select by country or in-captivity location.</p>
+            </div>
+            @*<div class="location col-lg-3 col-md-3 col-sm-3" id="in-captivity-link">
+                    <h1><a class="location-head" href="~/InCaptivityBirds">In Captivity</a></h1>
+                    <p>Birds in various zoos, theme parks and museum live areas.</p>
+                </div>*@
+        </div>
+    </div>
 </div>
+

@@ -59,8 +59,9 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-color: #0c0c20;
 }
 .footer {
   position: absolute;
@@ -68,4 +69,66 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+/* home page elements*/
+
+.home .container {
+    margin-top: 80px;
+}
+
+.home #intro {
+    /*height:300px;*/
+    background-color: #151545;
+}
+
+.home .location {
+    padding: 20px;
+    /*min-width:200px;*/
+    /*margin-left:1px;*/
+}
+
+    .home .location:hover {
+        opacity: 0.85;
+    }
+
+.home #location-selectors {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    overflow: hidden;
+}
+
+.home .location-head {
+    color: #fff;
+    text-decoration: none;
+}
+
+    .home .location-head:hover {
+        background-color: transparent;
+        text-shadow: 2px 2px 2px #111;
+    }
+
+
+.home #sweden-link {
+    background-color: #2929c8;
+}
+
+.home #peru-link {
+    background-color: #9e2929;
+}
+
+.home #usa-link {
+    background-color: #e27c34;
+}
+
+.home #in-captivity-link {
+    background-color: #237e23;
+}
+
+.temp-text {
+    color: #ffffaa;
+}
+
+.description-text {
+    color: #ffffdd;
 }
