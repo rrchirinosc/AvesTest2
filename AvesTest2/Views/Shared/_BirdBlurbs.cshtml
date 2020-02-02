@@ -1,0 +1,23 @@
+﻿@*
+
+*@
+
+@model AlphabeticalViewModel
+
+    <div class="blurbs-parent"></div>
+
+    <div class="card-columns">
+        @foreach (var bird in Model.Birds)
+        {
+            if (bird.Name.StartsWith(@ViewData["letter"].ToString()[0]))
+            {
+                <div class="card">
+                    <img src="~/Images/Birds/120/dsc09835w.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@bird.Name</h5>
+                        <h5 class="card-title">(@bird.SciName)</h5>                            
+                    </div>
+                </div>                
+            }
+         }
+    </div>      

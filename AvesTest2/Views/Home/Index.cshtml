@@ -20,17 +20,16 @@
 <div class="home">
     <div class="container">
         <div class="jumbotron" id="intro">
-            <h1>Intro to site</h1>
+            <h1 class="description-text">Intro to site</h1>
             <div>
                 @*@foreach (var bird in Model.Birds)
-                {
-                    <p>
-                        <span class="temp-text">@bird.Name</span>
-                        <span class="temp-text">(@bird.ScientificName)</span>
-                        <span class="temp-text">@bird.Location</span>
-                        <span class="temp-text">@Months[@bird.Month] @bird.Year</span>
-                    </p>
-                }*@
+                    {
+                        <p>
+                            <span class="temp-text">@bird.Name</span>
+                            <span class="temp-text">(@bird.SciName)</span>
+                            <span class="temp-text">@bird.FamilyId</span>
+                        </p>
+                    }*@
             </div>
         </div>
         <div class="row" id="location-selectors">
@@ -46,10 +45,6 @@
                 <h1><a class="location-head" asp-controller="Location">Location</a></h1>
                 <p class="description-text">Select by country or in-captivity location.</p>
             </div>
-            @*<div class="location col-lg-3 col-md-3 col-sm-3" id="in-captivity-link">
-                    <h1><a class="location-head" href="~/InCaptivityBirds">In Captivity</a></h1>
-                    <p>Birds in various zoos, theme parks and museum live areas.</p>
-                </div>*@
         </div>
     </div>
 </div>

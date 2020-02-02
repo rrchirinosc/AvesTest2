@@ -10,18 +10,42 @@
     padding: 10px;
     background-color: #0094ff;
     color: #ffffdd;
-    font-size: 24px;
+    border-radius: 0;
     margin: 5px;
+    font-size: 24px;
+    width:40px;
 }
 
-    .letter-key:hover, letter-key:enabled {
-        color: #0c0c20;
+    .letter-key:hover {
+        background-color: #ffffdd;
+        color: #0094ff;
         text-decoration: none;
         font-weight: bold;
+        border-radius:0;
+        width:40px;
     }
 
 .button-mod {
     border-radius: 0;
     margin: 5px;
     font-size: 24px;
+}
+
+.blurbs-parent{
+    margin-top:40px;
+}
+
+/* bootstrap mod */
+a.nav-link {
+    font-size: 24px;
+}
+
+.nav-tabs .nav-link {
+    border-radius:0;
+}
+
+.nav-tabs .nav-link.active {
+    background-color:rgba(255, 255, 221, 0.00);
+    color:#eeeeee;
+    font-weight:600;
 }
