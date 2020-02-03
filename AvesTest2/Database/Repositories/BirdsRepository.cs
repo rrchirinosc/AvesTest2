@@ -29,5 +29,16 @@ namespace AvesTest2.Database.Repositories
                 return Connection.Query<BirdDTO>(sql);
             }
         }
+
+
+        public IEnumerable<FamilyDTO> Families
+        {
+            get
+            {
+                string sql = "SELECT [Family].Id, [Family].Name, [Family].SciName" +
+                                                " FROM [Family] ORDER BY [SciName]";
+                return Connection.Query<FamilyDTO>(sql);
+            }
+        }
     }
 }

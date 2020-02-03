@@ -92,38 +92,22 @@ body {
         opacity: 0.85;
     }
 
-.home #location-selectors {
+.home #category-selectors {
     padding-top: 30px;
     padding-bottom: 30px;
     overflow: hidden;
 }
 
-.home .location-head {
+.home .category-head {
     color: #fff;
     text-decoration: none;
 }
 
-    .home .location-head:hover {
+    .home .category-head:hover {
         background-color: transparent;
         text-shadow: 2px 2px 2px #111;
     }
 
-
-.home #sweden-link {
-    background-color: #2929c8;
-}
-
-.home #peru-link {
-    background-color: #9e2929;
-}
-
-.home #usa-link {
-    background-color: #e27c34;
-}
-
-.home #in-captivity-link {
-    background-color: #237e23;
-}
 
 .temp-text {
     color: #ffffaa;

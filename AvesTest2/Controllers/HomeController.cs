@@ -28,6 +28,24 @@ namespace AvesTest2.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Alphabetical()
+        {
+            BirdViewModel model = await BirdViewModel.Load();
+            return View(model);
+        }
+
+        public async Task<IActionResult> Family()
+        {
+            BirdViewModel model = await BirdViewModel.Load();
+            return View(model);
+        }
+
+        public async Task<IActionResult> Location()
+        {
+            //AlphabeticalViewModel model = await AlphabeticalViewModel.Load();
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

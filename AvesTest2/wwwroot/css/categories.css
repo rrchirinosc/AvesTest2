@@ -1,28 +1,41 @@
 ﻿body {
 }
 
-.letter-list {
+.home #alphabetical-link {
+    background-color: #9e2929;
+}
+
+.home #family-link {
+    background-color: #2929c8;
+}
+
+.home #location-link {
+    background-color: #e27c34;
+}
+
+.selector-list {
     display: flex;
     flex-wrap: wrap;
 }
 
-.letter-key {
+.selector-item {
     padding: 10px;
-    background-color: #0094ff;
+    background-color: #2929c8; /*#0094ff;*/
     color: #ffffdd;
     border-radius: 0;
     margin: 5px;
     font-size: 24px;
-    width:40px;
+    font-weight: 600;
+    /*width:40px;*/
 }
 
-    .letter-key:hover {
+    .selector-item:hover {
         background-color: #ffffdd;
-        color: #0094ff;
+        color: #2929c8; /*#0094ff;*/
         text-decoration: none;
-        font-weight: bold;
-        border-radius:0;
-        width:40px;
+        /*font-weight: bold;*/
+        border-radius: 0;
+        /*width:40px;*/
     }
 
 .button-mod {
@@ -48,4 +61,9 @@ a.nav-link {
     background-color:rgba(255, 255, 221, 0.00);
     color:#eeeeee;
     font-weight:600;
+}
+
+.card {
+    border:none;
+    border-radius:0;
 }

@@ -1,0 +1,18 @@
+﻿
+
+@{
+    ViewData["Title"] = "Family";
+}
+
+@model BirdViewModel
+
+<h1 class="description-text">Family</h1>
+
+<div class="selector-list">
+    @foreach (var family in Model.Families)
+    {
+        <div class="selector-item">@family.SciName (@family.Name)</div>
+    }
+
+</div>
+
