@@ -32,19 +32,25 @@
                     }*@
             </div>
         </div>
-        <div class="row" id="category-selectors">
-            <div class="location col-lg-4 col-md-4 col-sm-4" id="alphabetical-link">
-                <h1><a class="location-head" asp-action="Alphabetical">Alphabetical Order</a></h1>
-                <p class="description-text">Select from the list of all the birds in the site.</p>
-            </div>
-            <div class="location col-lg-4 col-md-4 col-sm-4" id="family-link">
-                <h1><a class="location-head" asp-action="Family">Family</a></h1>
-                <p class="description-text">Select by Bird Family category.</p>
-            </div>
-            <div class="location col-lg-4 col-md-4 col-sm-4" id="location-link">
-                <h1><a class="location-head" asp-action="Location">Location</a></h1>
-                <p class="description-text">Select by country or in-captivity location.</p>
-            </div>
+        <div class="selector-list">
+            <a class="category-head" asp-action="Alphabetical">
+                <div class="selector-item">
+                    <h2>Alphabetical</h2>
+                    <p>Select from the list of all the birds in the site.</p>
+                </div>
+            </a>
+            <a class="category-head" asp-action="Family">
+                <div class="selector-item">
+                    <h2>Family</h2>
+                    <p>Select by Bird Family category.</p>
+                </div>
+            </a>
+            <a class="category-head" asp-action="Location">
+                <div class="selector-item">
+                    <h2>Location</h2>
+                    <p>Select by country or in-captivity location.</p>
+                </div>
+            </a>
         </div>
     </div>
 </div>

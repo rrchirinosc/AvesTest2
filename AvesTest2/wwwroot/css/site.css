@@ -82,31 +82,7 @@ body {
     background-color: #151545;
 }
 
-.home .location {
-    padding: 20px;
-    /*min-width:200px;*/
-    /*margin-left:1px;*/
-}
 
-    .home .location:hover {
-        opacity: 0.85;
-    }
-
-.home #category-selectors {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    overflow: hidden;
-}
-
-.home .category-head {
-    color: #fff;
-    text-decoration: none;
-}
-
-    .home .category-head:hover {
-        background-color: transparent;
-        text-shadow: 2px 2px 2px #111;
-    }
 
 
 .temp-text {
