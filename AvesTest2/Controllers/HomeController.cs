@@ -46,6 +46,12 @@ namespace AvesTest2.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Show()
+        {
+            //AlphabeticalViewModel model = await AlphabeticalViewModel.Load();
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
