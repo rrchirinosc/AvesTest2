@@ -86,30 +86,32 @@
 .blurb {
     padding: 2px;
     margin:3px;
-    background-color: rgba(255,255,254, 0.75);
+    background-color: rgba(255,255,254, 1);
     position: relative;
     text-align: left;
     color: #ffffee;
 }
 
     .blurb:hover {
-        text-decoration: none;
-        background-color: rgba(255,255,254, 1);
+        /*text-decoration: none;*/
+        /*background-color: rgba(255,255,254,.5);*/
+        opacity: .75;
     }
 
         .blurb-image {
-            width:320px;
+            width:320px;            
         }
 
-        .blurb-label {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 0 0 10px 15px;
-            background-color: rgba(80,80,80,0.05);
-            color: rgba(255,255,254,0.9);
-        }
+.blurb-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 0 10px 15px;
+    background-color: rgba(80,80,80,.1);
+    color: rgba(255,255,254,0.9);
+    text-shadow:1px 1px 1px #000;
+}
 
             .blurb-name {
                 font-weight: 500;

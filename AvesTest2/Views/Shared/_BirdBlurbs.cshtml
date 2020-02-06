@@ -1,5 +1,6 @@
 ﻿@{
-    string[] Aves = { "~/Images/Birds/120/dsc09835w.jpg", "~/Images/Birds/143/rcc05368w.jpg", "~/Images/Birds/24/dsc5740w.jpg", "~/Images/Birds/388/rcc09277_1w.jpg" };
+    string ImgRoot= "http://localhost:5000/Images/Birds";
+    string[] Imgs = { "/120/dsc09835w.jpg", "/143/rcc05368w.jpg", "/24/dsc5740w.jpg", "/388/rcc09277_1w.jpg" };
 }
 
 @model BirdViewModel
@@ -30,7 +31,7 @@
         {
             <a asp-action="Show">
                 <div class="blurb">
-                    <img src="~/Images/Birds/24/dsc5740w.jpg" class="blurb-image">
+                    <img src="@ImgRoot@Imgs[new Random().Next(0,4)]" class="blurb-image">
                     <div class="blurb-label">
                         <h5 class="blurb-name">@bird.Name</h5>
                         <h6 class="blurb-sciname">(@bird.SciName)</h6>

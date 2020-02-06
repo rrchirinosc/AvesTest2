@@ -16,6 +16,14 @@
 
 </div>
 
+<div class="selector-list">
+    @foreach (var family in Model.Families)
+    {
+        <div class="selector-item">@family.SciName (@family.Name)</div>
+    }
+
+</div>
+
 @*<div class="container">
     <table class="table table-striped">
         <thead>
@@ -35,6 +43,6 @@
                 </tr>
             }
         </tbody>
-    </table>*@
-</div>
+    </table>
+</div>*@
 
