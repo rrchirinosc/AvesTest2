@@ -8,41 +8,62 @@
 
 <h1 class="description-text">Family</h1>
 
-<div class="selector-list">
+@*<div class="selector-list">
     @foreach (var family in Model.Families)
     {
         <div class="selector-item">@family.SciName (@family.Name)</div>
     }
 
-</div>
-
-<div class="selector-list">
-    @foreach (var family in Model.Families)
-    {
-        <div class="selector-item">@family.SciName (@family.Name)</div>
-    }
-
-</div>
-
-@*<div class="container">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var family in Model.Families)
-            {
-                <tr>
-                    <td>@family.SciName</td>
-                    <td>(@family.Name)</td>
-                </tr>
-            }
-        </tbody>
-    </table>
 </div>*@
+
+@*<div class="selector-list">
+    @foreach (var family in Model.Families)
+    {
+        <div class="selector-item">@family.SciName (@family.Name)</div>
+    }
+
+</div>*@
+
+<div class="container">
+    <div class="row">
+        @{
+            int count = Model.Families.Count / 2;
+            int firstHalf = count + count % 2;
+            int secondHalf = Model.Families.Count - firstHalf;
+            int index;
+        }
+        <div class="col">
+            <table class="table table-striped">
+                @*<thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>*@
+                @for (index = 0; index < firstHalf; index++)
+                {
+                    <tr>
+                        <td class="selector-item">@Model.Families[index].SciName (@Model.Families[index].Name)</td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="col">
+            <table class="table table-striped">
+                @*<thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>*@
+                @for (; index < Model.Families.Count; index++)
+                {
+                    <tr>
+                        <td class="selector-item">@Model.Families[index].SciName (@Model.Families[index].Name)</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
 

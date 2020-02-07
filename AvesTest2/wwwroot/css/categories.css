@@ -49,13 +49,13 @@
 }
 
 .selector-item {
-    padding: 10px;
+    padding: 20px;
     background-color: rgba(41,41,200,.75);
     color: #ffffdd;
     border-radius: 0;
     margin: 5px;
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 400;
     position: relative;
     text-align:left;
     color:#ffffee;
