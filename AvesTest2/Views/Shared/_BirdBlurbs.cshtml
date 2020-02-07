@@ -1,11 +1,33 @@
-﻿@{
-    string ImgRoot= "http://localhost:5000/Images/Birds";
+﻿@inject Microsoft.Extensions.Options.IOptions<ApplicationOptions> AppOptions
+
+@{
+    string ImgRoot = AppOptions.Value.Scheme + "://" + AppOptions.Value.DomainName + ":" + AppOptions.Value.Port + "/Images/Birds";
     string[] Imgs = { "/120/dsc09835w.jpg", "/143/rcc05368w.jpg", "/24/dsc5740w.jpg", "/388/rcc09277_1w.jpg" };
 }
 
 @model BirdViewModel
-
+@*TODO: Hack, remove*@
 <div class="blurbs-parent"></div>
+
+<div class="blurb-list">
+
+    @foreach (var bird in Model.Birds)
+    {
+        if (bird.Name.StartsWith(@ViewData["letter"].ToString()[0]))
+        {
+            <a asp-action="Show">
+                <div class="blurb">
+                    <img src="@ImgRoot@Imgs[new Random().Next(0,4)]" class="blurb-image">
+                    <div class="blurb-label">
+                        <h5 class="blurb-name">@bird.Name</h5>
+                        <h6 class="blurb-sciname">(@bird.SciName)</h6>
+                        <span>@AppOptions.Value.ApplicationName</span>
+                    </div>
+                </div>
+            </a>
+        }
+    }
+</div>
 
 @*<div class="card-columns">
         @foreach (var bird in Model.Birds)
@@ -22,24 +44,5 @@
             }
          }
     </div>*@
-
-<div class="blurb-list">
-
-    @foreach (var bird in Model.Birds)
-    {
-        if (bird.Name.StartsWith(@ViewData["letter"].ToString()[0]))
-        {
-            <a asp-action="Show">
-                <div class="blurb">
-                    <img src="@ImgRoot@Imgs[new Random().Next(0,4)]" class="blurb-image">
-                    <div class="blurb-label">
-                        <h5 class="blurb-name">@bird.Name</h5>
-                        <h6 class="blurb-sciname">(@bird.SciName)</h6>
-                    </div>
-                </div>
-            </a>
-        }
-    }
-</div>
 
 
