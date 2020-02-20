@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<div class="container-fluid border-divider">
+    <form asp-action="AddBird" asp-controller="Admin">
+        <h3 class="description-text">Add new bird</h3>
+        <div class="form-group">
+            <input type="text" class="form-control" id="name" name="Name" placeholder="Bird name">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="sciName" name="SciName" placeholder="Scientific Name">
+        </div>
+        <div class="form-group">
+            <input type="number" class="form-control" id="familyId" name="FamilyId" placeholder="Family ID">
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin: 30px 10px">Add new bird</button>
+    </form>
+</div>
+

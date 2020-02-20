@@ -40,5 +40,17 @@ namespace AvesTest2.Database.Repositories
                 return Connection.Query<FamilyDTO>(sql);
             }
         }
+
+        public int AddBird(BirdDTO NewBird) 
+        {
+            string sql = "INSERT INTO Bird (Id, Name, SciName, FamilyId)" +
+                    " Values (@Id, @Name, @SciName, @FamilyId)";
+
+            BirdDTO bird = new BirdDTO(NewBird.Id, NewBird.Name, NewBird.SciName, NewBird.FamilyId);
+
+            int rows = Connection.Execute(sql, bird);
+
+            return rows;
+        }
     }
 }

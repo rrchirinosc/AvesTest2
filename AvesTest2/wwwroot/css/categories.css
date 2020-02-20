@@ -58,23 +58,46 @@
     font-weight: 400;
     position: relative;
     text-align:left;
-    color:#ffffee;
 }
 
-    .selector-item:hover {
-        background-color: #ffffdd;
-        color: rgba(41,41,200,.75);
+    .selector-item a {
         text-decoration: none;
-        border-radius: 0;
+        color: #ffffdd;
     }
 
-.selector-item-label{
+selector a:hover {
+    color: #0366d6;
+    font-weight: 400;
+}
+
+.selector-item-disabled {
+    padding: 20px;
+    background-color: rgba(41,41,200,.75);
+    color: #0366d6;
+    border-radius: 0;
+    margin: 5px;
+    font-size: 24px;
+    font-weight: 400;
     position: relative;
-    bottom:0;
-    left:0;
-    padding:0 10px 10px;
-    background-color:rgba(240,240,240,0.05);
-    
+    text-align: left;
+}
+
+.selector-item:hover {
+    background-color: #ffffdd;
+    color: rgba(41,41,200,.75);
+    text-decoration: none;
+    border-radius: 0;
+}
+
+.selector-item-disabled:hover{
+}
+
+.selector-item-label {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    padding: 0 10px 10px;
+    background-color: rgba(240,240,240,0.05);
 }
 
 .blurb-list {
@@ -159,3 +182,8 @@ a.nav-link {
     color: #ffffdd;
     background-color: rgba(41,41,200,.75); /*#2929c8*/
  }
+
+.border-divider{
+    border: 1px solid #888888;
+    padding: 20px;
+}

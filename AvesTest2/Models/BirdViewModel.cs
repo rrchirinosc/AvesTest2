@@ -19,6 +19,19 @@ namespace AvesTest2.Models
             model.Birds = repo.Birds.ToList();
             model.Families = repo.Families.ToList();
 
+            List<int> AvailableFamilies = new List<int>();
+            foreach(var bird in model.Birds)
+            {
+                AvailableFamilies.Add(bird.FamilyId);
+            }
+            IEnumerable<int> availableFamilies = AvailableFamilies.Distinct();
+
+            foreach(var family in model.Families)
+            {
+                if(availableFamilies.Contains(family.Id)) {
+                    family.Available = true;
+                }
+            }
             return model;
         }
     }   
