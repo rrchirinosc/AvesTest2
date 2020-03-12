@@ -29,7 +29,7 @@ namespace AvesTest2.Controllers
             bird.Name = Name;
             bird.SciName = SciName;
             bird.FamilyId = FamilyId;
-            //repo.AddBird(bird);
+            repo.AddBird(bird);
             return View("Admin");
         }
     }
