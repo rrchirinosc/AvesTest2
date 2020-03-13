@@ -21,8 +21,12 @@ namespace AvesTest2.Controllers
 
         public async Task<IActionResult> Admin()
         {
+#if DEBUG
             model = await AdminViewModel.Load();
             return View(model);
+#else
+            return RedirectToAction("Index", "Home");
+#endif
         }
 
         public async Task<IActionResult> AddBird(string Name, string SciName, int FamilyId)

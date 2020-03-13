@@ -84,9 +84,12 @@ selector a:hover {
 
 .selector-item:hover {
     background-color: #ffffdd;
-    color: rgba(41,41,200,.75);
-    text-decoration: none;
     border-radius: 0;
+}
+
+.selector-item:hover a {
+    color: rgba(41,41,200,.9);
+    text-decoration: none;
 }
 
 .selector-item-disabled:hover{
@@ -131,7 +134,7 @@ selector a:hover {
     left: 0;
     width: 100%;
     padding: 0 0 10px 15px;
-    background-color: rgba(80,80,80,.1);
+    background-color: rgba(20,20,20,.25);
     color: rgba(255,255,254,0.9);
     text-shadow:1px 1px 1px #000;
 }
