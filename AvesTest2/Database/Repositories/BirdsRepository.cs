@@ -25,7 +25,7 @@ namespace AvesTest2.Database.Repositories
             get
             {
                 string sql = "SELECT [Bird].Id, [Bird].Name, [Bird].SciName, [Bird].FamilyId" +
-                                                " FROM [Bird] ORDER BY [Id]";
+                                                " FROM [Bird] ORDER BY [Name]";
                 return Connection.Query<BirdDTO>(sql);
             }
         }
@@ -42,12 +42,22 @@ namespace AvesTest2.Database.Repositories
         }
 
        
-        public int AddBird(BirdDTO NewBird)
+        public int AddBird(BirdDTO Bird)
         {
             string sql = "INSERT INTO Bird (Name, SciName, FamilyId)" +
                     " Values (@Name, @SciName, @FamilyId)";
 
-            int rows = Connection.Execute(sql, new { NewBird.Name, NewBird.SciName, NewBird.FamilyId});
+            int rows = Connection.Execute(sql, new { Bird.Name, Bird.SciName, Bird.FamilyId });
+
+            return rows;
+        }
+
+        public int AddImage(ImageDTO Image)
+        {
+            string sql = "INSERT INTO Image (BirdId, FileName, Location, Date, Country, Coordinate, KeyImage)" +
+                    " Values (@BirdId, @FileName, @Location, @Date, @Country, @Coordinate, @KeyImage)";
+
+            int rows = Connection.Execute(sql, new { Image.BirdId, Image.FileName, Image.Location, Image.Date, Image.Country, Image.Coordinate, Image.KeyImage});
 
             return rows;
         }

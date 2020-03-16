@@ -35,7 +35,9 @@ namespace AvesTest2.Controllers
             if (model == null)
                 model = await AdminViewModel.Load();
 
-            if (Name != null && SciName != null && FamilyId != 0)
+            if (Name != null && 
+                SciName != null && 
+                FamilyId != 0)
             {
                 bird.Name = Name;
                 bird.SciName = SciName;
@@ -47,5 +49,33 @@ namespace AvesTest2.Controllers
                 
             return View("Admin", model);
         }
-    }
-}
+
+        public async Task<IActionResult> AddImage(int BirdId, string FileName, string Location, 
+            DateTime Date, int Country, string Coordinate, bool IsActive = false)
+        {
+            ImageDTO image = new ImageDTO();
+            if (model == null)
+                model = await AdminViewModel.Load();
+
+            if (BirdId != 0 &&
+                FileName != null &&
+                Location != null &&
+                Date.Year != 1 &&
+                Country != 0)
+            {
+                image.BirdId = BirdId;
+                image.FileName = FileName;
+                image.Location = Location;
+                image.Date = Date.ToShortDateString();
+                image.Country = Country;
+                image.Coordinate = (Coordinate == null) ? "" : Coordinate;
+                image.KeyImage = IsActive;
+
+                BirdsRepository repo = new BirdsRepository();
+                repo.AddImage(image);
+            }
+
+            return View("Admin", model);
+        }
+    }    
+ }
