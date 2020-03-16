@@ -85,6 +85,7 @@ selector a:hover {
 .selector-item:hover {
     background-color: #ffffdd;
     border-radius: 0;
+    color: rgba(41,41,200,.75);
 }
 
 .selector-item:hover a {
