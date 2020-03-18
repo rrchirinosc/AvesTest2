@@ -1,24 +1,32 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Show";
 }
+
+@model BirdImagesViewModel
 
 <h1>Show</h1>
 
 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="~/Images/Birds/120/dsc09835w.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="~/Images/Birds/143/rcc05368w.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="~/Images/Birds/24/dsc5740w.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="~/Images/Birds/388/rcc09277_1w.jpg" class="d-block w-100" alt="...">
-        </div>
+        @{
+            bool first = true;
+            foreach (var image in Model.Images)
+            {
+                if (first)
+                {
+                    <div class="carousel-item active">
+                        <img src="@image" class="d-block w-100" alt="...">
+                    </div>
+                    first = false;
+                }
+                else
+                {
+                    <div class="carousel-item">
+                        <img src="@image" class="d-block w-100" alt="...">
+                    </div>
+                }
+            }
+        }
     </div>
     <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

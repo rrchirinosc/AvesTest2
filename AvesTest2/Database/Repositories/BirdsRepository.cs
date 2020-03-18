@@ -47,6 +47,14 @@ namespace AvesTest2.Database.Repositories
             }
         }
 
+        public IEnumerable<string> GetImages(int birdId)
+        {
+            string sql = string.Format("SELECT [Image].FileName" +
+                                            " FROM [Image]" +
+                                            " WHERE [BirdId] = {0}", birdId);
+            return _connection.Query<string>(sql);
+        }
+
 
         public int AddBird(BirdDTO Bird)
         {

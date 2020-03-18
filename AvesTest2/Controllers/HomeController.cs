@@ -13,11 +13,13 @@ namespace AvesTest2.Controllers
     public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
+        public IOptions<ApplicationOptions> _appOptions;
 
         public HomeController(ILogger<HomeController> logger, 
                               IOptions<ApplicationOptions> appOptions) : base(appOptions)
         {
             _logger = logger;
+            _appOptions = appOptions;
         }
 
         public IActionResult Index()
@@ -48,10 +50,10 @@ namespace AvesTest2.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Show()
+        public async Task<IActionResult> Show(int birdId)
         {
-            //AlphabeticalViewModel model = await AlphabeticalViewModel.Load();
-            return View();
+            BirdImagesViewModel model = await BirdImagesViewModel.LoadSingle(Connection, birdId, _appOptions);
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -61,3 +63,4 @@ namespace AvesTest2.Controllers
         }
     }
 }
+

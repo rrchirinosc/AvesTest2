@@ -16,7 +16,8 @@
         if (bird.Name.StartsWith(@ViewData["letter"].ToString()[0]))
         {
             string img = @Model.KeyImages.ContainsKey(@bird.Id) ? string.Format("{0}/{1}/{2}.jpg", @ImgRoot,@bird.Id,@Model.KeyImages[@bird.Id]) : DefaultImg;
-            <a asp-action="Show">
+            
+            <a href = "@Url.Action("Show", "Home", new { birdId = @bird.Id })" >
                 <div class="blurb">
                     <img src= @img class="blurb-image">
                     <div class="blurb-label">
