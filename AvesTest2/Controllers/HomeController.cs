@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using AvesTest2.Models;
+using Microsoft.Extensions.Options;
 
 namespace AvesTest2.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, 
+                              IOptions<ApplicationOptions> appOptions) : base(appOptions)
         {
             _logger = logger;
         }
@@ -30,13 +32,13 @@ namespace AvesTest2.Controllers
 
         public async Task<IActionResult> Alphabetical()
         {
-            BirdViewModel model = await BirdViewModel.Load();
+            BirdViewModel model = await BirdViewModel.Load(Connection);
             return View(model);
         }
 
         public async Task<IActionResult> Family()
         {
-            BirdViewModel model = await BirdViewModel.Load();
+            BirdViewModel model = await BirdViewModel.Load(Connection);
             return View(model);
         }
 

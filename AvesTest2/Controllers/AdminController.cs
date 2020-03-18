@@ -6,23 +6,24 @@ using AvesTest2.Database.DTO;
 using AvesTest2.Database.Repositories;
 using AvesTest2.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 //TODO: Implement caching
 
 namespace AvesTest2.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         private AdminViewModel model;
 
-        public AdminController()
+        public AdminController(IOptions<ApplicationOptions> appOptions):base(appOptions)
         {
         }
 
         public async Task<IActionResult> Admin()
         {
 #if DEBUG
-            model = await AdminViewModel.Load();
+            model = await AdminViewModel.Load(Connection);
             return View(model);
 #else
             return RedirectToAction("Index", "Home");
@@ -33,7 +34,7 @@ namespace AvesTest2.Controllers
         {
             BirdDTO bird = new BirdDTO();
             if (model == null)
-                model = await AdminViewModel.Load();
+                model = await AdminViewModel.Load(Connection);
 
             if (Name != null && 
                 SciName != null && 
@@ -43,7 +44,7 @@ namespace AvesTest2.Controllers
                 bird.SciName = SciName;
                 bird.FamilyId = Convert.ToInt32(FamilyId);
 
-                BirdsRepository repo = new BirdsRepository();
+                BirdsRepository repo = new BirdsRepository(Connection);
                 repo.AddBird(bird);
             }
                 
@@ -55,7 +56,7 @@ namespace AvesTest2.Controllers
         {
             ImageDTO image = new ImageDTO();
             if (model == null)
-                model = await AdminViewModel.Load();
+                model = await AdminViewModel.Load(Connection);
 
             if (BirdId != 0 &&
                 FileName != null &&
@@ -71,7 +72,7 @@ namespace AvesTest2.Controllers
                 image.Coordinate = (Coordinate == null) ? "" : Coordinate;
                 image.KeyImage = IsActive;
 
-                BirdsRepository repo = new BirdsRepository();
+                BirdsRepository repo = new BirdsRepository(Connection);
                 repo.AddImage(image);
             }
 

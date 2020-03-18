@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿
 namespace AvesTest2.Database.DTO
 {
     public class BirdDTO
     {
-        private BirdDTO bird;
-        
+       
         public BirdDTO() { }
 
         public BirdDTO(int id, string name, string sciName, int familyId)

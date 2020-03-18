@@ -3,6 +3,7 @@ using AvesTest2.Database.Repositories;
 using AvesTest2.Infraestructure.Data;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,10 +15,10 @@ namespace AvesTest2.Models
         public List<FamilyDTO> Families;
         public Dictionary<int, string> Countries;
 
-        public static async Task<AdminViewModel> Load()
+        public static async Task<AdminViewModel> Load(SqlConnection connection)
         {
             AdminViewModel model = new AdminViewModel();
-            BirdsRepository repo = new BirdsRepository();
+            BirdsRepository repo = new BirdsRepository(connection);
             model.Birds = repo.Birds.ToList();
             model.Families = repo.Families.ToList();
             model.Countries = new Countries().Codes;

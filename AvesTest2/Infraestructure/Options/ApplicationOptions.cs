@@ -12,5 +12,6 @@ namespace AvesTest2
         public string Scheme { get; set; }
         public string DomainName { get; set; }
         public string Port { get; set; }
+        public string ConnectionString { get; set; }
     }
 }
