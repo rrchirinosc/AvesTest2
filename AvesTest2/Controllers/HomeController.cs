@@ -56,6 +56,12 @@ namespace AvesTest2.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> ShowFamily(int familyId)
+        {
+            BirdImagesViewModel model = await BirdImagesViewModel.LoadFamily(Connection, familyId, _appOptions);
+            return View("Show", model);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

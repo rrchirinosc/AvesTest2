@@ -55,6 +55,17 @@ namespace AvesTest2.Database.Repositories
             return _connection.Query<string>(sql);
         }
 
+        public IEnumerable<BirdImageDTO> GetImagesByFamily(int familyId)
+        {
+            string sql = string.Format("SELECT [Image].BirdId, [Image].FileName" +
+                                            " FROM [Image]" +
+                                            " WHERE [BirdId] in (" +
+                                            " SELECT [Bird].Id " +
+                                            " FROM [Bird]" +
+                                            " WHERE [Bird].FamilyId = {0} )" +
+                                            " ORDER BY [Image].BirdId", familyId);
+            return _connection.Query<BirdImageDTO>(sql);
+        }
 
         public int AddBird(BirdDTO Bird)
         {

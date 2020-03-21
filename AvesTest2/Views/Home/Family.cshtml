@@ -8,21 +8,6 @@
 
 <h1 class="description-text">Family</h1>
 
-@*<div class="selector-list">
-    @foreach (var family in Model.Families)
-    {
-        <div class="selector-item">@family.SciName (@family.Name)</div>
-    }
-
-</div>*@
-
-@*<div class="selector-list">
-    @foreach (var family in Model.Families)
-    {
-        <div class="selector-item">@family.SciName (@family.Name)</div>
-    }
-
-</div>*@
 
 <div class="container">
     <div class="row">
@@ -34,47 +19,32 @@
         }
         <div class="col">
             <table class="table table-striped">
-                @*<thead>
-            <tr>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>*@
                 @for (index = 0; index < firstHalf; index++)
                 {
                     if (@Model.Families[index].Available)
                     {
-                        <tr>
-                            <td class="selector-item"><a href="#">@Model.Families[index].SciName (@Model.Families[index].Name)</a></td>
-                        </tr>
+                    <tr>
+                        <td class="selector-item"><a href="@Url.Action("ShowFamily", "Home", new { familyId = @Model.Families[index].Id })">@Model.Families[index].SciName (@Model.Families[index].Name)</a></td>
+                    </tr>
                     }
                     else
                     {
-                        <tr>
-                            <td class="selector-item-disabled">@Model.Families[index].SciName (@Model.Families[index].Name)</td>
-                        </tr>
+                    <tr>
+                        <td class="selector-item-disabled">@Model.Families[index].SciName (@Model.Families[index].Name)</td>
+                    </tr>
                     }
 
-                }
-            </table>
+                    }
+</table>
         </div>
         <div class="col">
             <table class="table table-striped">
-                @*<thead>
-            <tr>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>*@
                 @for (; index < Model.Families.Count; index++)
                 {
-                    @*<tr>
-                        <td class="selector-item">@Model.Families[index].SciName (@Model.Families[index].Name)</td>
-                    </tr>*@
                     if (@Model.Families[index].Available)
                     {
                         <tr>
-                            <td class="selector-item"><a href="#">@Model.Families[index].SciName (@Model.Families[index].Name)</a></td>
+                            <td class="selector-item"><a href="@Url.Action("ShowFamily", "Home", new { familyId = @Model.Families[index].Id })">@Model.Families[index].SciName (@Model.Families[index].Name)</a></td>
                         </tr>
                     }
                     else
