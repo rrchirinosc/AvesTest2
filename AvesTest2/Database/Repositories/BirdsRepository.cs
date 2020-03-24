@@ -14,6 +14,7 @@ namespace AvesTest2.Database.Repositories
             _connection = connection;
         }
 
+        /* Fetch all available birds */
         public IEnumerable<BirdDTO> Birds
         {
             get
@@ -24,7 +25,7 @@ namespace AvesTest2.Database.Repositories
             }
         }
 
-
+        /* Fetch all available bird family names */ 
         public IEnumerable<FamilyDTO> Families
         {
             get
@@ -35,6 +36,7 @@ namespace AvesTest2.Database.Repositories
             }
         }
 
+        /* Fetch all file names that are key images */
         public IEnumerable<BirdImageDTO> KeyImages
         {
             get
@@ -47,14 +49,17 @@ namespace AvesTest2.Database.Repositories
             }
         }
 
+        /* Fetch images for a particular bird, sorted with key image first */
         public IEnumerable<string> GetImages(int birdId)
         {
             string sql = string.Format("SELECT [Image].FileName" +
                                             " FROM [Image]" +
-                                            " WHERE [BirdId] = {0}", birdId);
+                                            " WHERE [BirdId] = {0}" +
+                                            " ORDER BY [Image].KeyImage DESC", birdId);
             return _connection.Query<string>(sql);
         }
 
+        /* Fetch all bird file names belonging to a particular family */
         public IEnumerable<BirdImageDTO> GetImagesByFamily(int familyId)
         {
             string sql = string.Format("SELECT [Image].BirdId, [Image].FileName" +
@@ -67,6 +72,7 @@ namespace AvesTest2.Database.Repositories
             return _connection.Query<BirdImageDTO>(sql);
         }
 
+        /* Add a new bird to the [Bird] table */
         public int AddBird(BirdDTO Bird)
         {
             string sql = "INSERT INTO Bird (Name, SciName, FamilyId)" +
@@ -77,6 +83,7 @@ namespace AvesTest2.Database.Repositories
             return rows;
         }
 
+        /* Add a new image to the [Image] table */
         public int AddImage(ImageDTO Image)
         {
             string sql = "INSERT INTO Image (BirdId, FileName, Location, Date, Country, Coordinate, KeyImage)" +
