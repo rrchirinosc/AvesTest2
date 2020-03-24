@@ -46,8 +46,8 @@ namespace AvesTest2.Controllers
 
         public async Task<IActionResult> Location()
         {
-            //AlphabeticalViewModel model = await AlphabeticalViewModel.Load();
-            return View();
+            CountryViewModel model = await CountryViewModel.Load(Connection);
+            return View(model);
         }
 
         public async Task<IActionResult> Show(int birdId)
@@ -59,6 +59,12 @@ namespace AvesTest2.Controllers
         public async Task<IActionResult> ShowFamily(int familyId)
         {
             BirdImagesViewModel model = await BirdImagesViewModel.LoadFamily(Connection, familyId, _appOptions);
+            return View("Show", model);
+        }
+
+        public async Task<IActionResult> ShowByCountry(int countryId)
+        {
+            BirdImagesViewModel model = await BirdImagesViewModel.LoadByCountry(Connection, countryId, _appOptions);
             return View("Show", model);
         }
 

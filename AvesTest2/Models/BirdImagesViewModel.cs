@@ -46,6 +46,24 @@ namespace AvesTest2.Models
             }
 
             return model;
-        }        
+        }
+
+        public static async Task<BirdImagesViewModel> LoadByCountry(SqlConnection connection, int countryId, IOptions<ApplicationOptions> appOptions)
+        {
+            BirdImagesViewModel model = new BirdImagesViewModel();
+            BirdsRepository repo = new BirdsRepository(connection);
+            List<BirdImageDTO> images = new List<BirdImageDTO>();
+
+            string ImgRoot = appOptions.Value.Scheme + "://" + appOptions.Value.DomainName + ":" + appOptions.Value.Port + "/Images/Birds";
+            images = repo.GetImagesByCountry(countryId).ToList();
+            model.Images = new List<string>();
+
+            foreach (var image in images)
+            {
+                model.Images.Add(string.Format("{0}/{1}/{2}.jpg", ImgRoot, image.BirdId, image.FileName));
+            }
+
+            return model;
+        }
     }
 }

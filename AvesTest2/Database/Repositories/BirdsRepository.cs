@@ -72,6 +72,27 @@ namespace AvesTest2.Database.Repositories
             return _connection.Query<BirdImageDTO>(sql);
         }
 
+        /* Fetch all bird file names belonging to a particular country */
+        public IEnumerable<BirdImageDTO> GetImagesByCountry(int countryId)
+        {
+            string sql = string.Format("SELECT [Image].BirdId, [Image].FileName" +
+                                            " FROM [Image]" +
+                                            " WHERE [Image].Country = {0}" +
+                                            " ORDER BY [Image].BirdId", countryId);
+            return _connection.Query<BirdImageDTO>(sql);
+        }
+
+        /* Fetch all country existing Ids */
+        public IEnumerable<int> GetCountries
+        {
+            get
+            {
+                string sql = string.Format("SELECT DISTINCT [Image].Country" +
+                                            " FROM [Image]");
+                return _connection.Query<int>(sql);
+            }
+        }
+
         /* Add a new bird to the [Bird] table */
         public int AddBird(BirdDTO Bird)
         {

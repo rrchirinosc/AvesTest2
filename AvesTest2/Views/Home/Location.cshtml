@@ -3,5 +3,37 @@
     ViewData["Title"] = "Location";
 }
 
+@model CountryViewModel
+
 <h1>Location</h1>
 
+<div class="container">
+    <div class="row">
+        @{
+            int count = Model.AvailableCountries.Count;
+            int firstColumn = count % 2 == 1 ? count / 2 + 1 : count / 2;
+            int secondColumn = firstColumn;
+
+            <div class="col">
+                @foreach (var country in Model.AvailableCountries)
+                {
+                    if (--firstColumn < 0)
+                        break;
+                    <div class="selector-item">
+                        <a href="@Url.Action("ShowByCountry", "Home", new { countryId = @country.Key })">@country.Value</a>
+                    </div>
+                }
+            </div>
+            <div class="col">
+                @foreach (var country in Model.AvailableCountries)
+                {
+                    if (--secondColumn >= 0)
+                        continue;
+                    <div class="selector-item">
+                        <a href="@Url.Action("ShowByCountry", "Home", new { countryId = @country.Key })">@country.Value</a>
+                    </div>
+                }
+            </div>
+        }        
+    </div>
+</div>
