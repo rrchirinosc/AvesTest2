@@ -188,8 +188,8 @@ a.nav-link {
     border: none;
     border-radius: 0;
     color: #ffffdd;
-    background-color: rgba(41,41,200,.75); /*#2929c8*/
- }
+    background-color: rgba(41,41,200,0);
+}
 
 .border-divider{
     border: 1px solid #888888;
