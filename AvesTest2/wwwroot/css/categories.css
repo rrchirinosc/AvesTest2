@@ -112,13 +112,14 @@ selector a:hover {
 }
 
 .blurb {
-    padding: 2px;
-    margin:15px;
-    background-color: rgba(255,255,254, 0.75);
+    padding: 1px;
+    margin: 15px;
+    border: 1px solid rgba(255,255,254, 0.75);
+    /*background-color: rgba(255,255,254, 0.75);*/
     position: relative;
     text-align: left;
     color: #ffffee;
-    opacity:0.8;
+    opacity: 0.8;
 }
 
     .blurb:hover {
