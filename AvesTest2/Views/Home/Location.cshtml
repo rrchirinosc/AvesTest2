@@ -9,31 +9,35 @@
 
 <div class="container">
     <div class="row">
-        @{
-            int count = Model.AvailableCountries.Count;
-            int firstColumn = count % 2 == 1 ? count / 2 + 1 : count / 2;
-            int secondColumn = firstColumn;
+    @{
+        int count = Model.AvailableCountries.Count;
+        int firstColumn = count % 2 == 1 ? count / 2 + 1 : count / 2;
+        int secondColumn = firstColumn;
 
-            <div class="col">
-                @foreach (var country in Model.AvailableCountries)
-                {
-                    if (--firstColumn < 0)
-                        break;
+        <div class="col">
+            @foreach (var country in Model.AvailableCountries)
+            {
+                if (--firstColumn < 0)
+                    break;
+                <a class="category-item" href="@Url.Action("ShowByCountry", "Home", new { countryId = @country.Key })">
                     <div class="selector-item">
-                        <a href="@Url.Action("ShowByCountry", "Home", new { countryId = @country.Key })">@country.Value</a>
+                        @country.Value
                     </div>
-                }
-            </div>
-            <div class="col">
-                @foreach (var country in Model.AvailableCountries)
-                {
-                    if (--secondColumn >= 0)
-                        continue;
+                </a>
+            }
+        </div>
+        <div class="col">
+            @foreach (var country in Model.AvailableCountries)
+            {
+                if (--secondColumn >= 0)
+                    continue;
+                <a class="category-item" href="@Url.Action("ShowByCountry", "Home", new { countryId = @country.Key })">
                     <div class="selector-item">
-                        <a href="@Url.Action("ShowByCountry", "Home", new { countryId = @country.Key })">@country.Value</a>
+                        @country.Value
                     </div>
-                }
-            </div>
-        }        
+                </a>
+            }
+        </div>
+    }        
     </div>
 </div>
