@@ -12,9 +12,9 @@
 <div class="container">
     <div class="row">
         @{
-            int count = Model.Families.Count / 2;
-            int firstHalf = count + count % 2;
-            int secondHalf = Model.Families.Count - firstHalf;
+            int count = Model.Families.Count;
+            int firstHalf = count % 2 == 0 ? count / 2 : count / 2 + 1;
+            int secondHalf = count - firstHalf;
             int index;
         }
         <div class="col">
