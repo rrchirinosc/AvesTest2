@@ -82,6 +82,45 @@ namespace AvesTest2.Database.Repositories
             return _connection.Query<BirdImageDTO>(sql);
         }
 
+        /* Fetch all bird display info, including images */
+        public IEnumerable<BirdFullDTO> GetAllBirdInfo(int birdId)
+        {
+            string sql = string.Format("SELECT [Bird].Id, [Bird].Name, [Bird].SciName," +
+                            "[Image].FileName, [Image].Location, [Image].Date, [Image].Country, [Image].Coordinate" +
+                                            " FROM [Bird] INNER JOIN [Image]" +
+                                            " ON [Image].BirdId = [Bird].Id" +
+                                            " WHERE [Image].BirdId = {0}", birdId);
+            return _connection.Query<BirdFullDTO>(sql);
+        }
+
+        /* Fetch all bird file info belonging to a particular family */
+        public IEnumerable<BirdFullDTO> GetAllBirdInfoByFamily(int familyId)
+        {
+            string sql = string.Format("SELECT [Bird].Id, [Bird].Name, [Bird].SciName," +
+                            "[Image].FileName, [Image].Location, [Image].Date, [Image].Country, [Image].Coordinate" +
+                                            " FROM [Bird] INNER JOIN [Image]" +
+                                            " ON [Image].BirdId = [Bird].Id" +
+                                            " WHERE [BirdId] in (" +
+                                            " SELECT [Bird].Id " +
+                                            " FROM [Bird]" +
+                                            " WHERE [Bird].FamilyId = {0} )" +
+                                            " ORDER BY [Image].BirdId", familyId);
+
+            return _connection.Query<BirdFullDTO>(sql);
+        }
+
+        /* Fetch all bird file info belonging to a particular country */
+        public IEnumerable<BirdFullDTO> GetAllBirdInfoByCountry(int countryId)
+        {
+            string sql = string.Format("SELECT [Bird].Id, [Bird].Name, [Bird].SciName," +
+                            "[Image].FileName, [Image].Location, [Image].Date, [Image].Country, [Image].Coordinate" +
+                                            " FROM [Bird] INNER JOIN [Image]" +
+                                            " ON [Image].BirdId = [Bird].Id" +
+                                            " WHERE [Image].Country = {0}", countryId);
+
+            return _connection.Query<BirdFullDTO>(sql);
+        }
+
         /* Fetch all country existing Ids */
         public IEnumerable<int> GetCountries
         {

@@ -52,19 +52,19 @@ namespace AvesTest2.Controllers
 
         public async Task<IActionResult> Show(int birdId)
         {
-            BirdImagesViewModel model = await BirdImagesViewModel.LoadSingle(Connection, birdId, _appOptions);
+            BirdImagesViewModel model = await BirdImagesViewModel.LoadAllSingle(Connection, birdId, _appOptions);
             return View(model);
         }
 
         public async Task<IActionResult> ShowFamily(int familyId)
         {
-            BirdImagesViewModel model = await BirdImagesViewModel.LoadFamily(Connection, familyId, _appOptions);
+            BirdImagesViewModel model = await BirdImagesViewModel.LoadWholeFamily(Connection, familyId, _appOptions);
             return View("Show", model);
         }
 
         public async Task<IActionResult> ShowByCountry(int countryId)
         {
-            BirdImagesViewModel model = await BirdImagesViewModel.LoadByCountry(Connection, countryId, _appOptions);
+            BirdImagesViewModel model = await BirdImagesViewModel.LoadAllBirdsByCountry(Connection, countryId, _appOptions);
             return View("Show", model);
         }
 
