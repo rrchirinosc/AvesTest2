@@ -15,14 +15,18 @@
                 if (first)
                 {
                     <div class="carousel-item active">
-                        <img src="@image.FileName" class="d-block w-100" data-name="@image.Name (@image.SciName)" data-location="@image.Location" data-date="@image.Date" data-countrycode=@image.Country alt="@image.Name">
+                        <img src="@image.FileName" class="d-block w-100" 
+                             data-name="@image.Name (@image.SciName)" data-location="@image.Location" data-date="@image.Date" data-countrycode=@image.Country 
+                             alt="@image.Name">
                     </div>
                     first = false;
                 }
                 else
                 {
                     <div class="carousel-item">
-                        <img src="@image.FileName" class="d-block w-100" data-name="@image.Name (@image.SciName)" data-location="@image.Location" data-date="@image.Date" data-countrycode=@image.Country alt="@image.Name">
+                        <img src="@image.FileName" class="d-block w-100" 
+                             data-name="@image.Name (@image.SciName)" data-location="@image.Location" data-date="@image.Date" data-countrycode=@image.Country 
+                             alt="@image.Name">
                     </div>
                 }
             }
@@ -39,7 +43,8 @@
 </div>
 
 <div>
-    <button class="btn btn-outline-primary button-mod2 float-left" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <button class="btn btn-outline-primary button-mod2 float-left" type="button" 
+            data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
         <i class="fa fa-info"></i>
     </button>
     <div class="collapse" id="collapseExample">

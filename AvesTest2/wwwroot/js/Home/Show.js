@@ -250,7 +250,7 @@ var Months = "January,February,March,April,May,June,July,August,September,Octobe
 
 window.addEventListener('DOMContentLoaded', (event) => {
 
-    // display bird name (sciname) stored in the alt property
+    // fill bird info under each carousel item
     $('#birdShow').on('slid.bs.carousel', function (event) {
         var name = this.children[0].children[event.to].attributes[0].ownerElement.children[0].dataset.name;
         var location = this.children[0].children[event.to].attributes[0].ownerElement.children[0].dataset.location;
