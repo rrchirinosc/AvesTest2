@@ -14,6 +14,55 @@ namespace AvesTest2.Models
         //public List<string> Images;
         public List<BirdFullDTO> Birds;
 
+        
+
+        public static async Task<BirdImagesViewModel> LoadAllSingle(SqlConnection connection, int birdId, IOptions<ApplicationOptions> appOptions)
+        {
+            BirdImagesViewModel model = new BirdImagesViewModel();
+            BirdsRepository repo = new BirdsRepository(connection);
+
+            string ImgRoot = appOptions.Value.Scheme + "://" + appOptions.Value.DomainName + ":" + appOptions.Value.Port + "/Images/Birds";
+            model.Birds = repo.GetAllBirdInfo(birdId).ToList();
+   
+            foreach (var bird in model.Birds)
+            {
+                bird.FileName = string.Format("{0}/{1}/{2}.jpg", ImgRoot, birdId, bird.FileName);
+            }
+
+            return model;
+        }
+
+        public static async Task<BirdImagesViewModel> LoadWholeFamily(SqlConnection connection, int familyId, IOptions<ApplicationOptions> appOptions)
+        {
+            BirdImagesViewModel model = new BirdImagesViewModel();
+            BirdsRepository repo = new BirdsRepository(connection);
+
+            string ImgRoot = appOptions.Value.Scheme + "://" + appOptions.Value.DomainName + ":" + appOptions.Value.Port + "/Images/Birds";
+            model.Birds = repo.GetAllBirdInfoByFamily(familyId).ToList();
+            foreach (var bird in model.Birds)
+            {
+                bird.FileName = string.Format("{0}/{1}/{2}.jpg", ImgRoot, bird.Id, bird.FileName);
+            }
+
+            return model;
+        }
+
+        public static async Task<BirdImagesViewModel> LoadAllBirdsByCountry(SqlConnection connection, int countryId, IOptions<ApplicationOptions> appOptions)
+        {
+            BirdImagesViewModel model = new BirdImagesViewModel();
+            BirdsRepository repo = new BirdsRepository(connection);
+
+            string ImgRoot = appOptions.Value.Scheme + "://" + appOptions.Value.DomainName + ":" + appOptions.Value.Port + "/Images/Birds";
+            model.Birds = repo.GetAllBirdInfoByCountry(countryId).ToList();
+
+            foreach (var bird in model.Birds)
+            {
+                bird.FileName = string.Format("{0}/{1}/{2}.jpg", ImgRoot, bird.Id, bird.FileName);
+            }
+
+            return model;
+        }
+
         //public static async Task<BirdImagesViewModel> LoadSingle(SqlConnection connection, int birdId, IOptions<ApplicationOptions> appOptions)
         //{
         //    BirdImagesViewModel model = new BirdImagesViewModel();
@@ -30,24 +79,6 @@ namespace AvesTest2.Models
 
         //    return model;
         //}
-
-        public static async Task<BirdImagesViewModel> LoadAllSingle(SqlConnection connection, int birdId, IOptions<ApplicationOptions> appOptions)
-        {
-            BirdImagesViewModel model = new BirdImagesViewModel();
-            BirdsRepository repo = new BirdsRepository(connection);
-
-            string ImgRoot = appOptions.Value.Scheme + "://" + appOptions.Value.DomainName + ":" + appOptions.Value.Port + "/Images/Birds";
-            model.Birds = repo.GetAllBirdInfo(birdId).ToList();
-            //List<string> fileNames = new List<string>();
-            //fileNames.AddRange(bird.Select(x => x.FileName));
-   
-            foreach (var bird in model.Birds)
-            {
-                bird.FileName = string.Format("{0}/{1}/{2}.jpg", ImgRoot, birdId, bird.FileName);
-            }
-
-            return model;
-        }
 
         //public static async Task<BirdImagesViewModel> LoadFamily(SqlConnection connection, int familyId, IOptions<ApplicationOptions> appOptions)
         //{
@@ -67,21 +98,6 @@ namespace AvesTest2.Models
         //    return model;
         //}
 
-        public static async Task<BirdImagesViewModel> LoadWholeFamily(SqlConnection connection, int familyId, IOptions<ApplicationOptions> appOptions)
-        {
-            BirdImagesViewModel model = new BirdImagesViewModel();
-            BirdsRepository repo = new BirdsRepository(connection);
-
-            string ImgRoot = appOptions.Value.Scheme + "://" + appOptions.Value.DomainName + ":" + appOptions.Value.Port + "/Images/Birds";
-            model.Birds = repo.GetAllBirdInfoByFamily(familyId).ToList();
-            foreach (var bird in model.Birds)
-            {
-                bird.FileName = string.Format("{0}/{1}/{2}.jpg", ImgRoot, bird.Id, bird.FileName);
-            }
-
-            return model;
-        }
-
         //public static async Task<BirdImagesViewModel> LoadByCountry(SqlConnection connection, int countryId, IOptions<ApplicationOptions> appOptions)
         //{
         //    BirdImagesViewModel model = new BirdImagesViewModel();
@@ -99,21 +115,5 @@ namespace AvesTest2.Models
 
         //    return model;
         //}
-
-        public static async Task<BirdImagesViewModel> LoadAllBirdsByCountry(SqlConnection connection, int countryId, IOptions<ApplicationOptions> appOptions)
-        {
-            BirdImagesViewModel model = new BirdImagesViewModel();
-            BirdsRepository repo = new BirdsRepository(connection);
-
-            string ImgRoot = appOptions.Value.Scheme + "://" + appOptions.Value.DomainName + ":" + appOptions.Value.Port + "/Images/Birds";
-            model.Birds = repo.GetAllBirdInfoByCountry(countryId).ToList();
-
-            foreach (var bird in model.Birds)
-            {
-                bird.FileName = string.Format("{0}/{1}/{2}.jpg", ImgRoot, bird.Id, bird.FileName);
-            }
-
-            return model;
-        }
     }
 }
