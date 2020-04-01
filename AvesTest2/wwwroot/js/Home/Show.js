@@ -250,21 +250,35 @@ var Months = "January,February,March,April,May,June,July,August,September,Octobe
 
 window.addEventListener('DOMContentLoaded', (event) => {
 
-    // fill bird info under each carousel item
-    $('#birdShow').on('slid.bs.carousel', function (event) {
-        var name = this.children[0].children[event.to].attributes[0].ownerElement.children[0].dataset.name;
-        var location = this.children[0].children[event.to].attributes[0].ownerElement.children[0].dataset.location;
-        var countrycode = this.children[0].children[event.to].attributes[0].ownerElement.children[0].dataset.countrycode;
+    // Set event for info display
+    document.getElementById("showInfo").addEventListener("click", infoClicked);
 
-        $('#bird-name').html(name);
-        $('#bird-location').html(location + " - " + Countries[Countries.findIndex(x => x.code == countrycode)].name);
+    // Fill bird info under each carousel item
+    $('#birdShow').on('slide.bs.carousel', function (event) {
+        let carouselIndex = parseInt(this.children[0].children[event.to].attributes[0].ownerElement.children[0].dataset.index);
+        setBirdInfo(carouselIndex);
+    });
+
+    // Hack to overcome the fact that the carousel does not fire an event upon starting 
+    // to be able to fill up info for first slide */
+    function infoClicked() {
+        let carouselIndex = $('.carousel-item.active').index();
+        if (carouselIndex == 0) {
+            setBirdInfo(carouselIndex);
+        }         
+    };
+
+    // Set bird info display with the current slide values
+    function setBirdInfo(index) {
+        $('#bird-name').html(birddata.Birds[index].Name);
+        $('#bird-location').html(birddata.Birds[index].Location + " - " + Countries[Countries.findIndex(x => x.code == birddata.Birds[index].Country)].name);
 
         // put date into Month Day, Year format
-        let date = this.children[0].children[event.to].attributes[0].ownerElement.children[0].dataset.date.split("/");
+        let date = birddata.Birds[index].Date.split("/");
         let months = Months.split(",");
         let month = parseInt(date[1]) - 1;
         $('#bird-date-taken').html(months[month] + " " + date[0] + ", " + date[2]);
-    });
+    }
 });
 
 

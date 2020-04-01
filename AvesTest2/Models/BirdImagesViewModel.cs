@@ -12,9 +12,7 @@ namespace AvesTest2.Models
     public class BirdImagesViewModel
     {
         //public List<string> Images;
-        public List<BirdFullDTO> Birds;
-
-        
+        public List<BirdFullDTO> Birds;        
 
         public static async Task<BirdImagesViewModel> LoadAllSingle(SqlConnection connection, int birdId, IOptions<ApplicationOptions> appOptions)
         {
