@@ -107,8 +107,8 @@ selector a:hover {
 .blurb-list {
     display: flex;
     flex-flow: row wrap;
-    align-items:flex-start;
-    justify-content:space-evenly;
+    align-items: flex-start;
+    justify-content: space-evenly;
 }
 
 .blurb {
@@ -120,6 +120,7 @@ selector a:hover {
     text-align: left;
     color: #ffffee;
     opacity: 0.8;
+    width: 324px;
 }
 
     .blurb:hover {
