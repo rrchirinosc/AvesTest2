@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using AvesTest2.Models;
 using Microsoft.Extensions.Options;
+using AvesTest2.Infraestructure.Data;
 
 namespace AvesTest2.Controllers
 {
@@ -46,7 +47,7 @@ namespace AvesTest2.Controllers
 
         public async Task<IActionResult> Location()
         {
-            CountryViewModel model = await CountryViewModel.Load(Connection);
+            LocationViewModel model = await LocationViewModel.Load(Connection);
             return View(model);
         }
 
@@ -62,9 +63,25 @@ namespace AvesTest2.Controllers
             return View("Show", model);
         }
 
-        public async Task<IActionResult> ShowByCountry(int countryId)
+        public async Task<IActionResult> SelectFamily(int familyId)
         {
-            BirdImagesViewModel model = await BirdImagesViewModel.LoadAllBirdsByCountry(Connection, countryId, _appOptions);
+            BirdViewModel model = await BirdViewModel.Load(Connection);
+            ViewData["type"] = eBlurbDataType.Family;
+            ViewData["id"] = familyId;
+            return View("Selection", model);
+        }
+
+        public async Task<IActionResult> SelectLocation(int countryId)
+        {
+            BirdViewModel model = await BirdViewModel.Load(Connection);
+            ViewData["type"] = eBlurbDataType.Location;
+            ViewData["id"] = countryId;
+            return View("Selection", model);
+        }
+
+        public async Task<IActionResult> ShowByLocation(int countryId)
+        {
+            BirdImagesViewModel model = await BirdImagesViewModel.LoadAllBirdsByLocation(Connection, countryId, _appOptions);
             return View("Show", model);
         }
 

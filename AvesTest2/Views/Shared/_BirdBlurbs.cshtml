@@ -1,8 +1,9 @@
 ﻿@inject Microsoft.Extensions.Options.IOptions<ApplicationOptions> AppOptions
+@using AvesTest2.Infraestructure.Data
 
 @{
     string ImgRoot = AppOptions.Value.Scheme + "://" + AppOptions.Value.DomainName + ":" + AppOptions.Value.Port + "/Images/Birds";
-    string DefaultImg = @ImgRoot+"/0/default.jpg";
+    string DefaultImg = @ImgRoot + "/0/default.jpg";
 }
 
 @model BirdViewModel
@@ -10,20 +11,40 @@
 <div class="blurbs-parent"></div>
 
 <div class="blurb-list">
-
-    @foreach (var bird in Model.Birds)
-    {
-        if (bird.Name.StartsWith(@ViewData["letter"].ToString()[0]))
+    @{
+        foreach (var bird in Model.Birds)
         {
-            string img = @Model.KeyImages.ContainsKey(@bird.Id) ? string.Format("{0}/{1}/{2}.jpg", @ImgRoot,@bird.Id,@Model.KeyImages[@bird.Id]) : DefaultImg;
-            
-            <a href = "@Url.Action("Show", "Home", new { birdId = @bird.Id })" >
+
+            if ((eBlurbDataType)@ViewData["type"] == eBlurbDataType.Alpha)
+            {
+                if (bird.Name.StartsWith(@ViewData["letter"].ToString()[0]) == false)
+                    continue;
+            }
+            else if ((eBlurbDataType)@ViewData["type"] == eBlurbDataType.Family)
+            {
+                if (bird.FamilyId != (int)@ViewData["id"])
+                    continue;
+            }
+            else if ((eBlurbDataType)@ViewData["type"] == eBlurbDataType.Location)
+            {
+                int index = Model.InCountry.FindIndex(x => x.Id == bird.Id);
+                if(index < 0 || Model.InCountry[index].CountryId != (int)@ViewData["id"])
+                    continue;
+            }
+            else
+            {
+                continue;
+            }
+
+            string img = @Model.KeyImages.ContainsKey(@bird.Id) ? string.Format("{0}/{1}/{2}.jpg", @ImgRoot, @bird.Id, @Model.KeyImages[@bird.Id]) : DefaultImg;
+
+            <a href="@Url.Action("Show", "Home", new { birdId = @bird.Id })">
+
                 <div class="blurb">
-                    <img src= @img class="blurb-image">
+                    <img src=@img class="blurb-image">
                     <div class="blurb-label">
                         <h5 class="blurb-name">@bird.Name</h5>
                         <h5 class="blurb-sciname">(@bird.SciName)</h5>
-                        @*<span>@AppOptions.Value.ApplicationName</span>*@
                     </div>
                 </div>
             </a>

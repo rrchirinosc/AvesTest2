@@ -1,4 +1,4 @@
-﻿
+﻿@using AvesTest2.Infraestructure.Data
 
 @{
     ViewData["Title"] = "Family";
@@ -22,26 +22,26 @@
             {
                 if (@Model.Families[index].Available)
                 {
-                    <a class="category-item" href="@Url.Action("ShowFamily", "Home", new { familyId = @Model.Families[index].Id })">
+                    <a class="category-item" href="@Url.Action("SelectFamily", "Home", new { familyId = @Model.Families[index].Id })">
                         <div class="selector-item">
                             @Model.Families[index].SciName (@Model.Families[index].Name)
                         </div>
                     </a>
-                    }
+                }
                 else
                 {
                     <div class="selector-item-disabled">
                         @Model.Families[index].SciName (@Model.Families[index].Name)
                     </div>
                 }
-             }
+            }
         </div>
         <div class="col">
-             @for (; index < Model.Families.Count; index++)
-             {
+            @for (; index < Model.Families.Count; index++)
+            {
                 if (@Model.Families[index].Available)
                 {
-                    <a class="category-item" href="@Url.Action("ShowFamily", "Home", new { familyId = @Model.Families[index].Id })">
+                    <a class="category-item" href="@Url.Action("SelectFamily", "Home", new { familyId = @Model.Families[index].Id })">
                         <div class="selector-item">
                             @Model.Families[index].SciName (@Model.Families[index].Name)
                         </div>
@@ -52,8 +52,8 @@
                     <div class="selector-item-disabled">
                         @Model.Families[index].SciName (@Model.Families[index].Name)
                     </div>
-                    }
-              }
+                }
+            }
         </div>
     </div>
 </div>

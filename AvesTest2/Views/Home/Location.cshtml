@@ -3,7 +3,7 @@
     ViewData["Title"] = "Location";
 }
 
-@model CountryViewModel
+@model LocationViewModel
 
 <h1>Location</h1>
 
@@ -13,13 +13,13 @@
         int count = Model.AvailableCountries.Count;
         int firstColumn = count % 2 == 1 ? count / 2 + 1 : count / 2;
         int secondColumn = firstColumn;
-
+        
         <div class="col">
             @foreach (var country in Model.AvailableCountries)
             {
                 if (--firstColumn < 0)
                     break;
-                <a class="category-item" href="@Url.Action("ShowByCountry", "Home", new { countryId = @country.Key })">
+                <a class="category-item" href="@Url.Action("SelectLocation", "Home", new { countryId = @country.Key })">
                     <div class="selector-item">
                         @country.Value
                     </div>
@@ -31,7 +31,7 @@
             {
                 if (--secondColumn >= 0)
                     continue;
-                <a class="category-item" href="@Url.Action("ShowByCountry", "Home", new { countryId = @country.Key })">
+                <a class="category-item" href="@Url.Action("SelectLocation", "Home", new { countryId = @country.Key })">
                     <div class="selector-item">
                         @country.Value
                     </div>

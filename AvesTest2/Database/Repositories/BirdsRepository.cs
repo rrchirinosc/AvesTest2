@@ -121,6 +121,18 @@ namespace AvesTest2.Database.Repositories
             return _connection.Query<BirdFullDTO>(sql);
         }
 
+        public IEnumerable<BirdCountryDTO> GetBirdByCountry
+        {
+            get
+            {
+                string sql = string.Format("SELECT DISTINCT [Bird].Id, [Image].Country AS CountryId" +
+                                                " FROM [Bird] INNER JOIN [Image]" +
+                                                " ON [Image].BirdId = [Bird].Id");
+
+                return _connection.Query<BirdCountryDTO>(sql);
+            }
+        }
+
         /* Fetch all country existing Ids */
         public IEnumerable<int> GetCountries
         {

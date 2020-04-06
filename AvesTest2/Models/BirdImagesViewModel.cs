@@ -45,7 +45,7 @@ namespace AvesTest2.Models
             return model;
         }
 
-        public static async Task<BirdImagesViewModel> LoadAllBirdsByCountry(SqlConnection connection, int countryId, IOptions<ApplicationOptions> appOptions)
+        public static async Task<BirdImagesViewModel> LoadAllBirdsByLocation(SqlConnection connection, int countryId, IOptions<ApplicationOptions> appOptions)
         {
             BirdImagesViewModel model = new BirdImagesViewModel();
             BirdsRepository repo = new BirdsRepository(connection);

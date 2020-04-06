@@ -13,7 +13,9 @@ namespace AvesTest2.Models
         public List<BirdDTO> Birds;
         public List<FamilyDTO> Families;
         public Dictionary<int, string> KeyImages;
-
+        public List<BirdCountryDTO> InCountry;
+        
+        //TODO: Make loading more specific
 
         public static async Task<BirdViewModel> Load(SqlConnection connection)
         {
@@ -22,6 +24,7 @@ namespace AvesTest2.Models
             model.Birds = repo.Birds.ToList();
             model.Families = repo.Families.ToList();
             model.KeyImages = repo.KeyImages.ToDictionary(x => x.BirdId, x => x.FileName);
+            model.InCountry = repo.GetBirdByCountry.ToList();
 
             List<int> AvailableFamilies = new List<int>();
             foreach(var bird in model.Birds)

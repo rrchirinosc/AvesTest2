@@ -1,4 +1,5 @@
-﻿
+﻿@using AvesTest2.Infraestructure.Data
+
 @{
     ViewData["Title"] = "AlphabeticalView";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -85,73 +86,73 @@
 <!-- Tab panes -->
 <div class="tab-content">
     <div id="alpha-a" class="container tab-pane active">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "A" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "A" } });
     </div>
     <div id="alpha-b" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "B" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "B" } });
     </div>
     <div id="alpha-c" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "C" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "C" } });
     </div>
     <div id="alpha-d" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "D" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "D" } });
     </div>
     <div id="alpha-e" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "E" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "E" } });
     </div>
     <div id="alpha-f" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "F" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "F" } });
     </div>
     <div id="alpha-g" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "G" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "G" } });
     </div>
     <div id="alpha-h" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "H" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "H" } });
     </div>
     <div id="alpha-i" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "I" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "I" } });
     </div>
     <div id="alpha-j" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "J" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "J" } });
     </div>
     <div id="alpha-k" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "K" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "K" } });
     </div>
     <div id="alpha-l" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "L" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "L" } });
     </div>
     <div id="alpha-m" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "M" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "M" } });
     </div>
     <div id="alpha-n" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "N" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "N" } });
     </div>
     <div id="alpha-o" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "O" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "O" } });
     </div>
     <div id="alpha-p" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "P" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "P" } });
     </div>
     <div id="alpha-r" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "R" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "R" } });
     </div>
     <div id="alpha-s" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "S" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "S" } });
     </div>
     <div id="alpha-t" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "T" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "T" } });
     </div>
     <div id="alpha-u" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "U" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "U" } });
     </div>
     <div id="alpha-v" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "V" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "V" } });
     </div>
     <div id="alpha-w" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "W" } });
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "W" } });
     </div>
     <div id="alpha-y" class="container tab-pane fade">
-        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "letter", "Y" } });
-    </div>    
+        @await Html.PartialAsync(@blurb, Model, new ViewDataDictionary(ViewData) { { "type", eBlurbDataType.Alpha }, { "letter", "Y" } });
+    </div>
 </div>
 

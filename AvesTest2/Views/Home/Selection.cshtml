@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "Selection";
+    string blurb = "~/Views/Shared/_BirdBlurbs.cshtml";
+}
+
+@model BirdViewModel
+
+<h1>Selection</h1>
+
+<div class="container">
+    @await Html.PartialAsync(@blurb, Model);
+</div>
+
