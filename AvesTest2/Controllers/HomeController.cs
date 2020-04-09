@@ -73,7 +73,7 @@ namespace AvesTest2.Controllers
 
         public async Task<IActionResult> SelectLocation(int countryId)
         {
-            BirdViewModel model = await BirdViewModel.Load(Connection);
+            BirdViewModel model = await BirdViewModel.Load(Connection, countryId);
             ViewData["type"] = eBlurbDataType.Location;
             ViewData["id"] = countryId;
             return View("Selection", model);

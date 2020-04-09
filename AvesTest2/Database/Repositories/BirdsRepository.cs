@@ -25,7 +25,18 @@ namespace AvesTest2.Database.Repositories
             }
         }
 
-        /* Fetch all available bird family names */ 
+        public IEnumerable<BirdDTO> BirdsByCountry(int countryId)
+        {
+                string sql = string.Format("SELECT DISTINCT [Bird].Id, [Bird].Name, [Bird].SciName, [Bird].FamilyId" +
+                                        " FROM [Bird] INNER JOIN [Image]" +
+                                        " ON [Image].BirdId = [Bird].Id" +
+                                        " WHERE [Image].Country = {0}" +
+                                        " ORDER BY [Name]", countryId);
+
+                return _connection.Query<BirdDTO>(sql);
+        }
+
+        /* Fetch all available bird family names */
         public IEnumerable<FamilyDTO> Families
         {
             get
@@ -82,14 +93,15 @@ namespace AvesTest2.Database.Repositories
             return _connection.Query<BirdImageDTO>(sql);
         }
 
-        /* Fetch all bird display info, including images */
+        /* Fetch all bird display info, including images orderd by keyimage*/
         public IEnumerable<BirdFullDTO> GetAllBirdInfo(int birdId)
         {
             string sql = string.Format("SELECT [Bird].Id, [Bird].Name, [Bird].SciName," +
                             "[Image].FileName, [Image].Location, [Image].Date, [Image].Country, [Image].Coordinate" +
                                             " FROM [Bird] INNER JOIN [Image]" +
                                             " ON [Image].BirdId = [Bird].Id" +
-                                            " WHERE [Image].BirdId = {0}", birdId);
+                                            " WHERE [Image].BirdId = {0}" +
+                                            " ORDER BY [Image].KeyImage DESC", birdId);
             return _connection.Query<BirdFullDTO>(sql);
         }
 
@@ -121,16 +133,14 @@ namespace AvesTest2.Database.Repositories
             return _connection.Query<BirdFullDTO>(sql);
         }
 
-        public IEnumerable<BirdCountryDTO> GetBirdByCountry
+        public IEnumerable<BirdCountryDTO> GetBirdByCountry(int countryId)
         {
-            get
-            {
                 string sql = string.Format("SELECT DISTINCT [Bird].Id, [Image].Country AS CountryId" +
                                                 " FROM [Bird] INNER JOIN [Image]" +
-                                                " ON [Image].BirdId = [Bird].Id");
+                                                " ON [Image].BirdId = [Bird].Id" +
+                                                " WHERE [Image].Country = {0}", countryId);
 
                 return _connection.Query<BirdCountryDTO>(sql);
-            }
         }
 
         /* Fetch all country existing Ids */

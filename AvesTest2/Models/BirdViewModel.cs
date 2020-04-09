@@ -24,7 +24,6 @@ namespace AvesTest2.Models
             model.Birds = repo.Birds.ToList();
             model.Families = repo.Families.ToList();
             model.KeyImages = repo.KeyImages.ToDictionary(x => x.BirdId, x => x.FileName);
-            model.InCountry = repo.GetBirdByCountry.ToList();
 
             List<int> AvailableFamilies = new List<int>();
             foreach(var bird in model.Birds)
@@ -36,6 +35,32 @@ namespace AvesTest2.Models
             foreach(var family in model.Families)
             {
                 if(availableFamilies.Contains(family.Id)) {
+                    family.Available = true;
+                }
+            }
+            return model;
+        }
+
+        public static async Task<BirdViewModel> Load(SqlConnection connection, int countryId)
+        {
+            BirdViewModel model = new BirdViewModel();
+            BirdsRepository repo = new BirdsRepository(connection);
+            model.Birds = repo.BirdsByCountry(countryId).ToList();
+            model.Families = repo.Families.ToList();
+            model.KeyImages = repo.KeyImages.ToDictionary(x => x.BirdId, x => x.FileName);
+            model.InCountry = repo.GetBirdByCountry(countryId).ToList();
+
+            List<int> AvailableFamilies = new List<int>();
+            foreach (var bird in model.Birds)
+            {
+                AvailableFamilies.Add(bird.FamilyId);
+            }
+            IEnumerable<int> availableFamilies = AvailableFamilies.Distinct();
+
+            foreach (var family in model.Families)
+            {
+                if (availableFamilies.Contains(family.Id))
+                {
                     family.Available = true;
                 }
             }
