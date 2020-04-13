@@ -78,5 +78,32 @@ namespace AvesTest2.Controllers
 
             return View("Admin", model);
         }
+
+        [HttpGet]
+        public async Task<JsonResult> GetBirdTable()
+        {
+            BirdsRepository repo = new BirdsRepository(Connection);
+            List<BirdDTO>  model = repo.Birds.ToList();
+            
+            return Json(model);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetFamilyTable()
+        {
+            BirdsRepository repo = new BirdsRepository(Connection);
+            List<FamilyDTO> model = repo.GetFamilyTable.ToList();
+
+            return Json(model);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetImageTable()
+        {
+            BirdsRepository repo = new BirdsRepository(Connection);
+            List<ImageDTO> model = repo.GetImageTable.ToList();
+
+            return Json(model);
+        }
     }    
  }

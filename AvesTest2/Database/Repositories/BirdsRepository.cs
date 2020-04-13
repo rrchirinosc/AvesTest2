@@ -175,5 +175,24 @@ namespace AvesTest2.Database.Repositories
 
             return rows;
         }
+
+        /* Get table methods -- used for Admin purposes */
+        public IEnumerable<FamilyDTO> GetFamilyTable        
+        {
+            get
+            {
+                string sql = "SELECT * FROM [Family] ORDER BY [Id]";
+                return _connection.Query<FamilyDTO>(sql);
+            }
+        }
+
+        public IEnumerable<ImageDTO> GetImageTable
+        {
+            get
+            {
+                string sql = "SELECT * FROM [Image] ORDER BY [BirdId]";               
+                return _connection.Query<ImageDTO>(sql);
+            }
+        }
     }
 }
