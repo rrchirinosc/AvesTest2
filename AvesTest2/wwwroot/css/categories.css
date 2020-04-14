@@ -18,8 +18,8 @@
 }
 
 .home .category-head {
-    /*color: #fff;*/
     text-decoration: none;
+    flex-grow:2;
 }
 
     .home .category-head:hover {
@@ -46,14 +46,15 @@
 .selector-list {
     display: flex;
     flex-wrap: wrap;
+    justify-content:space-between;
 }
 
 .selector-item {
-    padding: 20px;
+    padding: 15px;
     background-color: rgba(41,41,200,.75);
     color: #ffffdd;
     border-radius: 0;
-    margin: 5px;
+    margin: 2px;
     font-size: 24px;
     font-weight: 400;
     position: relative;
