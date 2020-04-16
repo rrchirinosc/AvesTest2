@@ -55,7 +55,7 @@
                         <option value="" selected>Country...</option>
                         @foreach (var country in Model.Countries)
                         {
-                            <option value=@country.Key>@country.Value</option>
+                            <option value=@country.Key>@country.Value (@country.Key) </option>
                         }
                     </select>
                 </div>
