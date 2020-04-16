@@ -39,7 +39,6 @@
             string img = @Model.KeyImages.ContainsKey(@bird.Id) ? string.Format("{0}/{1}/{2}.jpg", @ImgRoot, @bird.Id, @Model.KeyImages[@bird.Id]) : DefaultImg;
 
             <a href="@Url.Action("Show", "Home", new { birdId = @bird.Id })">
-
                 <div class="blurb">
                     <img src=@img class="blurb-image">
                     <div class="blurb-label">
