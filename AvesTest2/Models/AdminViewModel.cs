@@ -13,7 +13,7 @@ namespace AvesTest2.Models
     {
         public List<BirdDTO> Birds;
         public List<FamilyDTO> Families;
-        public Dictionary<int, string> Countries;
+        public Dictionary<int, string> AllCountries;
 
         public static async Task<AdminViewModel> Load(SqlConnection connection)
         {
@@ -21,7 +21,7 @@ namespace AvesTest2.Models
             BirdsRepository repo = new BirdsRepository(connection);
             model.Birds = repo.Birds.ToList();
             model.Families = repo.Families.ToList();
-            model.Countries = new Countries().Codes;
+            model.AllCountries = Countries.Codes;
 
             return model;
         }

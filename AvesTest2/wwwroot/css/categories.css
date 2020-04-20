@@ -43,6 +43,16 @@
     background-color: #e27c34;
 }
 
+.navbar-brand-mod {
+    color: #ffd !important;
+    font-size: 48px;
+}
+
+.descriptor-header {
+    color: #ffffdd;
+    font-size:24px;
+}
+
 .selector-list {
     display: flex;
     flex-wrap: wrap;
@@ -214,3 +224,18 @@ a.nav-link {
     text-decoration:none;
 }
 
+.no-show {
+    color:#f8f9fa00 !important;
+}
+
+    .no-show:hover {
+        color: #f8f9fa80 !important;
+    }
+
+.bird-banner {
+    background-image: url(/Images/Site/RCC00160.JPG);
+    background-size: cover;
+    background-position: center 50%;
+    /* background: no-repeat; */
+    opacity: 0.6;
+}

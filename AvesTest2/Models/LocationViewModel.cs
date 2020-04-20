@@ -18,9 +18,7 @@ namespace AvesTest2.Models
             BirdsRepository repo = new BirdsRepository(connection);
 
             List<int>countryIds = repo.GetCountries.ToList();
-            Countries countries = new Countries();
-
-            model.AvailableCountries = countries.Codes.Where(c => countryIds.Contains(c.Key)).ToDictionary(x => x.Key, x => x.Value);
+            model.AvailableCountries = Countries.Codes.Where(c => countryIds.Contains(c.Key)).ToDictionary(x => x.Key, x => x.Value);
                       
             return model;
         }

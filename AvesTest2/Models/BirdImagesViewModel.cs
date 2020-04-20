@@ -18,7 +18,7 @@ namespace AvesTest2.Models
             BirdImagesViewModel model = new BirdImagesViewModel();
             BirdsRepository repo = new BirdsRepository(connection);
 
-            string ImgRoot = appOptions.Value.Scheme + "://" + appOptions.Value.DomainName + ":" + appOptions.Value.Port + "/Images/Birds";
+            string ImgRoot = /*appOptions.Value.Scheme + "://" + appOptions.Value.DomainName + ":" + appOptions.Value.Port +*/ "/Images/Birds";
             model.Birds = repo.GetAllBirdInfo(birdId).ToList();
    
             foreach (var bird in model.Birds)
@@ -34,7 +34,7 @@ namespace AvesTest2.Models
             BirdImagesViewModel model = new BirdImagesViewModel();
             BirdsRepository repo = new BirdsRepository(connection);
 
-            string ImgRoot = appOptions.Value.Scheme + "://" + appOptions.Value.DomainName + ":" + appOptions.Value.Port + "/Images/Birds";
+            string ImgRoot = /*appOptions.Value.Scheme + "://" + appOptions.Value.DomainName + ":" + appOptions.Value.Port +*/ "/Images/Birds";
             model.Birds = repo.GetAllBirdInfoByFamily(familyId).ToList();
             foreach (var bird in model.Birds)
             {
@@ -49,7 +49,7 @@ namespace AvesTest2.Models
             BirdImagesViewModel model = new BirdImagesViewModel();
             BirdsRepository repo = new BirdsRepository(connection);
 
-            string ImgRoot = appOptions.Value.Scheme + "://" + appOptions.Value.DomainName + ":" + appOptions.Value.Port + "/Images/Birds";
+            string ImgRoot = /*appOptions.Value.Scheme + "://" + appOptions.Value.DomainName + ":" + appOptions.Value.Port +*/ "/Images/Birds";
             model.Birds = repo.GetAllBirdInfoByCountry(countryId).ToList();
 
             foreach (var bird in model.Birds)

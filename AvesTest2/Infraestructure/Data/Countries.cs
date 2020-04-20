@@ -8,12 +8,12 @@ namespace AvesTest2.Infraestructure.Data
     /// <summary>
     /// Static country names
     /// </summary>
-    class Countries
+    public class Countries
     {
         /// <summary>
         /// Country names
         /// </summary>
-        public List<string> Names = new List<string>
+        public static List<string> Names = new List<string>
         {
             "Afghanistan",
             "Åland Islands",
@@ -255,7 +255,7 @@ namespace AvesTest2.Infraestructure.Data
             "Zimbabwe"
         };
 
-        public Dictionary<int, string> Codes = new Dictionary<int, string>
+        public static Dictionary<int, string> Codes = new Dictionary<int, string>
         {
             { 004, "Afghanistan" },
             { 248, "Åland Islands" },

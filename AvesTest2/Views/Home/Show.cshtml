@@ -1,10 +1,10 @@
 ﻿@{
-    ViewData["Title"] = "Show";
+    //ViewData["Title"] = "Show";
 }
 
 @model BirdImagesViewModel
 
-<h1>Show</h1>
+<div class="descriptor-header">@ViewData["Title"]</div>
 
 <div id="birdShow" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
     <div class="carousel-inner">
@@ -19,7 +19,7 @@
                         <img src="@image.FileName" class="d-block w-100" @image
                              data-name="@image.Name (@image.SciName)" data-index=@index alt="@image.Name">
                     </div>
-                            first = false;
+                    first = false;
                 }
                 else
                 {
@@ -55,15 +55,15 @@
                 <span id="bird-date-taken"></span>
             </div>
             @*<div>
-                <button class="btn btn-outline-primary button-mod2 float-left" id="showLocation" type="button"                        
-                    data-toggle="collapse" data-target="#birdLocation" aria-expanded="false" aria-controls="birdInfo">
-                    <i class="fa fa-location-arrow"></i>
-                </button>
-                <div class="collapse" id="birdLocation">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m19!1m8!1m3!1d498483.43703938107!2d-69.167442!3d-12.555733!3m2!1i1024!2i768!4f13.1!4m8!3e0!4m0!4m5!1s0x917078a6fe6c1921%3A0x6e99a4038045b62b!2sTambopata%2C+Peru!3m2!1d-12.5825295!2d-69.1932762!5e0!3m2!1sen!2sse!4v1555502566048!5m2!1sen!2sse" width=100% height=400 frameborder=0 style="border:1px solid #737373" allowfullscreen></iframe>
-                </div>
-            </div>*@
-        </div>        
+                    <button class="btn btn-outline-primary button-mod2 float-left" id="showLocation" type="button"
+                        data-toggle="collapse" data-target="#birdLocation" aria-expanded="false" aria-controls="birdInfo">
+                        <i class="fa fa-location-arrow"></i>
+                    </button>
+                    <div class="collapse" id="birdLocation">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m19!1m8!1m3!1d498483.43703938107!2d-69.167442!3d-12.555733!3m2!1i1024!2i768!4f13.1!4m8!3e0!4m0!4m5!1s0x917078a6fe6c1921%3A0x6e99a4038045b62b!2sTambopata%2C+Peru!3m2!1d-12.5825295!2d-69.1932762!5e0!3m2!1sen!2sse!4v1555502566048!5m2!1sen!2sse" width=100% height=400 frameborder=0 style="border:1px solid #737373" allowfullscreen></iframe>
+                    </div>
+                </div>*@
+        </div>
     </div>
 </div>
 
