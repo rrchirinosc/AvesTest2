@@ -58,6 +58,7 @@ namespace AvesTest2.Controllers
             if (model == null)
                 model = await AdminViewModel.Load(Connection);
 
+            // check for missing fields that make entry invalid
             if (BirdId != 0 &&
                 FileName != null &&
                 Location != null &&
@@ -73,6 +74,14 @@ namespace AvesTest2.Controllers
                 image.KeyImage = IsActive;
 
                 BirdsRepository repo = new BirdsRepository(Connection);
+
+                // check whether or not the bird has already an image set as key and
+                // if so remove the flag for that entry
+                if (image.KeyImage == true)
+                {
+                    repo.ResetKeyImage(BirdId);
+                }
+
                 repo.AddImage(image);
             }
 

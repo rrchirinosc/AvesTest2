@@ -1,12 +1,13 @@
 ﻿@{
-    //ViewData["Title"] = "Show";
+//ViewData["Title"] = "Show";
 }
 
 @model BirdImagesViewModel
 
 <div class="descriptor-header">@ViewData["Title"]</div>
 
-<div id="birdShow" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
+<div id="bird-show" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
+    
     <div class="carousel-inner">
         @{
             bool first = true;
@@ -32,25 +33,45 @@
             }
         }
     </div>
-    <a class="carousel-control-prev" href="#birdShow" role="button" data-slide="prev">
+
+    <ol class="carousel-indicators">
+        @{
+            first = true;
+            index = 0;
+            foreach (var image in Model.Birds)
+            {
+                if (first)
+                {
+                    <li data-target="#bird-show" data-slide-to=@index.ToString() class="active"></li>
+                }
+                else
+                {
+                    <li data-target="#bird-show" data-slide-to=@index.ToString()></li>
+                }
+                index++;
+            }        
+       }
+    </ol>
+
+    <a class="carousel-control-prev" href="#bird-show" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
-    <a class="carousel-control-next" href="#birdShow" role="button" data-slide="next">
+    <a class="carousel-control-next" href="#bird-show" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
 </div>
 
-<div>
-    <button class="btn btn-outline-primary button-mod2 float-left" id="showInfo" type="button"
-            data-toggle="collapse" data-target="#birdInfo" aria-expanded="false" aria-controls="birdInfo">
+<div class="mt-5">
+    <button class="btn btn-outline-primary button-mod2 float-left" id="show-info" type="button"
+            data-toggle="collapse" data-target="#bird-info" aria-expanded="false" aria-controls="bird-info">
         <i class="fa fa-info"></i>
     </button>
-    <div class="collapse" id="birdInfo">
+    <div class="collapse" id="bird-info">
         <div class="d-flex">
             <div class="card card-body">
-                <span id="bird-name"></span>
+                @*<span id="bird-name"></span>*@
                 <span id="bird-location"></span>
                 <span id="bird-date-taken"></span>
             </div>
@@ -67,6 +88,6 @@
     </div>
 </div>
 
-<script src="~/js/Home/Show.js" asp-append-version="true"></script>
+<script src="/js/Home/Show.js" asp-append-version="true"></script>
 @*Pass whole model as json to js*@
 <script>var birddata = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model, Newtonsoft.Json.Formatting.Indented));</script> 

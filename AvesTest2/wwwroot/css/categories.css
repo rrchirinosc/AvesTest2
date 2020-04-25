@@ -82,11 +82,11 @@ selector a:hover {
 }
 
 .selector-item-disabled {
-    padding: 20px;
+    padding: 15px;
     background-color: rgba(41,41,200,.75);
     color: #0366d6;
     border-radius: 0;
-    margin: 5px;
+    margin: 2px;
     font-size: 24px;
     font-weight: 400;
     position: relative;
@@ -148,7 +148,7 @@ selector a:hover {
     left: 0;
     width: 100%;
     padding: 0 0 10px 15px;
-    background-color: rgba(20,20,20,.15);
+    background-color: rgba(20,20,20,.2);
     color: rgba(255,255,254,1);
     text-shadow:1px 1px 1px #000;
 }
@@ -158,7 +158,6 @@ selector a:hover {
             }
 
 .blurb-sciname{
-    font-family:Calibri;
     font-style:italic;
 }
 
@@ -238,4 +237,18 @@ a.nav-link {
     background-position: center 50%;
     /* background: no-repeat; */
     opacity: 0.6;
+}
+
+.link-no-decoration:hover {
+    text-decoration:none;
+    color:#ffd;
+}
+
+    .carousel-indicators li.active {
+        background-color: #007Bff;
+
+    }
+
+.carousel-indicators {
+    bottom: -50px;
 }

@@ -194,5 +194,13 @@ namespace AvesTest2.Database.Repositories
                 return _connection.Query<ImageDTO>(sql);
             }
         }
+
+        public IEnumerable<string> ResetKeyImage(int birdId)
+        {
+            string sql = string.Format("UPDATE [Image]" +
+                                            " SET [KeyImage]= 0" +
+                                            " WHERE [BirdId] = {0}", birdId);
+            return _connection.Query<string>(sql);
+        }
     }
 }

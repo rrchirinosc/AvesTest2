@@ -251,10 +251,10 @@ var Months = "January,February,March,April,May,June,July,August,September,Octobe
 window.addEventListener('DOMContentLoaded', (event) => {
 
     // Set event for info display
-    document.getElementById("showInfo").addEventListener("click", infoClicked);
+    document.getElementById("show-info").addEventListener("click", infoClicked);
 
     // Fill bird info under each carousel item
-    $('#birdShow').on('slide.bs.carousel', function (event) {
+    $('#bird-show').on('slide.bs.carousel', function (event) {
         let carouselIndex = parseInt(this.children[0].children[event.to].attributes[0].ownerElement.children[0].dataset.index);
         setBirdInfo(carouselIndex);
     });

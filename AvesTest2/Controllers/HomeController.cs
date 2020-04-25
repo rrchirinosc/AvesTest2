@@ -55,7 +55,8 @@ namespace AvesTest2.Controllers
         {
             BirdImagesViewModel model = await BirdImagesViewModel.LoadAllSingle(Connection, birdId, _appOptions);
             int index = model.Birds.FindIndex(x => x.Id == birdId);
-            ViewData["Title"] = string.Format("{0} ({1})", model.Birds[index].Name, model.Birds[index].SciName);
+            if(index >= 0)
+                ViewData["Title"] = string.Format("{0} ({1})", model.Birds[index].Name, model.Birds[index].SciName);
             return View(model);
         }
 
@@ -73,7 +74,7 @@ namespace AvesTest2.Controllers
             ViewData["type"] = eBlurbDataType.Family;
             ViewData["id"] = familyId;
             int index = model.Families.FindIndex(x => x.Id == familyId);
-            ViewData["Title"] = string.Format("{0} ({1})", model.Families[index].SciName, model.Families[index].Name);
+            ViewData["Title"] = string.Format("{0} ( {1} )", model.Families[index].SciName, model.Families[index].Name);
             return View("Selection", model);
         }
 
