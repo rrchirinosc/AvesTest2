@@ -1,6 +1,10 @@
 ﻿window.addEventListener('DOMContentLoaded', (event) => {
 
-   
+    var init = function () {
+        $.validator.unobtrusive.parse("#addBirdForm");
+        $.validator.unobtrusive.parse("#addImageForm");
+    };
+
     $('#load-birds').click(function () {
         var url = "/Admin/GetBirdTable";
         $.ajax(
@@ -94,5 +98,77 @@
                 $('#image-table').empty();
                 $('#image-table').append(`${table}`);
             });
-    });       
+    });   
+
+    $('#add-image').click(function (e) {
+
+        e.preventDefault();
+
+        if ($('#addImageForm').valid()) {
+
+            var url = "/Admin/AddImage";
+            var data = {
+                BirdId: $('#birdId').val(),
+                FileName: $('#fileName').val(),
+                Location: $('#location').val(),
+                Date: $('#date').val(),
+                Country: $('#country').val(),
+                Coordinate: $('#coordinates').val(),
+                KeyImage: $('#keyImage').prop('checked')
+            };
+
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: url,
+                    dataType: 'text',
+                    cache: false,
+                    data: data
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown + this.url);
+                }).done(function (res, textStatus, jqXHR) {
+                    if (res === "0") {
+                        alert('Error, no data added');
+                    }
+                    else {
+                        $('#addImageForm')[0].reset();
+                    }
+                });
+        }
+    });   
+
+    $('#add-bird').click(function (e) {
+
+        e.preventDefault();
+
+        if ($('#addBirdForm').valid()) {
+
+            var url = "/Admin/AddBird";
+            var data = {
+                Name: $('#name').val(),
+                SciName: $('#sciName').val(),
+                FamilyId: $('#familyId').val()
+            };
+
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: url,
+                    dataType: 'text',
+                    cache: false,
+                    data: data
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown + this.url);
+                }).done(function (res, textStatus, jqXHR) {
+                    if (res === "0") {
+                        alert('Error, no data added');
+                    }
+                    else {
+                        $('#addBirdForm')[0].reset();
+                    }
+                });
+        }
+    });   
+
+    init();
 });

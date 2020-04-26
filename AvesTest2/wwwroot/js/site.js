@@ -12,7 +12,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     function checkVisibility() {
         var rect = document.getElementById("page-top").getBoundingClientRect();
-        rect.top > 0 ? $('#to-top').hide() : $('#to-top').show();
+        //console.log(rect.top);
+        rect.top >= 0 ? $('#to-top').hide() : $('#to-top').show();
     }
 
 })

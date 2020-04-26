@@ -93,6 +93,11 @@ body {
     background-color: #151545;
 }
 
+input.input-validation-error, select.input-validation-error {
+    border: 2px solid #ff0000;
+    box-shadow: 0 0 3px 1px #ff0000;
+}
+
 
 
 

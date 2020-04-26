@@ -30,64 +30,6 @@ namespace AvesTest2.Controllers
 #endif
         }
 
-        public async Task<IActionResult> AddBird(string Name, string SciName, int FamilyId)
-        {
-            BirdDTO bird = new BirdDTO();
-            if (model == null)
-                model = await AdminViewModel.Load(Connection);
-
-            if (Name != null && 
-                SciName != null && 
-                FamilyId != 0)
-            {
-                bird.Name = Name;
-                bird.SciName = SciName;
-                bird.FamilyId = Convert.ToInt32(FamilyId);
-
-                BirdsRepository repo = new BirdsRepository(Connection);
-                repo.AddBird(bird);
-            }
-                
-            return View("Admin", model);
-        }
-
-        public async Task<IActionResult> AddImage(int BirdId, string FileName, string Location, 
-            DateTime Date, int Country, string Coordinate, bool IsActive = false)
-        {
-            ImageDTO image = new ImageDTO();
-            if (model == null)
-                model = await AdminViewModel.Load(Connection);
-
-            // check for missing fields that make entry invalid
-            if (BirdId != 0 &&
-                FileName != null &&
-                Location != null &&
-                Date.Year != 1 &&
-                Country != 0)
-            {
-                image.BirdId = BirdId;
-                image.FileName = FileName;
-                image.Location = Location;
-                image.Date = Date.ToShortDateString();
-                image.Country = Country;
-                image.Coordinate = (Coordinate == null) ? "" : Coordinate;
-                image.KeyImage = IsActive;
-
-                BirdsRepository repo = new BirdsRepository(Connection);
-
-                // check whether or not the bird has already an image set as key and
-                // if so remove the flag for that entry
-                if (image.KeyImage == true)
-                {
-                    repo.ResetKeyImage(BirdId);
-                }
-
-                repo.AddImage(image);
-            }
-
-            return View("Admin", model);
-        }
-
         [HttpGet]
         public async Task<JsonResult> GetBirdTable()
         {
@@ -113,6 +55,60 @@ namespace AvesTest2.Controllers
             List<ImageDTO> model = repo.GetImageTable.ToList();
 
             return Json(model);
+        }
+
+        [HttpPost]
+        public async Task<int> AddBird(string Name, string SciName, int FamilyId)
+        {
+            BirdDTO bird = new BirdDTO();
+            int result = 0;
+
+            // This check is not really necessary since I validate on the client but...
+            if (Name == null || SciName == null || FamilyId == 0)
+                return result;
+            
+            bird.Name = Name;
+            bird.SciName = SciName;
+            bird.FamilyId = Convert.ToInt32(FamilyId);
+
+            BirdsRepository repo = new BirdsRepository(Connection);
+            result = repo.AddBird(bird);
+
+            return result;
+        }
+
+        [HttpPost]
+        public async Task<int> AddImage(int BirdId, string FileName, string Location,
+            DateTime Date, int Country, string Coordinate, bool KeyImage = false)
+        {
+            ImageDTO image = new ImageDTO();
+            int result = 0;
+
+            // This check is not really necessary since I validate on the client but...
+            if (BirdId == 0 || FileName == null ||
+                Location == null || Date.Year == 1 || Country == 0)
+                return result;
+
+            image.BirdId = BirdId;
+            image.FileName = FileName;
+            image.Location = Location;
+            image.Date = Date.ToShortDateString();
+            image.Country = Country;
+            image.Coordinate = (Coordinate == null) ? "" : Coordinate;
+            image.KeyImage = KeyImage;
+
+            BirdsRepository repo = new BirdsRepository(Connection);
+
+            // check whether or not the bird has already an image set as key and
+            // if so remove the flag for that entry
+            if (image.KeyImage == true)
+            {
+                repo.ResetKeyImage(BirdId);
+            }
+
+            result = repo.AddImage(image);
+
+            return result;
         }
     }    
  }
