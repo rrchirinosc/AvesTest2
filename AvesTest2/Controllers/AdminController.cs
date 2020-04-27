@@ -34,7 +34,7 @@ namespace AvesTest2.Controllers
         public async Task<JsonResult> GetBirdTable()
         {
             BirdsRepository repo = new BirdsRepository(Connection);
-            List<BirdDTO>  model = repo.Birds.ToList();
+            List<BirdDTO> model = repo.Birds.ToList();
             
             return Json(model);
         }
@@ -44,7 +44,6 @@ namespace AvesTest2.Controllers
         {
             BirdsRepository repo = new BirdsRepository(Connection);
             List<FamilyDTO> model = repo.GetFamilyTable.ToList();
-
             return Json(model);
         }
 
@@ -55,6 +54,14 @@ namespace AvesTest2.Controllers
             List<ImageDTO> model = repo.GetImageTable.ToList();
 
             return Json(model);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetStats()
+        {
+            StatsViewModel model = await StatsViewModel.Load(Connection);
+            
+            return Json(model.Stats);
         }
 
         [HttpPost]

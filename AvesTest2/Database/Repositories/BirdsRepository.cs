@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Dapper;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace AvesTest2.Database.Repositories
 {
@@ -201,6 +202,28 @@ namespace AvesTest2.Database.Repositories
                                             " SET [KeyImage]= 0" +
                                             " WHERE [BirdId] = {0}", birdId);
             return _connection.Query<string>(sql);
+        }
+
+        public int GetBirdCount
+        {
+            get
+            {
+                string sql = string.Format("SELECT COUNT(*) FROM [Bird]");
+
+                return _connection.Query<int>(sql).First();
+            }
+        }
+
+        public int GetKeyImageCount
+        {
+            get
+            {
+                string sql = string.Format("SELECT COUNT(DISTINCT [BirdId])" +
+                                        " FROM [Image]" +
+                                        "WHERE [KeyImage] = 1");
+
+                return _connection.Query<int>(sql).First();
+            }
         }
     }
 }

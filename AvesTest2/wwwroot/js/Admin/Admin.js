@@ -79,7 +79,7 @@
                 alert(errorThrown + this.url);
             }).done(function (imageList, textStatus, jqXHR) {
                 //alert('image table loaded');
-                let th = `<th style="color:#0366D6">`
+                let th = `<th style="color:#0366D6">`;
                 var table = `<table><thead><tr>${th}BirdId</th>${th}FileName</th>${th}Location</th>${th}Date</th>${th}Country</th>${th}Coordinate</th>${th}KeyImage</th>${th}</tr></thead><tbody>`;
                 var index = 2;
                 for (image in imageList) {
@@ -99,6 +99,31 @@
                 $('#image-table').append(`${table}`);
             });
     });   
+
+    $('#load-stats').click(function () {
+        var url = "/Admin/GetStats";
+        $.ajax(
+            {
+                type: 'GET',
+                url: url,
+                dataType: 'json',
+                cache: false,
+                contentType: "application/json; charset=utf-8"
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown + this.url);
+            }).done(function (stats, textStatus, jqXHR) {
+                //alert('stats loaded');
+                let value = stats.birdCount;
+                let value2 = stats.haveKeyImages;
+                let div = '<div style="padding:0 10px; color:#fff; margin-top:25px">';
+                var statsList = `${div}<ul>` + 
+                                `<li> Number of Birds: ${value} </li>` +
+                                `<li> Number of KeyImages: ${value2} </li>` +
+                                `</ul></div>`;
+                $('#stats-list').empty();
+                $('#stats-list').append(`${statsList}`);               
+            });
+    });
 
     $('#add-image').click(function (e) {
 
