@@ -44,6 +44,7 @@
 }
 
 .navbar-brand-mod {
+    display:flex;
     color: #ffd !important;
     font-size: 48px;
 }
@@ -186,7 +187,6 @@ selector a:hover {
     height: 50px;
     font-size: 24px;
     margin-right: 20px;
-    margin-bottom: 20px;
 }
 
 .blurbs-parent {
@@ -238,6 +238,10 @@ a.nav-link {
     background-position: center 50%;
     /* background: no-repeat; */
     opacity: 0.6;
+}
+
+#bird-location:hover {
+    color:#007bff;
 }
 
 .link-no-decoration:hover {

@@ -24,6 +24,7 @@ namespace AvesTest2
         {
             services.AddControllersWithViews();
             services.Configure<ApplicationOptions>(options => Configuration.GetSection("ApplicationOptions").Bind(options));
+            services.Configure<ServicesOptions>(options => Configuration.GetSection("ServicesOptions").Bind(options));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

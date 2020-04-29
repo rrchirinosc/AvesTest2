@@ -270,7 +270,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     // Set bird info display with the current slide values
     function setBirdInfo(index) {
-        $('#bird-name').html(birddata.Birds[index].Name);
         $('#bird-location').html(birddata.Birds[index].Location + " - " + Countries[Countries.findIndex(x => x.code == birddata.Birds[index].Country)].name);
 
         // put date into Month Day, Year format
@@ -278,6 +277,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
         let months = Months.split(",");
         let month = parseInt(date[1]) - 1;
         $('#bird-date-taken').html(months[month] + " " + date[0] + ", " + date[2]);
+
+        // location map
+        let url = 'https://www.google.com/maps/embed/v1/view?key=' + appkey + '&center=' + birddata.Birds[index].Coordinate + '&zoom=15&maptype=satellite';
+        var map = `<iframe width="100%"` +
+            `height="300"` +
+            `frameborder="0" style="border:1px solid #737373"` +
+            `src=${url}></iframe>`;
+        $('#map').empty();
+        $('#map').append(`${map}`);
     }
 });
 

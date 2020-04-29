@@ -1,14 +1,17 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.Extensions.Options.IOptions<ApplicationOptions> AppOptions
+<!DOCTYPE html>
+@{
+    string site = AppOptions.Value.ApplicationName;
+}
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AvesTest2</title>
+    <title>@ViewData["Title"] - @site</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/categories.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />"
-    @*<link href="https://fonts.googleapis.com/css2?family=Merienda&display=swap" rel="stylesheet">*@
     <link href="https://fonts.googleapis.com/css2?family=Ruluko&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -16,8 +19,8 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" id="page-top">
             <div class="container">
                 <a class="navbar-brand navbar-brand-mod" asp-area="" asp-controller="Home" asp-action="Index">
-                    <div><img src="/Images/Site/RCC00160.png" alt="" style="width:376px; height:114px" /></div>
-                    <div style="font-size:28px">AvesTest2</div>
+                    <div><img src="/Images/Site/RCC00160.png" alt=@site style="width:250px; height:76px" /></div>
+                    <div style="font-size:48px">@site</div>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -36,21 +39,21 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container" style="overflow:hidden">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
     <div id="to-top">
-        <a class="btn btn-outline-primary button-mod3" href="#page-top">
+        <a class="btn btn-outline-primary button-mod3 mb-5" href="#page-top">
             <i class="fa fa-arrow-up"></i>
         </a>
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - AvesTest2 - <a class="link-no-decoration" asp-area=" " asp-controller="Home" asp-action="About">About</a>
+            &copy; 2020 - @site - <a class="link-no-decoration" asp-area=" " asp-controller="Home" asp-action="About">About</a>
         </div>
     </footer>
 

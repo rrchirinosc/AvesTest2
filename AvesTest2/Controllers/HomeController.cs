@@ -36,18 +36,21 @@ namespace AvesTest2.Controllers
         public async Task<IActionResult> Alphabetical()
         {
             BirdViewModel model = await BirdViewModel.Load(Connection);
+            ViewData["Title"] = "Birds A-Z";
             return View(model);
         }
 
         public async Task<IActionResult> Family()
         {
             BirdViewModel model = await BirdViewModel.Load(Connection);
+            ViewData["Title"] = "Bird Families";
             return View(model);
         }
 
         public async Task<IActionResult> Location()
         {
             LocationViewModel model = await LocationViewModel.Load(Connection);
+            ViewData["Title"] = "Bird Locations";
             return View(model);
         }
 
