@@ -74,12 +74,28 @@
                     <span id="bird-date-taken"></span>
                 </div>
                 <div class="col-lg-8">
-                    <div class="collapse" id="map">                        
+                    <div class="collapse" id="map">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    @*<div class="mt-5 mb-5 d-flex flex-wrap">
+            <button class="btn btn-outline-primary button-mod2 mb-5" id="show-info" type="button"
+                    data-toggle="collapse" data-target="#bird-info" aria-expanded="false" aria-controls="bird-info">
+                <i class="fa fa-info"></i>
+            </button>
+            <div class="collapse d-flex" id="bird-info">
+                <div class="col-lg-4 d-block">
+                    <span id="bird-location" type="button" data-toggle="collapse" data-target="#map" aria-expanded="false" aria-controls="map"></span>
+                    <span id="bird-date-taken"></span>
+                </div>
+                <div class="collapse col-lg-6" id="map">
+                </div>
+            </div>
+        </div>*@
+
 </div>
 
 
@@ -87,5 +103,4 @@
 @*Pass whole model as json to js*@
 <script>
     var birddata = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model, Newtonsoft.Json.Formatting.Indented));
-    var appkey = "@Options.Value.GoogleAPIKey";
-</script> 
+ </script> 

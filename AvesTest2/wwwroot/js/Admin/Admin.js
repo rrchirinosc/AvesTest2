@@ -115,10 +115,12 @@
                 //alert('stats loaded');
                 let value = stats.birdCount;
                 let value2 = stats.haveKeyImages;
+                let value3 = stats.birdCount - stats.haveKeyImages;
                 let div = '<div style="padding:0 10px; color:#fff; margin-top:25px">';
                 var statsList = `${div}<ul>` + 
-                                `<li> Number of Birds: ${value} </li>` +
-                                `<li> Number of KeyImages: ${value2} </li>` +
+                                `<li> Birds: ${value} </li>` +
+                                `<li> KeyImages: ${value2} </li>` +
+                                `<li> Birds w/o images: ${value3} </li>` +
                                 `</ul></div>`;
                 $('#stats-list').empty();
                 $('#stats-list').append(`${statsList}`);               

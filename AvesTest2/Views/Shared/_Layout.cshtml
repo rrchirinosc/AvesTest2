@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - @site</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/categories.css" />
+    <link rel="stylesheet" href="~/css/site.min.css" />
+    <link rel="stylesheet" href="~/css/categories.min.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />"
     <link href="https://fonts.googleapis.com/css2?family=Ruluko&display=swap" rel="stylesheet">
 </head>
@@ -18,7 +18,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" id="page-top">
             <div class="container">
-                <a class="navbar-brand navbar-brand-mod" asp-area="" asp-controller="Home" asp-action="Index">
+                <a class="navbar-brand navbar-brand-mod d-flex flex-wrap" asp-area="" asp-controller="Home" asp-action="Index">
                     <div><img src="/Images/Site/RCC00160.png" alt=@site style="width:250px; height:76px" /></div>
                     <div style="font-size:48px">@site</div>
                 </a>
