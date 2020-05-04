@@ -54,12 +54,23 @@ namespace AvesTest2.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Show(int birdId)
+        //TODO: refactor
+        public async Task<IActionResult> Show(int birdId, int location)
         {
-            BirdImagesViewModel model = await BirdImagesViewModel.LoadAllSingle(Connection, birdId, _appOptions);
+            BirdImagesViewModel model;
+            if (location != 0)
+            {
+                model = await BirdImagesViewModel.LoadAllSingleByCountry(Connection, birdId, location, _appOptions);
+            }
+            else
+            {
+                model = await BirdImagesViewModel.LoadAllSingle(Connection, birdId, _appOptions);
+            }
+            
             int index = model.Birds.FindIndex(x => x.Id == birdId);
             if(index >= 0)
                 ViewData["Title"] = string.Format("{0} ({1})", model.Birds[index].Name, model.Birds[index].SciName);
+
             return View(model);
         }
 

@@ -65,7 +65,7 @@ body {
 
 .selector-item {
     padding: 15px;
-    background-color: rgba(41,41,200,.75);
+    background-color: $app-select-bk;
     color: $app-font-color;
     border-radius: 0;
     margin: 2px;
@@ -87,8 +87,8 @@ selector a:hover {
 
 .selector-item-disabled {
     padding: 15px;
-    background-color: rgba(41,41,200,.75);
-    color: #0366d6;
+    background-color: $app-select-bk-disabled;
+    color: $app-select-bk-color-disabled;
     border-radius: 0;
     margin: 2px;
     font-size: 24px;
@@ -98,7 +98,7 @@ selector a:hover {
 }
 
 .selector-item:hover {
-    background-color: $app-select-bk;
+    background-color: $app-select-bk-hover;
     border-radius: 0;
     color: rgba(41,41,200,.75);
 }
@@ -177,6 +177,7 @@ selector a:hover {
     width:50px;
     height:50px;
     font-size: 24px;
+    opacity:0.75;
 }
 
 
@@ -189,8 +190,13 @@ selector a:hover {
     height: 50px;
     font-size: 24px;
     margin-right: 20px;
+    opacity:0.75;
 }
 
+.button-mod2:hover, .button-mod3:hover {
+    opacity:0.5;
+}
+ 
 .blurbs-parent {
     margin-top: 40px;
 }
@@ -253,7 +259,7 @@ a.nav-link {
 
     .carousel-indicators li.active {
         background-color: #007Bff;
-
+        opacity:0.75;
     }
 
 .carousel-indicators {

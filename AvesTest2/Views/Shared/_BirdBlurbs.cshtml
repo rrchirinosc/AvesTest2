@@ -37,8 +37,8 @@
             }
 
             string img = @Model.KeyImages.ContainsKey(@bird.Id) ? string.Format("{0}/{1}/{2}.jpg", @ImgRoot, @bird.Id, @Model.KeyImages[@bird.Id]) : DefaultImg;
-
-            <a href="@Url.Action("Show", "Home", new { birdId = @bird.Id })">
+            int location = (eBlurbDataType)@ViewData["type"] == eBlurbDataType.Location ? (int)@ViewData["id"] : 0;
+            <a href="@Url.Action("Show", "Home", new { birdId = @bird.Id, location = @location})">
                 <div class="blurb">
                     <img src=@img class="blurb-image">
                     <div class="blurb-label">

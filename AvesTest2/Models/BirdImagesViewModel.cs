@@ -11,7 +11,12 @@ namespace AvesTest2.Models
 {
     public class BirdImagesViewModel
     {
-        public List<BirdFullDTO> Birds;        
+        public List<BirdFullDTO> Birds;
+
+        public object ShallowCopy()
+        {
+            return this.MemberwiseClone();
+        }
 
         public static async Task<BirdImagesViewModel> LoadAllSingle(SqlConnection connection, int birdId, IOptions<ApplicationOptions> appOptions)
         {
@@ -21,6 +26,22 @@ namespace AvesTest2.Models
             string ImgRoot = "/Images/Birds";
             model.Birds = repo.GetAllBirdInfo(birdId).ToList();
    
+            foreach (var bird in model.Birds)
+            {
+                bird.FileName = string.Format("{0}/{1}/{2}.jpg", ImgRoot, birdId, bird.FileName);
+            }
+
+            return model;
+        }
+
+        public static async Task<BirdImagesViewModel> LoadAllSingleByCountry(SqlConnection connection, int birdId, int countryId, IOptions<ApplicationOptions> appOptions)
+        {
+            BirdImagesViewModel model = new BirdImagesViewModel();
+            BirdsRepository repo = new BirdsRepository(connection);
+
+            string ImgRoot = "/Images/Birds";
+            model.Birds = repo.GetAllBirdInfoByCountry(birdId, countryId).ToList();
+
             foreach (var bird in model.Birds)
             {
                 bird.FileName = string.Format("{0}/{1}/{2}.jpg", ImgRoot, birdId, bird.FileName);

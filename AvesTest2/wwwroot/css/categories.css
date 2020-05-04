@@ -48,7 +48,7 @@
 
 .selector-item {
   padding: 15px;
-  background-color: rgba(41, 41, 200, 0.75);
+  background-color: rgba(72, 72, 106, 0.75);
   color: #fffff0;
   border-radius: 0;
   margin: 2px;
@@ -67,8 +67,8 @@ selector a:hover {
 
 .selector-item-disabled {
   padding: 15px;
-  background-color: rgba(41, 41, 200, 0.75);
-  color: #0366d6;
+  background-color: rgba(72, 72, 72, 0.75);
+  color: rgba(172, 172, 172, 0.75);
   border-radius: 0;
   margin: 2px;
   font-size: 24px;
@@ -141,7 +141,8 @@ selector a:hover {
   border-radius: 25px;
   width: 50px;
   height: 50px;
-  font-size: 24px; }
+  font-size: 24px;
+  opacity: 0.75; }
 
 .button-mod3 {
   position: fixed;
@@ -151,7 +152,11 @@ selector a:hover {
   width: 50px;
   height: 50px;
   font-size: 24px;
-  margin-right: 20px; }
+  margin-right: 20px;
+  opacity: 0.75; }
+
+.button-mod2:hover, .button-mod3:hover {
+  opacity: 0.5; }
 
 .blurbs-parent {
   margin-top: 40px; }
@@ -202,7 +207,8 @@ a.nav-link {
   color: #fffff0; }
 
 .carousel-indicators li.active {
-  background-color: #007Bff; }
+  background-color: #007Bff;
+  opacity: 0.75; }
 
 .carousel-indicators {
   bottom: -50px; }

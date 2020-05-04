@@ -106,6 +106,18 @@ namespace AvesTest2.Database.Repositories
             return _connection.Query<BirdFullDTO>(sql);
         }
 
+        public IEnumerable<BirdFullDTO> GetAllBirdInfoByCountry(int birdId, int countryId)
+        {
+            string sql = string.Format("SELECT [Bird].Id, [Bird].Name, [Bird].SciName," +
+                            "[Image].FileName, [Image].Location, [Image].Date, [Image].Country, [Image].Coordinate" +
+                                            " FROM [Bird] INNER JOIN [Image]" +
+                                            " ON [Image].BirdId = [Bird].Id" +
+                                            " WHERE ([Image].BirdId = {0} AND [Image].Country = {1})" +
+                                            " ORDER BY [Image].KeyImage DESC", birdId, countryId);
+            return _connection.Query<BirdFullDTO>(sql);
+        }
+
+
         /* Fetch all bird file info belonging to a particular family */
         public IEnumerable<BirdFullDTO> GetAllBirdInfoByFamily(int familyId)
         {

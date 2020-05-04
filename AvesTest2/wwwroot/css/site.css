@@ -84,3 +84,6 @@ input.input-validation-error, select.input-validation-error {
 
 .description-text {
   color: #fffff0; }
+
+#bird-show {
+  border: 1px solid #fffff0; }
