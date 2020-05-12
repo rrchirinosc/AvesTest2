@@ -5,108 +5,167 @@
 
 @model AdminViewModel
 
-<div class="container-fluid d-flex" style="flex-wrap: wrap">
-    <div class="border-divider col-lg-6 col-md-12">
+    <div class="container-fluid d-flex" style="flex-wrap: wrap">
 
-        @using (Html.BeginForm(FormMethod.Post, new { id = "addBirdForm" }))
-        {
-            <h3 class="description-text m-2">Add bird</h3>
-            <div class="form-group p-0">
-                <input type="text" class="form-control" id="name" name="Name" placeholder="Bird name" data-val="true" data-val-required="*">
-            </div>
-            <div class="form-group p-0">
-                <input type="text" class="form-control" id="sciName" name="SciName" placeholder="Scientific Name" data-val="true" data-val-required="*">
-            </div>
-            <div class="form-group p-0">
-                <select id="familyId" class="form-control" name="FamilyId" data-val="true" data-val-required="*">
-                    <option value="">FamilyId...</option>
+        <div class="border-divider col-lg-6 col-md-12">
 
-                    @foreach (var family in Model.Families)
-                    {
-                        <option value=@family.Id>@family.SciName</option>
-                    }
+            @using (Html.BeginForm(FormMethod.Post, new { id = "addImageForm" }))
+            {
+                <h3 class="description-text m-2">Add [Image]</h3>
+                <div class="form-group p-0">
+                    <select id="birdId" class="form-control" name="BirdId" data-val="true" data-val-required="*">
+                        <option value="">Bird ID...</option>
+                        @foreach (var bird in Model.Birds)
+                        {
+                            <option value=@bird.Id>@bird.Name (@bird.Id)</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group p-0">
+                    <input type="text" class="form-control" id="fileName" name="FileName" placeholder="File Name (no extension)" data-val="true" data-val-required="*">
+                </div>
+                <div class="form-group p-0">
+                    <input type="text" class="form-control" id="location" name="Location" placeholder="Location" data-val="true" data-val-required="*">
+                </div>
+                <div class="form-group p-0">
+                    <input type="date" class="form-control" id="date" name="Date" placeholder="Date" data-val="true" data-val-required="*">
+                </div>
+                <div class="form-group p-0">
+                    <select id="country" class="form-control" name="Country" data-val="true" data-val-required="*">
+                        <option value="">Country...</option>
+                        @foreach (var country in Model.AllCountries)
+                        {
+                            <option value=@country.Key>@country.Value (@country.Key) </option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group p-0">
+                    <input type="text" class="form-control" id="coordinates" name="Coordinate" placeholder="Coordinates: Longitud,Latitud..." data-val="true" data-val-required="*">
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="keyImage" name="IsActive" value="true">
+                    <label class="text-white" for="keyImage">Key Image</label>
+                </div>
+                <button class="btn btn-primary" id="add-image" style="margin: 30px 10px">Add image</button>
+            }
+        </div>
 
-                </select>
-            </div>
-            <button class="btn btn-primary" id="add-bird" style="margin: 30px 10px">Add Bird</button>
-        }
-    </div>
-    <div class="border-divider col-lg-6 col-md-12">
+        <div class="border-divider col-lg-6 col-md-12">
 
-        @using (Html.BeginForm(FormMethod.Post, new { id = "addImageForm" }))
-        {
-            <h3 class="description-text m-2">Add image</h3>
-            <div class="form-group p-0">
-                <select id="birdId" class="form-control" name="BirdId" data-val="true" data-val-required="*">
-                    <option value="">Bird ID...</option>
-                    @foreach (var bird in Model.Birds)
-                    {
-                        <option value=@bird.Id>@bird.Name (@bird.Id)</option>
-                    }
-                </select>
-            </div>
-            <div class="form-group p-0">
-                <input type="text" class="form-control" id="fileName" name="FileName" placeholder="File Name (no extension)" data-val="true" data-val-required="*">
-            </div>
-            <div class="form-group p-0">
-                <input type="text" class="form-control" id="location" name="Location" placeholder="Location" data-val="true" data-val-required="*">
-            </div>
-            <div class="form-group p-0">
-                <input type="date" class="form-control" id="date" name="Date" placeholder="Date" data-val="true" data-val-required="*">
-            </div>
-            <div class="form-group p-0">
-                <select id="country" class="form-control" name="Country" data-val="true" data-val-required="*">
-                    <option value="">Country...</option>
-                    @foreach (var country in Model.AllCountries)
-                    {
-                        <option value=@country.Key>@country.Value (@country.Key) </option>
-                    }
-                </select>
-            </div>
-            <div class="form-group p-0">
-                <input type="text" class="form-control" id="coordinates" name="Coordinate" placeholder="Coordinates: Longitud,Latitud..." data-val="true" data-val-required="*">
-            </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="keyImage" name="IsActive" value="true">
-                <label class="text-white" for="keyImage">Key Image</label>
-            </div>
-            <button class="btn btn-primary" id="add-image" style="margin: 30px 10px">Add Image</button>
-        }
-    </div>
+            @using (Html.BeginForm(FormMethod.Post, new { id = "addBirdForm" }))
+            {
+                <h3 class="description-text m-2">Add [Bird]</h3>
+                <div class="form-group p-0">
+                    <input type="text" class="form-control" id="name" name="Name" placeholder="Bird name" data-val="true" data-val-required="*">
+                </div>
+                <div class="form-group p-0">
+                    <input type="text" class="form-control" id="sciName" name="SciName" placeholder="Scientific Name" data-val="true" data-val-required="*">
+                </div>
+                <div class="form-group p-0">
+                    <select id="familyId" class="form-control" name="FamilyId" data-val="true" data-val-required="*">
+                        <option value="">FamilyId...</option>
 
-    <div class="border-divider col-lg-12">
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#bird-table">Bird</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#family-table">Family</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#image-table">Image</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#stats-list">Stats</a>
-            </li>
-        </ul>
+                        @foreach (var family in Model.Families)
+                        {
+                            <option value=@family.Id>@family.SciName</option>
+                        }
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div id="bird-table" class="container tab-pane active">
-                <button class="btn btn-primary float-right m-3" id="load-birds">Load</button>
+                    </select>
+                </div>
+                <button class="btn btn-primary" id="add-bird" style="margin: 30px 10px">Add Bird</button>
+            }
+        </div>
+
+        <div class="border-divider col-lg-6 col-md-12 d-flex">
+            <button class="btn btn-outline-primary button-mod2 float-left mb-5 m-sm-3" id="update-block" type="button"
+                    data-toggle="collapse" data-target="#image-update" aria-expanded="false" aria-controls="image-update">
+                <i class="fa fa-pencil"></i>
+            </button>
+
+            <div class="collapse" id="image-update">
+                @using (Html.BeginForm(FormMethod.Post, new { id = "updateImageForm" }))
+                {
+                    <h3 class="description-text m-2">Update [Image]</h3>
+                    <div class="form-group p-0">
+                        <input type="text" class="form-control" id="image-id" name="ImageId" placeholder="Image Id" data-val="true" data-val-required="*">
+                    </div>
+                    <div class="form-group p-0">
+                        <input type="text" class="form-control" id="image-fileName" name="ImageFileName" placeholder="File Name (no extension)" data-val="true">
+                    </div>
+                    <div class="form-group p-0">
+                        <input type="text" class="form-control" id="image-location" name="ImageLocation" placeholder="Location" data-val="true">
+                    </div>
+                    <div class="form-group p-0">
+                        <input type="date" class="form-control" id="image-date" name="ImageDate" placeholder="Date" data-val="true">
+                    </div>
+                    <div class="form-group p-0">
+                        <select id="image-country" class="form-control" name="ImageCountry" data-val="true">
+                            <option value="">Country...</option>
+                            @foreach (var country in Model.AllCountries)
+                            {
+                                <option value=@country.Key>@country.Value (@country.Key) </option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group p-0">
+                        <input type="text" class="form-control" id="image-coordinates" name="Coordinate" placeholder="Coordinates: Longitud,Latitud..." data-val="true">
+                    </div>
+                    <button class="btn btn-primary" id="update-image" style="margin: 30px 10px">Update image</button>
+                }
             </div>
-            <div id="family-table" class="container tab-pane fade">
-                <button class="btn btn-primary float-right m-3" id="load-families">Load</button>
+        </div>
+
+        <div class="border-divider col-lg-6 col-md-12 d-flex">
+            <button class="btn btn-outline-primary button-mod2 float-left mb-5 m-sm-3" id="remove-block" type="button"
+                    data-toggle="collapse" data-target="#image-remove" aria-expanded="false" aria-controls="image-remove">
+                <i class="fa fa-minus"></i>
+            </button>
+
+            <div class="collapse" id="image-remove">
+                @using (Html.BeginForm(FormMethod.Post, new { id = "removeImageForm" }))
+                {
+                    <h3 class="description-text m-2">Remove [Image]</h3>
+                    <div class="form-group p-0">
+                        <input type="text" class="form-control" id="remove-image-id" name="ImageId" placeholder="[Image] Id" data-val="true" data-val-required="*">
+                    </div>
+                    <button class="btn btn-primary" id="remove-image" style="margin: 30px 10px">Remove image</button>
+                }
             </div>
-            <div id="image-table" class="container tab-pane fade">
-                <button class="btn btn-primary float-right m-3" id="load-image-data">Load</button>
-            </div>
-            <div id="stats-list" class="container tab-pane fade">
-                <button class="btn btn-primary float-right m-3" id="load-stats">Load</button>
+        </div>
+
+        <div class="border-divider col-lg-12">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#bird-table">Bird</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#family-table">Family</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#image-table">Image</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#stats-list">Stats</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div id="bird-table" class="container tab-pane active">
+                    <button class="btn btn-primary float-right m-3" id="load-birds">Load</button>
+                </div>
+                <div id="family-table" class="container tab-pane fade">
+                    <button class="btn btn-primary float-right m-3" id="load-families">Load</button>
+                </div>
+                <div id="image-table" class="container tab-pane fade">
+                    <button class="btn btn-primary float-right m-3" id="load-image-data">Load</button>
+                </div>
+                <div id="stats-list" class="container tab-pane fade">
+                    <button class="btn btn-primary float-right m-3" id="load-stats">Load</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 <script src="/js/Admin/Admin.js" asp-append-version="true"></script>
 

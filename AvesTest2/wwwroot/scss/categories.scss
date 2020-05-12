@@ -123,12 +123,12 @@ selector a:hover {
     display: flex;
     flex-flow: row wrap;
     align-items: flex-start;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .blurb {
-    margin: 15px;
-    border: 1px solid rgba(255,255,254, 0.75);
+    /*margin: 15px;*/
+    border: 1px solid rgba(33,33,33,0.75);
     position: relative;
     text-align: left;
     color: #ffffee;

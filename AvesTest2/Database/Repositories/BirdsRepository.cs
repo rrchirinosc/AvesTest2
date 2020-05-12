@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Dapper;
 using System.Data.SqlClient;
 using System.Linq;
+using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace AvesTest2.Database.Repositories
 {
@@ -170,7 +171,7 @@ namespace AvesTest2.Database.Repositories
         /* Add a new bird to the [Bird] table */
         public int AddBird(BirdDTO Bird)
         {
-            string sql = "INSERT INTO Bird (Name, SciName, FamilyId)" +
+            string sql = "INSERT INTO [Bird] (Name, SciName, FamilyId)" +
                     " Values (@Name, @SciName, @FamilyId)";
 
             int rows = _connection.Execute(sql, new { Bird.Name, Bird.SciName, Bird.FamilyId });
@@ -181,12 +182,56 @@ namespace AvesTest2.Database.Repositories
         /* Add a new image to the [Image] table */
         public int AddImage(ImageDTO Image)
         {
-            string sql = "INSERT INTO Image (BirdId, FileName, Location, Date, Country, Coordinate, KeyImage)" +
+            string sql = "INSERT INTO [Image] (BirdId, FileName, Location, Date, Country, Coordinate, KeyImage)" +
                     " Values (@BirdId, @FileName, @Location, @Date, @Country, @Coordinate, @KeyImage)";
 
             int rows = _connection.Execute(sql, new { Image.BirdId, Image.FileName, Image.Location, Image.Date, Image.Country, Image.Coordinate, Image.KeyImage});
 
             return rows;
+        }
+
+        /* Update image data in the [Image] table */
+        public int UpdateImage(ImageDTO UpdatedImage)
+        {
+            // Read in imaga data to be modified
+            List<ImageDTO> image = (List<ImageDTO>)GetImage(UpdatedImage.Id);
+
+            if (image == null)
+                return 0;
+
+            // Check what parameters are to be changed and setup query accordingly
+            if (UpdatedImage.FileName != null)
+                image[0].FileName = UpdatedImage.FileName;
+            if (UpdatedImage.Location != null)
+                image[0].Location = UpdatedImage.Location;
+            if (UpdatedImage.Date != null)
+                image[0].Date = UpdatedImage.Date;
+            if (UpdatedImage.Country != 0)
+                image[0].Country = UpdatedImage.Country;
+            if (UpdatedImage.Coordinate != "")
+                image[0].Coordinate = UpdatedImage.Coordinate;
+
+            string sql = "UPDATE [Image] SET [FileName] = @filename," +
+                                            " [Location] = @location," +
+                                            " [Date] = @date," +
+                                            " [Country] = @country," +
+                                            " [Coordinate] = @coordinate" +
+                                            " WHERE [Id] = @id";
+
+            return _connection.Execute(sql, new { filename = image[0].FileName, 
+                                                location = image[0].Location, 
+                                                date = image[0].Date,
+                                                country = image[0].Country,
+                                                coordinate = image[0].Coordinate,
+                                                id = image[0].Id });
+        }
+
+        /* Add a new image to the [Image] table */
+        public int RemoveImage(int ImageId)
+        {
+            string sql = string.Format("DELETE FROM [Image] WHERE Id = {0}", ImageId);
+
+            return _connection.Execute(sql);
         }
 
         /* Get table methods -- used for Admin purposes */
@@ -236,6 +281,12 @@ namespace AvesTest2.Database.Repositories
 
                 return _connection.Query<int>(sql).First();
             }
+        }
+
+        private IEnumerable<ImageDTO> GetImage(long ImageId)
+        {
+            string sql = string.Format("SELECT * FROM [Image] WHERE [Id]= {0}", ImageId);
+            return _connection.Query<ImageDTO>(sql);
         }
     }
 }

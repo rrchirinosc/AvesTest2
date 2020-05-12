@@ -76,7 +76,7 @@ namespace AvesTest2.Controllers
             
             bird.Name = Name;
             bird.SciName = SciName;
-            bird.FamilyId = Convert.ToInt32(FamilyId);
+            bird.FamilyId = FamilyId;
 
             BirdsRepository repo = new BirdsRepository(Connection);
             result = repo.AddBird(bird);
@@ -114,6 +114,47 @@ namespace AvesTest2.Controllers
             }
 
             result = repo.AddImage(image);
+
+            return result;
+        }
+
+        [HttpPost]
+        public async Task<int> UpdateImage(int ImageId, string FileName, string Location,
+            DateTime Date, int Country, string Coordinate)
+        {
+            ImageDTO image = new ImageDTO();
+            int result = 0;
+
+            // Double-check that params are valid
+            if (ImageId == 0 || (FileName == null &&
+                Location == null && Date.Year == 1 && Country == 0 &&
+                Coordinate == null))
+                return result;
+
+            image.Id = ImageId;
+            image.FileName = FileName;
+            image.Location = Location;
+            image.Date = Date.Year == 1 ? null : Date.ToShortDateString();
+            image.Country = Country;
+            image.Coordinate = (Coordinate == null) ? "" : Coordinate;
+
+            BirdsRepository repo = new BirdsRepository(Connection);
+            result = repo.UpdateImage(image);
+
+            return result;
+        }
+
+        [HttpPost]
+        public async Task<int> RemoveImage(int ImageId)
+        {
+            int result = 0;
+
+            // This check is not really necessary since I validate on the client but...
+            if (ImageId == 0)
+                return result;
+
+            BirdsRepository repo = new BirdsRepository(Connection);
+            result = repo.RemoveImage(ImageId);
 
             return result;
         }

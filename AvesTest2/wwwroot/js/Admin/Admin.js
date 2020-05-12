@@ -80,9 +80,10 @@
             }).done(function (imageList, textStatus, jqXHR) {
                 //alert('image table loaded');
                 let th = `<th style="color:#0366D6">`;
-                var table = `<table><thead><tr>${th}BirdId</th>${th}FileName</th>${th}Location</th>${th}Date</th>${th}Country</th>${th}Coordinate</th>${th}KeyImage</th>${th}</tr></thead><tbody>`;
+                var table = `<table><thead><tr>${th}Id</th>${th}BirdId</th>${th}FileName</th>${th}Location</th>${th}Date</th>${th}Country</th>${th}Coordinate</th>${th}KeyImage</th>${th}</tr></thead><tbody>`;
                 var index = 2;
                 for (image in imageList) {
+                    let id = imageList[image].id;
                     let birdid = imageList[image].birdId;
                     let filename = imageList[image].fileName;
                     let location = imageList[image].location;
@@ -90,9 +91,9 @@
                     let country = imageList[image].country;
                     let coordinate = imageList[image].coordinate;
                     let keyimage = imageList[image].keyImage;
-                    let td = '<td style="padding:0 10px; color:#fff">';
+                    let td = '<td style="padding:0 8px; color:#fff">';
                     let tr = (index++ % 2 === 0) ? '<tr style="background-color:#444">' : '<tr>';
-                    table = table.concat(`${tr}${td}${birdid}</td>${td}${filename}</td>${td}${location}</td>` +
+                    table = table.concat(`${tr}${td}${id}</td>${td}${birdid}</td>${td}${filename}</td>${td}${location}</td>` +
                         `${td}${date}</td>${td}${country}</td>${td}${coordinate}</td>${td}${keyimage}</td></tr>`);
                 }
                 $('#image-table').empty();
@@ -159,6 +160,74 @@
                     }
                     else {
                         $('#addImageForm')[0].reset();
+                    }
+                });
+        }
+    });   
+
+    $('#update-image').click(function (e) {
+
+        e.preventDefault();
+
+        if ($('#updateImageForm').valid()) {
+
+            var url = "/Admin/UpdateImage";
+            var data = {
+                ImageId: $('#image-id').val(),
+                FileName: $('#image-fileName').val(),
+                Location: $('#image-location').val(),
+                Date: $('#image-date').val(),
+                Country: $('#image-country').val(),
+                Coordinate: $('#image-coordinates').val(),
+            };
+
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: url,
+                    dataType: 'text',
+                    cache: false,
+                    data: data
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown + this.url);
+                }).done(function (res, textStatus, jqXHR) {
+                    if (res === "0") {
+                        alert('Error, no data updated');
+                    }
+                    else {
+                        $('#updateImageForm')[0].reset();
+                    }
+                });
+        }
+    });   
+
+
+    $('#remove-image').click(function (e) {
+
+        e.preventDefault();
+
+        if ($('#removeImageForm').valid()) {
+
+            var url = "/Admin/RemoveImage";
+            var data = {
+                ImageId: $('#remove-image-id').val()              
+            };
+
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: url,
+                    dataType: 'text',
+                    cache: false,
+                    data: data
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown + this.url);
+                }).done(function (res, textStatus, jqXHR) {
+                    if (res === "0") {
+                        alert('Error, no image removed');
+                    }
+                    else {
+                        $('#removeImageForm')[0].reset();
                     }
                 });
         }
