@@ -109,7 +109,7 @@ selector a:hover {
 
 .blurb:hover {
   opacity: 1;
-  background-color: #fffffe; }
+  /*background-color: rgba(255,0,0, 1);*/ }
 
 .blurb-image {
   width: 320px;

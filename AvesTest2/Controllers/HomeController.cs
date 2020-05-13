@@ -55,17 +55,13 @@ namespace AvesTest2.Controllers
         }
 
         //TODO: refactor
-        public async Task<IActionResult> Show(int birdId, int location)
+        public async Task<IActionResult> Show(int birdId, int location = 0)
         {
             BirdImagesViewModel model;
             if (location != 0)
-            {
                 model = await BirdImagesViewModel.LoadAllSingleByCountry(Connection, birdId, location, _appOptions);
-            }
             else
-            {
                 model = await BirdImagesViewModel.LoadAllSingle(Connection, birdId, _appOptions);
-            }
             
             int index = model.Birds.FindIndex(x => x.Id == birdId);
             if(index >= 0)
