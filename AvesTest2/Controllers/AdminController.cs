@@ -60,8 +60,10 @@ namespace AvesTest2.Controllers
         public async Task<JsonResult> GetStats()
         {
             StatsViewModel model = await StatsViewModel.Load(Connection);
-            
-            return Json(model.Stats);
+
+            JsonResult res = Json(model.Stats);
+
+            return res;
         }
 
         [HttpPost]

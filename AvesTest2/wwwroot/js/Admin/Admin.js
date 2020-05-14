@@ -124,7 +124,23 @@
                                 `<li> Birds w/o images: ${value3} </li>` +
                                 `</ul></div>`;
                 $('#stats-list').empty();
-                $('#stats-list').append(`${statsList}`);               
+                $('#stats-list').append(`${statsList}`);
+
+                //TODO: column styling
+                let th = `<th style="color:#0366D6">`
+                var table = `<table><thead><tr>${th}Bird (Id)</th>${th}Images</th></tr></thead><tbody>`;
+                var index = 2;
+                for (bird in stats.imagesPerBird) {
+                    let id = stats.imagesPerBird[bird].id;
+                    let name = stats.imagesPerBird[bird].name;
+                    let images = stats.imagesPerBird[bird].images;
+                    let td = `<td style="padding:0 10px; color:#fff">`;
+                    let tr = (index++ % 2 === 0) ? `<tr style="background-color:#444">` : `<tr>`;
+                    table = table.concat(`${tr}${td}${name} (${id})</td>${td}${images}</td></tr>`);
+                }
+                table = table.concat(`</tbody></table>`);
+                $('#stats-image-list').empty();
+                $('#stats-image-list').append(`${table}`);
             });
     });
 

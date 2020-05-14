@@ -18,7 +18,9 @@ namespace AvesTest2.Models
             BirdsRepository repo = new BirdsRepository(connection);
             model.Stats = new StatsDTO(){
                 BirdCount = repo.GetBirdCount,
-                HaveKeyImages = repo.GetKeyImageCount };
+                HaveKeyImages = repo.GetKeyImageCount, 
+                ImagesPerBird = (List<ImagesCount>)repo.GetImagesPerBird()
+            }; 
             return model;
         }
     }

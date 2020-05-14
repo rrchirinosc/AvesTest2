@@ -277,11 +277,27 @@ namespace AvesTest2.Database.Repositories
             {
                 string sql = string.Format("SELECT COUNT(DISTINCT [BirdId])" +
                                         " FROM [Image]" +
-                                        "WHERE [KeyImage] = 1");
+                                        " WHERE [KeyImage] = 1");
 
                 return _connection.Query<int>(sql).First();
             }
         }
+
+        public IEnumerable<ImagesCount> GetImagesPerBird()
+        {
+            string sql = "SELECT BirdsTable.Id, BirdsTable.Name," +
+                " (CASE WHEN ImagesTable.Images is NULL THEN 0 ELSE ImagesTable.Images end) AS Images" +
+                " FROM " +
+                " (SELECT [Id], [Name] FROM [Bird]) AS BirdsTable" +
+                " LEFT JOIN" +
+                " (SELECT [BirdId], COUNT([BirdId]) AS Images" +
+                " FROM [Image] GROUP BY [BirdId]) AS ImagesTable" +
+                " ON BirdsTable.[Id] = ImagesTable.[BirdId]" +
+                " ORDER BY BirdsTable.[Name]";
+
+            return _connection.Query<ImagesCount>(sql);
+
+    }
 
         private IEnumerable<ImageDTO> GetImage(long ImageId)
         {

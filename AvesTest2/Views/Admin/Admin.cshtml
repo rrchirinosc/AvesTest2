@@ -5,6 +5,8 @@
 
 @model AdminViewModel
 
+    <h1 class="descriptor-header">@ViewData["Title"]</h1>
+
     <div class="container-fluid d-flex" style="flex-wrap: wrap">
 
         <div class="border-divider col-lg-6 col-md-12">
@@ -145,7 +147,7 @@
                     <a class="nav-link" data-toggle="tab" href="#image-table">Image</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#stats-list">Stats</a>
+                    <a class="nav-link" data-toggle="tab" href="#stats">Stats</a>
                 </li>
             </ul>
 
@@ -160,8 +162,12 @@
                 <div id="image-table" class="container tab-pane fade">
                     <button class="btn btn-primary float-right m-3" id="load-image-data">Load</button>
                 </div>
-                <div id="stats-list" class="container tab-pane fade">
-                    <button class="btn btn-primary float-right m-3" id="load-stats">Load</button>
+                <div id="stats" class="container tab-pane fade d-flex" style="justify-content:space-between">
+                    <div id="stats-list"></div>
+                    <div id="stats-image-list" style="color:#ffe"></div>
+                    <div>
+                        <button class="btn btn-primary float-right m-3" id="load-stats">Load</button>
+                    </div>
                 </div>
             </div>
         </div>
