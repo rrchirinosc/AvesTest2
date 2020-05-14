@@ -127,20 +127,35 @@
                 $('#stats-list').append(`${statsList}`);
 
                 //TODO: column styling
-                let th = `<th style="color:#0366D6">`
-                var table = `<table><thead><tr>${th}Bird (Id)</th>${th}Images</th></tr></thead><tbody>`;
+                let th = `<th style="color:#0366D6;padding-left:2px">`
+                var table = `<table style="border:1px solid #fffffe20; padding:0 2px"><thead><tr>${th}Bird (Id)</th>${th}Images</th></tr></thead><tbody>`;
+                var table2 = table;
+                var table3 = table;
                 var index = 2;
+                var cutSize = stats.imagesPerBird.length / 3;
                 for (bird in stats.imagesPerBird) {
                     let id = stats.imagesPerBird[bird].id;
                     let name = stats.imagesPerBird[bird].name;
                     let images = stats.imagesPerBird[bird].images;
                     let td = `<td style="padding:0 10px; color:#fff">`;
                     let tr = (index++ % 2 === 0) ? `<tr style="background-color:#444">` : `<tr>`;
-                    table = table.concat(`${tr}${td}${name} (${id})</td>${td}${images}</td></tr>`);
+                    if (bird < cutSize) {
+                        table = table.concat(`${tr}${td}${name} (${id})</td>${td}${images}</td></tr>`);
+                    }
+                    else if (bird >= cutSize && bird < cutSize * 2) {
+                        if (bird == cutSize)
+                            table = table.concat(`</tbody></table>`);
+                        table2 = table2.concat(`${tr}${td}${name} (${id})</td>${td}${images}</td></tr>`);
+                    }
+                    else {
+                        if (bird == cutSize * 2)
+                            table2 = table2.concat(`</tbody></table>`);
+                        table3 = table3.concat(`${tr}${td}${name} (${id})</td>${td}${images}</td></tr>`);
+                    }
                 }
-                table = table.concat(`</tbody></table>`);
+                table3 = table3.concat(`</tbody></table>`);
                 $('#stats-image-list').empty();
-                $('#stats-image-list').append(`${table}`);
+                $('#stats-image-list').append(`${table}${table2}${table3}`);
             });
     });
 
