@@ -31,7 +31,7 @@ namespace AvesTest2.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetBirdTable()
+        public JsonResult GetBirdTable()
         {
             BirdsRepository repo = new BirdsRepository(Connection);
             List<BirdDTO> model = repo.Birds.ToList();
@@ -40,7 +40,7 @@ namespace AvesTest2.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetFamilyTable()
+        public JsonResult GetFamilyTable()
         {
             BirdsRepository repo = new BirdsRepository(Connection);
             List<FamilyDTO> model = repo.GetFamilyTable.ToList();
@@ -48,7 +48,7 @@ namespace AvesTest2.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetImageTable()
+        public JsonResult GetImageTable()
         {
             BirdsRepository repo = new BirdsRepository(Connection);
             List<ImageDTO> model = repo.GetImageTable.ToList();
@@ -61,13 +61,11 @@ namespace AvesTest2.Controllers
         {
             StatsViewModel model = await StatsViewModel.Load(Connection);
 
-            JsonResult res = Json(model.Stats);
-
-            return res;
+            return Json(model.Stats);
         }
 
         [HttpPost]
-        public async Task<int> AddBird(string Name, string SciName, int FamilyId)
+        public int AddBird(string Name, string SciName, int FamilyId)
         {
             BirdDTO bird = new BirdDTO();
             int result = 0;
@@ -87,7 +85,7 @@ namespace AvesTest2.Controllers
         }
 
         [HttpPost]
-        public async Task<int> AddImage(int BirdId, string FileName, string Location,
+        public int AddImage(int BirdId, string FileName, string Location,
             DateTime Date, int Country, string Coordinate, bool KeyImage = false)
         {
             ImageDTO image = new ImageDTO();
@@ -121,7 +119,7 @@ namespace AvesTest2.Controllers
         }
 
         [HttpPost]
-        public async Task<int> UpdateImage(int ImageId, string FileName, string Location,
+        public int UpdateImage(int ImageId, string FileName, string Location,
             DateTime Date, int Country, string Coordinate)
         {
             ImageDTO image = new ImageDTO();
@@ -147,7 +145,7 @@ namespace AvesTest2.Controllers
         }
 
         [HttpPost]
-        public async Task<int> RemoveImage(int ImageId)
+        public int RemoveImage(int ImageId)
         {
             int result = 0;
 

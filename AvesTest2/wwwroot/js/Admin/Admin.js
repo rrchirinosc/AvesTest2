@@ -50,56 +50,32 @@
             }).done(function (familyList, textStatus, jqXHR) {
                 //alert('family table loaded');
                 let th = `<th style="color:#0366D6">`
-                var table = `<table><thead><tr>${th}Id</th>${th}Name</th>${th}SciName</th></tr></thead><tbody>`;
+                var table = `<table style="border:1px solid #fffffe20; padding:0 2px"><thead><tr>${th}Id</th>${th}Name</th>${th}SciName</th></tr></thead><tbody>`;
+                var table2 = table;
                 var index = 2;
+                var cutSize = familyList.length / 2;
                 for (family in familyList) {
                     let id = familyList[family].id;
                     let name = familyList[family].name;
                     let sciname = familyList[family].sciName;
                     let td = `<td style="padding:0 10px; color:#fff">`;
                     let tr = (index++ % 2 === 0) ? `<tr style="background-color:#444">` : `<tr>`;
-                    table = table.concat(`${tr}${td}${id}</td>${td}${name}</td>${td}${sciname}</td></tr>`);
+
+                    if (family < cutSize) {
+                        table = table.concat(`${tr}${td}${id}</td>${td}${name}</td>${td}${sciname}</td></tr>`);
+                    }
+                    else {
+                        if (family == cutSize)
+                            table = table.concat(`</tbody></table>`);
+                        table2 = table2.concat(`${tr}${td}${id}</td>${td}${name}</td>${td}${sciname}</td></tr>`);
+                    }
                 }
-                table = table.concat(`</tbody></table>`);
-                $('#family-table').empty();
-                $('#family-table').append(`${table}`);
+                table2 = table2.concat(`</tbody></table>`);
+                $('#load-families').hide();
+                $('#family-list').empty();
+                $('#family-list').append(`${table}${table2}`);
             });
     });
-
-    $('#load-image-data').click(function () {
-        var url = "/Admin/GetImageTable";
-        $.ajax(
-            {
-                type: 'GET',
-                url: url,
-                dataType: 'json',
-                cache: false,
-                contentType: "application/json; charset=utf-8"
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown + this.url);
-            }).done(function (imageList, textStatus, jqXHR) {
-                //alert('image table loaded');
-                let th = `<th style="color:#0366D6">`;
-                var table = `<table><thead><tr>${th}Id</th>${th}BirdId</th>${th}FileName</th>${th}Location</th>${th}Date</th>${th}Country</th>${th}Coordinate</th>${th}KeyImage</th>${th}</tr></thead><tbody>`;
-                var index = 2;
-                for (image in imageList) {
-                    let id = imageList[image].id;
-                    let birdid = imageList[image].birdId;
-                    let filename = imageList[image].fileName;
-                    let location = imageList[image].location;
-                    let date = imageList[image].date;
-                    let country = imageList[image].country;
-                    let coordinate = imageList[image].coordinate;
-                    let keyimage = imageList[image].keyImage;
-                    let td = '<td style="padding:0 8px; color:#fff">';
-                    let tr = (index++ % 2 === 0) ? '<tr style="background-color:#444">' : '<tr>';
-                    table = table.concat(`${tr}${td}${id}</td>${td}${birdid}</td>${td}${filename}</td>${td}${location}</td>` +
-                        `${td}${date}</td>${td}${country}</td>${td}${coordinate}</td>${td}${keyimage}</td></tr>`);
-                }
-                $('#image-table').empty();
-                $('#image-table').append(`${table}`);
-            });
-    });   
 
     $('#load-stats').click(function () {
         var url = "/Admin/GetStats";
@@ -118,15 +94,14 @@
                 let value2 = stats.haveKeyImages;
                 let value3 = stats.birdCount - stats.haveKeyImages;
                 let div = '<div style="padding:0 10px; color:#fff; margin-top:25px">';
-                var statsList = `${div}<ul>` + 
-                                `<li> Birds: ${value} </li>` +
-                                `<li> KeyImages: ${value2} </li>` +
-                                `<li> Birds w/o images: ${value3} </li>` +
-                                `</ul></div>`;
+                var statsList = `${div}<ul>` +
+                    `<li> Birds: ${value} </li>` +
+                    `<li> KeyImages: ${value2} </li>` +
+                    `<li> Birds w/o images: ${value3} </li>` +
+                    `</ul></div>`;
                 $('#stats-list').empty();
                 $('#stats-list').append(`${statsList}`);
 
-                //TODO: column styling
                 let th = `<th style="color:#0366D6;padding-left:2px">`
                 var table = `<table style="border:1px solid #fffffe20; padding:0 2px"><thead><tr>${th}Bird (Id)</th>${th}Images</th></tr></thead><tbody>`;
                 var table2 = table;
@@ -158,6 +133,41 @@
                 $('#stats-image-list').append(`${table}${table2}${table3}`);
             });
     });
+
+    $('#load-image-data').click(function () {
+        var url = "/Admin/GetImageTable";
+        $.ajax(
+            {
+                type: 'GET',
+                url: url,
+                dataType: 'json',
+                cache: false,
+                contentType: "application/json; charset=utf-8"
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown + this.url);
+            }).done(function (imageList, textStatus, jqXHR) {
+                //alert('image table loaded');
+                let th = `<th style="color:#0366D6">`;
+                var table = `<table><thead><tr>${th}Id</th>${th}BirdId</th>${th}FileName</th>${th}Location</th>${th}Date</th>${th}Country</th>${th}Coordinate</th>${th}KeyImage</th>${th}</tr></thead><tbody>`;
+                var index = 2;
+                for (image in imageList) {
+                    let id = imageList[image].id;
+                    let birdid = imageList[image].birdId;
+                    let filename = imageList[image].fileName;
+                    let location = imageList[image].location;
+                    let date = imageList[image].date;
+                    let country = imageList[image].country;
+                    let coordinate = imageList[image].coordinate;
+                    let keyimage = imageList[image].keyImage == true ? 'x' : ' ';
+                    let td = '<td style="padding:0 8px; color:#fff">';
+                    let tr = (index++ % 2 === 0) ? '<tr style="background-color:#444">' : '<tr>';
+                    table = table.concat(`${tr}${td}${id}</td>${td}${birdid}</td>${td}${filename}</td>${td}${location}</td>` +
+                        `${td}${date}</td>${td}${country}</td>${td}${coordinate}</td>${td}${keyimage}</td></tr>`);
+                }
+                $('#image-table').empty();
+                $('#image-table').append(`${table}`);
+            });
+    });   
 
     $('#add-image').click(function (e) {
 
