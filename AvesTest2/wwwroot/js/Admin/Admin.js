@@ -52,7 +52,7 @@
             }).done(function (familyList, textStatus, jqXHR) {
                 // build 2 html tables with acquired families data
                 let th = `<th style="color:#0366D6">`
-                var table = `<table style="border:1px solid #fffffe20; padding:0 2px"><thead><tr>${th}Id</th>${th}Name</th>${th}SciName</th></tr></thead><tbody>`;
+                var table = `<table style="border:1px solid #fffffe20; padding:0 2px;font-size:14px"><thead><tr>${th}Id</th>${th}Name</th>${th}SciName</th></tr></thead><tbody>`;
                 var table2 = table;
                 var index = 2;
                 // determine number of rows for each of the 2 tables (last one could be larger)
@@ -111,7 +111,7 @@
 
                 // build 3 html tables with acquired images per bird data
                 let th = `<th style="color:#0366D6;padding-left:2px">`
-                var table = `<table style="border:1px solid #fffffe20; padding:0 2px"><thead><tr>${th}Bird (Id)</th>${th}Images</th></tr></thead><tbody>`;
+                var table = `<table style="border:1px solid #fffffe20; padding:0 2px;font-size:14px"><thead><tr>${th}Bird (Id)</th>${th}Images</th></tr></thead><tbody>`;
                 var table2 = table;
                 var table3 = table;
                 var index = 2;
@@ -163,7 +163,7 @@
             }).done(function (imageList, textStatus, jqXHR) {
                 // build html table with acquired data
                 let th = `<th style="color:#0366D6">`;
-                var table = `<table><thead><tr>${th}Id</th>${th}BirdId</th>${th}FileName</th>${th}Location</th>${th}Date</th>${th}Country</th>${th}Coordinate</th>${th}KeyImage</th>${th}</tr></thead><tbody>`;
+                var table = `<table style="font-size:14px"><thead><tr>${th}Id</th>${th}BirdId</th>${th}FileName</th>${th}Location</th>${th}Date</th>${th}Country</th>${th}Coordinate</th>${th}KeyImage</th>${th}</tr></thead><tbody>`;
                 var index = 2;
                 // add a row at the time as we iterate through list
                 for (image in imageList) {

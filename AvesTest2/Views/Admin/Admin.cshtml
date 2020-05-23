@@ -1,11 +1,7 @@
 ﻿
-@{
-    ViewData["Title"] = "Admin";
-}
-
 @model AdminViewModel
 
-    <h1 class="descriptor-header">@ViewData["Title"]</h1>
+    <h2 class="descriptor-header">@ViewData["Title"]</h2>
 
     <div class="container-fluid d-flex" style="flex-wrap: wrap">
 
@@ -13,7 +9,7 @@
 
             @using (Html.BeginForm(FormMethod.Post, new { id = "addImageForm" }))
             {
-                <h3 class="description-text m-2">Add [Image]</h3>
+                <h4 class="description-text m-2">Add [Image]</h4>
                 <div class="form-group p-0">
                     <select id="birdId" class="form-control" name="BirdId" data-val="true" data-val-required="*">
                         <option value="">Bird ID...</option>
@@ -56,7 +52,7 @@
 
             @using (Html.BeginForm(FormMethod.Post, new { id = "addBirdForm" }))
             {
-                <h3 class="description-text m-2">Add [Bird]</h3>
+                <h4 class="description-text m-2">Add [Bird]</h4>
                 <div class="form-group p-0">
                     <input type="text" class="form-control" id="name" name="Name" placeholder="Bird name" data-val="true" data-val-required="*">
                 </div>
@@ -87,7 +83,7 @@
             <div class="collapse" id="image-update">
                 @using (Html.BeginForm(FormMethod.Post, new { id = "updateImageForm" }))
                 {
-                    <h3 class="description-text m-2">Update [Image]</h3>
+                    <h4 class="description-text m-2">Update [Image]</h4>
                     <div class="form-group p-0">
                         <input type="text" class="form-control" id="image-id" name="ImageId" placeholder="Image Id" data-val="true" data-val-required="*">
                     </div>
@@ -126,7 +122,7 @@
             <div class="collapse" id="image-remove">
                 @using (Html.BeginForm(FormMethod.Post, new { id = "removeImageForm" }))
                 {
-                    <h3 class="description-text m-2">Remove [Image]</h3>
+                    <h4 class="description-text m-2">Remove [Image]</h4>
                     <div class="form-group p-0">
                         <input type="text" class="form-control" id="remove-image-id" name="ImageId" placeholder="[Image] Id" data-val="true" data-val-required="*">
                     </div>

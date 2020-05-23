@@ -24,6 +24,7 @@ namespace AvesTest2.Controllers
         {
 #if DEBUG
             model = await AdminViewModel.Load(Connection);
+            ViewData["Title"] = "Admin";
             return View(model);
 #else
             return RedirectToAction("Index", "Home");

@@ -26,7 +26,7 @@ a {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px; }
+  font-size: 12px; }
 
 @media (min-width: 768px) {
   html {
@@ -58,7 +58,7 @@ body {
   /*font-family: 'Merienda', cursive;*/
   /*font-family: 'K2D', sans-serif;*/
   /*font-family: 'Carrois Gothic SC', sans-serif;*/
-  font-family: "Ruluko", sans-serif;
+  font-family: "Raleway", sans-serif;
   /*font-family: 'Baloo Da 2', cursive;*/ }
 
 .footer {

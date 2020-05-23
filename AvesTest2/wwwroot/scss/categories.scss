@@ -53,8 +53,8 @@ body {
 
 .descriptor-header {
     color: $app-font-color;
-    font-size: 24px;
     margin: 20px 0;
+    padding-right:15px;
 }
 
 .selector-list {
@@ -69,7 +69,7 @@ body {
     color: $app-font-color;
     border-radius: 0;
     margin: 2px;
-    font-size: 24px;
+    font-size: $app-select-font-size;
     font-weight: 400;
     position: relative;
     text-align: left;
@@ -91,7 +91,7 @@ selector a:hover {
     color: $app-select-bk-color-disabled;
     border-radius: 0;
     margin: 2px;
-    font-size: 24px;
+    font-size: $app-select-font-size;
     font-weight: 400;
     position: relative;
     text-align: left;
@@ -101,6 +101,7 @@ selector a:hover {
     background-color: $app-select-bk-hover;
     border-radius: 0;
     color: rgba(41,41,200,.75);
+    font-weight:800;
 }
 
 .selector-item:hover a {
@@ -151,33 +152,35 @@ selector a:hover {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 0 0 10px 15px;
-    background-color: rgba(20,20,20,.2);
+    padding-left: 15px;
+    background-color: rgba(20,20,20,.1);
     color: rgba(255,255,254,1);
-    text-shadow:1px 1px 1px #000;
+    text-shadow:2px 2px 5px #000;
 }
 
-            .blurb-name {
-                font-weight: 500;
-            }
+.blurb-name {
+    font-weight: 700;
+    /*text-shadow: 2px -1px 5px black;*/
+}
 
-.blurb-sciname{
-    font-style:italic;
+.blurb-sciname {
+    font-style: italic;
+    /*text-shadow: 2px -1px 5px black;*/
 }
 
 .button-mod {
     border-radius: 0;
     margin: 5px;
-    font-size: 24px;
+    font-size: $app-select-font-size;
 }
 
 .button-mod2 {
-    margin-top:10px;
+    margin-top: 10px;
     border-radius: 25px;
-    width:50px;
-    height:50px;
-    font-size: 24px;
-    opacity:0.75;
+    width: 50px;
+    height: 50px;
+    font-size: $app-select-font-size;
+    opacity: 0.75;
 }
 
 
@@ -188,9 +191,9 @@ selector a:hover {
     border-radius: 25px;
     width: 50px;
     height: 50px;
-    font-size: 24px;
+    font-size: $app-select-font-size;
     margin-right: 20px;
-    opacity:0.75;
+    opacity: 0.75;
 }
 
 .button-mod2:hover, .button-mod3:hover {
@@ -203,7 +206,7 @@ selector a:hover {
 
 /* bootstrap mod */
 a.nav-link {
-    font-size: 24px;
+    font-size: $app-select-font-size;
 }
 
 .nav-tabs .nav-link {

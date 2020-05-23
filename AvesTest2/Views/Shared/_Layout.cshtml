@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="~/css/site.min.css" />
     <link rel="stylesheet" href="~/css/categories.min.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />"
-    <link href="https://fonts.googleapis.com/css2?family=Ruluko&display=swap" rel="stylesheet">
+    @*<link href="https://fonts.googleapis.com/css2?family=Ruluko&display=swap" rel="stylesheet">*@
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -32,7 +33,12 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>*@
                         <li class="nav-item">
-                            <a class="nav-link no-show" asp-area="" asp-controller="Admin" asp-action="Admin">Admin</a>
+                            @*<a class="nav-link no-show" asp-area="" asp-controller="Admin" asp-action="Admin">
+                                <i class="fa fa-cog"></i>
+                            </a>*@
+                            <a class="nav-link no-show" href="@Url.Action("Admin", "Admin")" target="_blank">
+                                <i class="fa fa-cog"></i>
+                            </a>
                         </li>
                     </ul>
                 </div>

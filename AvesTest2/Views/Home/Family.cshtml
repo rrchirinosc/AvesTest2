@@ -2,54 +2,55 @@
 
 @model BirdViewModel
 
-<h1 class="descriptor-header">@ViewData["Title"]</h1>
+    <h2 class="descriptor-header">@ViewData["Title"]</h2>
+    <p class="descriptor-header">[ Based on The Cornell Lab of Ornitology and British Trust for Ornitology (BTO) listings ]</p>
 
-<div class="container">
-    <div class="row">
-        @{
-            int count = Model.Families.Count;
-            int firstHalf = count % 2 == 0 ? count / 2 : count / 2 + 1;
-            int secondHalf = count - firstHalf;
-            int index;
-        }
-        <div class="col">
-            @for (index = 0; index < firstHalf; index++)
-            {
-                if (@Model.Families[index].Available)
+    <div class="container">
+        <div class="row">
+            @{
+                int count = Model.Families.Count;
+                int firstHalf = count % 2 == 0 ? count / 2 : count / 2 + 1;
+                int secondHalf = count - firstHalf;
+                int index;
+            }
+            <div class="col">
+                @for (index = 0; index < firstHalf; index++)
                 {
-                    <a class="category-item" href="@Url.Action("SelectFamily", "Home", new { familyId = @Model.Families[index].Id })">
-                        <div class="selector-item">
+                    if (@Model.Families[index].Available)
+                    {
+                        <a class="category-item" href="@Url.Action("SelectFamily", "Home", new { familyId = @Model.Families[index].Id })">
+                            <div class="selector-item">
+                                @Model.Families[index].SciName ( @Model.Families[index].Name )
+                            </div>
+                        </a>
+                    }
+                    else
+                    {
+                        <div class="selector-item-disabled">
                             @Model.Families[index].SciName ( @Model.Families[index].Name )
                         </div>
-                    </a>
+                    }
                 }
-                else
+            </div>
+            <div class="col">
+                @for (; index < Model.Families.Count; index++)
                 {
-                    <div class="selector-item-disabled">
-                        @Model.Families[index].SciName ( @Model.Families[index].Name )
-                    </div>
-                }
-            }
-        </div>
-        <div class="col">
-            @for (; index < Model.Families.Count; index++)
-            {
-                if (@Model.Families[index].Available)
-                {
-                    <a class="category-item" href="@Url.Action("SelectFamily", "Home", new { familyId = @Model.Families[index].Id })">
-                        <div class="selector-item">
+                    if (@Model.Families[index].Available)
+                    {
+                        <a class="category-item" href="@Url.Action("SelectFamily", "Home", new { familyId = @Model.Families[index].Id })">
+                            <div class="selector-item">
+                                @Model.Families[index].SciName ( @Model.Families[index].Name )
+                            </div>
+                        </a>
+                    }
+                    else
+                    {
+                        <div class="selector-item-disabled">
                             @Model.Families[index].SciName ( @Model.Families[index].Name )
                         </div>
-                    </a>
+                    }
                 }
-                else
-                {
-                    <div class="selector-item-disabled">
-                        @Model.Families[index].SciName ( @Model.Families[index].Name )
-                    </div>
-                }
-            }
+            </div>
         </div>
     </div>
-</div>
 
