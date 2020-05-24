@@ -134,36 +134,57 @@
         <div class="border-divider col-lg-12">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#bird-table">Bird</a>
+                    <a class="nav-link active" data-toggle="tab" href="#bird-table-content">Bird</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#family-table">Family</a>
+                    <a class="nav-link" data-toggle="tab" href="#family-table-content">Family</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#image-table">Image</a>
+                    <a class="nav-link" data-toggle="tab" href="#image-table-content">Image</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#stats">Stats</a>
+                    <a class="nav-link" data-toggle="tab" href="#stats-table-content">Stats</a>
                 </li>
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div id="bird-table" class="container tab-pane active">
-                    <button class="btn btn-primary float-right m-3" id="load-birds">Load</button>
-                </div>
-                <div id="family-table" class="container tab-pane fade">
-                    <button class="btn btn-primary float-right m-3" id="load-families">Load</button>
-                    <div id="family-list" class="d-flex flex-wrap" style="color:#ffe"></div>
-                </div>
-                <div id="image-table" class="container tab-pane fade">
-                    <button class="btn btn-primary float-right m-3" id="load-image-data">Load</button>
-                </div>
-                <div id="stats" class="container tab-pane fade" style="justify-content:space-between">
-                    <div id="stats-list">
-                        <button class="btn btn-primary float-right m-3" id="load-stats">Load</button>
+                <div id="bird-table-content" class="container tab-pane active">
+                    <div class="table-ext">
+                        <div id="bird-table"></div>
+                        <button class="btn btn-outline-primary button-mod2 m-3" style="visibility:hidden" id="reload-birds">
+                            <i class="fa fa-refresh"></i>
+                        </button>
                     </div>
-                    <div id="stats-image-list" class="d-flex flex-wrap" style="color:#ffe"></div>
+                </div>
+                <div id="family-table-content" class="container fade tab-pane">
+                    <div class="table-ext">
+                        <div id="family-table">
+                            <div id="family-list" class="d-flex flex-wrap" style="color:#ffe"></div>
+                        </div>
+                        <button class="btn btn-outline-primary button-mod2 float-right m-3" style="visibility:hidden" id="reload-families">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="image-table-content" class="container tab-pane fade">
+                    <div class="table-ext">
+                        <div id="image-table"></div>
+                        <button class="btn btn-outline-primary button-mod2 float-right m-3" style="visibility:hidden" id="reload-image-data">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                    </div>
+                    </div>
+                <div id="stats-table-content" class="container tab-pane fade">
+                    <div class="table-ext">
+                        <div id="stats" style="justify-content:space-between">
+                            <div id="stats-list"></div>
+                            <div id="stats-image-list" class="d-flex flex-wrap" style="color:#ffe"></div>
+                        </div>
+                        <button class="btn btn-outline-primary button-mod2 float-right m-3" style="visibility:hidden" id="reload-stats">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

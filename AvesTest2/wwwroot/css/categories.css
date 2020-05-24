@@ -215,3 +215,7 @@ a.nav-link {
 
 .carousel-indicators {
   bottom: -50px; }
+
+.table-ext {
+  display: flex;
+  justify-content: space-between; }
