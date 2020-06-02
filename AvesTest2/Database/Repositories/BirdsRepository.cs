@@ -95,7 +95,7 @@ namespace AvesTest2.Database.Repositories
             return _connection.Query<BirdImageDTO>(sql);
         }
 
-        /* Fetch all bird display info, including images orderd by keyimage*/
+        /* Fetch all bird display info, including images ordered by keyimage*/
         public IEnumerable<BirdFullDTO> GetAllBirdInfo(int birdId)
         {
             string sql = string.Format("SELECT [Bird].Id, [Bird].Name, [Bird].SciName," +

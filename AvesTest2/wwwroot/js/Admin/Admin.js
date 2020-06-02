@@ -67,7 +67,7 @@
                     let name = birdList[bird].name;
                     let sciname = birdList[bird].sciName;
                     let familyid = birdList[bird].familyId;
-                    let td = '<td style="padding:0 10px; color:#fff">';
+                    let td = '<td style="padding-left: 10px; color:#fff">';
                     let tr = (index++ % 2 === 0) ? '<tr style="background-color:#444">' : '<tr>';
                     table = table.concat(`${tr}${td}${id}</td>${td}${name}</td>${td}${sciname}</td>${td}${familyid}</td></tr>`);
                 }
@@ -97,13 +97,13 @@
                 var table2 = table;
                 var index = 2;
                 // determine number of rows for each of the 2 tables (last one could be larger)
-                var cutSize = familyList.length / 2;
+                var cutSize = Math.trunc(familyList.length / 2);
                 // add a row at the time as we iterate through list
                 for (family in familyList) {
                     let id = familyList[family].id;
                     let name = familyList[family].name;
                     let sciname = familyList[family].sciName;
-                    let td = `<td style="padding:0 10px; color:#fff">`;
+                    let td = `<td style="padding-left:10px; color:#fff">`;
                     let tr = (index++ % 2 === 0) ? `<tr style="background-color:#444">` : `<tr>`;
 
                     if (family < cutSize) {
@@ -152,7 +152,7 @@
                     let country = imageList[image].country;
                     let coordinate = imageList[image].coordinate;
                     let keyimage = imageList[image].keyImage == true ? 'x' : ' ';
-                    let td = '<td style="padding:0 8px; color:#fff">';
+                    let td = '<td style="padding-left: 10px; color:#fff">';
                     let tr = (index++ % 2 === 0) ? '<tr style="background-color:#444">' : '<tr>';
                     table = table.concat(`${tr}${td}${id}</td>${td}${birdid}</td>${td}${filename}</td>${td}${location}</td>` +
                         `${td}${date}</td>${td}${country}</td>${td}${coordinate}</td>${td}${keyimage}</td></tr>`);
@@ -197,13 +197,13 @@
                 var table3 = table;
                 var index = 2;
                 // determine number of rows for each of the 3 tables (last one could be larger)
-                var cutSize = stats.imagesPerBird.length / 3;
+                var cutSize = Math.trunc(stats.imagesPerBird.length / 3);
                 // add a row at the time as we iterate through list
                 for (bird in stats.imagesPerBird) {
                     let id = stats.imagesPerBird[bird].id;
                     let name = stats.imagesPerBird[bird].name;
                     let images = stats.imagesPerBird[bird].images;
-                    let td = `<td style="padding:0 10px; color:#fff">`;
+                    let td = `<td style="padding-left: 8px; color:#fff">`;
                     let tr = (index++ % 2 === 0) ? `<tr style="background-color:#444">` : `<tr>`;
                     if (bird < cutSize) {
                         table = table.concat(`${tr}${td}${name} (${id})</td>${td}${images}</td></tr>`);
