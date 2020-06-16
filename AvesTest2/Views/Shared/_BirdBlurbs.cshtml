@@ -41,7 +41,7 @@
                 @Url.Action("Show", "Home", new { birdId = @bird.Id, location = (int)@ViewData["id"] }) :
                 @Url.Action("Show", "Home", new { birdId = @bird.Id });
 
-            <a href="@action">
+            <a href="@action" class="blurb-selected">
                 <div class="blurb">
                     <img src=@img class="blurb-image">
                     <div class="blurb-label">

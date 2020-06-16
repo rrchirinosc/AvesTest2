@@ -95,11 +95,11 @@ namespace AvesTest2.Database.Repositories
             return _connection.Query<BirdImageDTO>(sql);
         }
 
-        /* Fetch all bird display info, including images ordered by keyimage*/
+        /* Fetch all bird display info, including images ordered by keyimage */
         public IEnumerable<BirdFullDTO> GetAllBirdInfo(int birdId)
         {
             string sql = string.Format("SELECT [Bird].Id, [Bird].Name, [Bird].SciName," +
-                            "[Image].FileName, [Image].Location, [Image].Date, [Image].Country, [Image].Coordinate" +
+                            "[Image].FileName, [Image].Location, [Image].Date, [Image].Country, [Image].Coordinate, [Image].Comment" +
                                             " FROM [Bird] INNER JOIN [Image]" +
                                             " ON [Image].BirdId = [Bird].Id" +
                                             " WHERE [Image].BirdId = {0}" +
@@ -110,7 +110,7 @@ namespace AvesTest2.Database.Repositories
         public IEnumerable<BirdFullDTO> GetAllBirdInfoByCountry(int birdId, int countryId)
         {
             string sql = string.Format("SELECT [Bird].Id, [Bird].Name, [Bird].SciName," +
-                            "[Image].FileName, [Image].Location, [Image].Date, [Image].Country, [Image].Coordinate" +
+                            "[Image].FileName, [Image].Location, [Image].Date, [Image].Country, [Image].Coordinate, [Image].Comment" +
                                             " FROM [Bird] INNER JOIN [Image]" +
                                             " ON [Image].BirdId = [Bird].Id" +
                                             " WHERE ([Image].BirdId = {0} AND [Image].Country = {1})" +
@@ -123,7 +123,7 @@ namespace AvesTest2.Database.Repositories
         public IEnumerable<BirdFullDTO> GetAllBirdInfoByFamily(int familyId)
         {
             string sql = string.Format("SELECT [Bird].Id, [Bird].Name, [Bird].SciName," +
-                            "[Image].FileName, [Image].Location, [Image].Date, [Image].Country, [Image].Coordinate" +
+                            "[Image].FileName, [Image].Location, [Image].Date, [Image].Country, [Image].Coordinate, [Image].Comment" +
                                             " FROM [Bird] INNER JOIN [Image]" +
                                             " ON [Image].BirdId = [Bird].Id" +
                                             " WHERE [BirdId] in (" +
@@ -182,10 +182,10 @@ namespace AvesTest2.Database.Repositories
         /* Add a new image to the [Image] table */
         public int AddImage(ImageDTO Image)
         {
-            string sql = "INSERT INTO [Image] (BirdId, FileName, Location, Date, Country, Coordinate, KeyImage)" +
-                    " Values (@BirdId, @FileName, @Location, @Date, @Country, @Coordinate, @KeyImage)";
+            string sql = "INSERT INTO [Image] (BirdId, FileName, Location, Date, Country, Coordinate, Comment, KeyImage)" +
+                    " Values (@BirdId, @FileName, @Location, @Date, @Country, @Coordinate, @Comment, @KeyImage)";
 
-            int rows = _connection.Execute(sql, new { Image.BirdId, Image.FileName, Image.Location, Image.Date, Image.Country, Image.Coordinate, Image.KeyImage});
+            int rows = _connection.Execute(sql, new { Image.BirdId, Image.FileName, Image.Location, Image.Date, Image.Country, Image.Coordinate, Image.Comment, Image.KeyImage});
 
             return rows;
         }
@@ -210,12 +210,15 @@ namespace AvesTest2.Database.Repositories
                 image[0].Country = UpdatedImage.Country;
             if (UpdatedImage.Coordinate != "")
                 image[0].Coordinate = UpdatedImage.Coordinate;
+            if (UpdatedImage.Comment != "")
+                image[0].Comment = UpdatedImage.Comment;
 
             string sql = "UPDATE [Image] SET [FileName] = @filename," +
                                             " [Location] = @location," +
                                             " [Date] = @date," +
                                             " [Country] = @country," +
-                                            " [Coordinate] = @coordinate" +
+                                            " [Coordinate] = @coordinate," +
+                                            " [Comment] = @comment" +
                                             " WHERE [Id] = @id";
 
             return _connection.Execute(sql, new { filename = image[0].FileName, 
@@ -223,6 +226,7 @@ namespace AvesTest2.Database.Repositories
                                                 date = image[0].Date,
                                                 country = image[0].Country,
                                                 coordinate = image[0].Coordinate,
+                                                comment = image[0].Comment,
                                                 id = image[0].Id });
         }
 

@@ -5,6 +5,7 @@
 
     <div class="container-fluid d-flex" style="flex-wrap: wrap">
 
+        @*Add Image*@
         <div class="border-divider col-lg-6 col-md-12">
 
             @using (Html.BeginForm(FormMethod.Post, new { id = "addImageForm" }))
@@ -40,6 +41,9 @@
                 <div class="form-group p-0">
                     <input type="text" class="form-control" id="coordinates" name="Coordinate" placeholder="Coordinates: Longitud,Latitud..." data-val="true" data-val-required="*">
                 </div>
+                <div class="form-group p-0">
+                    <input type="text" class="form-control" id="comment" name="Comment" placeholder="Comment, can be empty" data-val="true">
+                </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="keyImage" name="IsActive" value="true">
                     <label class="text-white" for="keyImage">Key Image</label>
@@ -48,6 +52,7 @@
             }
         </div>
 
+        @*Add Bird*@
         <div class="border-divider col-lg-6 col-md-12">
 
             @using (Html.BeginForm(FormMethod.Post, new { id = "addBirdForm" }))
@@ -74,6 +79,7 @@
             }
         </div>
 
+        @*Update Image data*@
         <div class="border-divider col-lg-6 col-md-12 d-flex">
             <button class="btn btn-outline-primary button-mod2 float-left mb-5 m-sm-3" id="update-block" type="button"
                     data-toggle="collapse" data-target="#image-update" aria-expanded="false" aria-controls="image-update">
@@ -106,6 +112,9 @@
                         </select>
                     </div>
                     <div class="form-group p-0">
+                        <input type="text" class="form-control" id="image-comment" name="ImageComment" placeholder="Comment" data-val="true">
+                    </div>
+                    <div class="form-group p-0">
                         <input type="text" class="form-control" id="image-coordinates" name="Coordinate" placeholder="Coordinates: Longitud,Latitud..." data-val="true">
                     </div>
                     <button class="btn btn-primary" id="update-image" style="margin: 30px 10px">Update image</button>
@@ -113,6 +122,7 @@
             </div>
         </div>
 
+        @*Remove Image*@
         <div class="border-divider col-lg-6 col-md-12 d-flex">
             <button class="btn btn-outline-primary button-mod2 float-left mb-5 m-sm-3" id="remove-block" type="button"
                     data-toggle="collapse" data-target="#image-remove" aria-expanded="false" aria-controls="image-remove">
@@ -148,6 +158,7 @@
             </ul>
 
             <!-- Tab panes -->
+            @*Birds list*@
             <div class="tab-content">
                 <div id="bird-table-content" class="container tab-pane active">
                     <div class="table-ext">
@@ -157,6 +168,7 @@
                         </button>
                     </div>
                 </div>
+                @*Bird Families data*@
                 <div id="family-table-content" class="container fade tab-pane">
                     <div class="table-ext">
                         <div id="family-table">
@@ -167,6 +179,7 @@
                         </button>
                     </div>
                 </div>
+                @*Images data*@
                 <div id="image-table-content" class="container tab-pane fade">
                     <div class="table-ext">
                         <div id="image-table"></div>
@@ -174,7 +187,8 @@
                             <i class="fa fa-refresh"></i>
                         </button>
                     </div>
-                    </div>
+                </div>
+                @*Stats data*@
                 <div id="stats-table-content" class="container tab-pane fade">
                     <div class="table-ext">
                         <div id="stats" style="justify-content:space-between">
@@ -191,4 +205,3 @@
     </div>
 
 <script src="/js/Admin/Admin.js" asp-append-version="true"></script>
-

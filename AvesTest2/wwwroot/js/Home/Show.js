@@ -34,6 +34,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
         let month = parseInt(date[1]) - 1;
         $('#bird-date-taken').html(months[month] + " " + date[0] + ", " + date[2]);
 
+        // add comment
+        $('#image-comment').html(birddata.Birds[index].Comment);
+
+        // don't load map if not requested
+        if ($('#bird-location').attr('aria-expanded') === "false")
+            return;
+
+        loadMap(index);
+    };   
+
+    function loadMap(index) {
         // location map
         //let url = 'https://www.google.com/maps/embed/v1/view?key=' + appkey + '&center=' + birddata.Birds[index].Coordinate + '&zoom=15&maptype=satellite';
         let url = 'https://www.google.com/maps?q=' + birddata.Birds[index].Coordinate + '&z=18&output=embed';
@@ -43,9 +54,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
             `height="300"` +
             `frameborder="0" style="border:1px solid #737373"` +
             `src=${url}></iframe>`;
-        $('#map').empty();
-        $('#map').append(`${map}`);
-    };     
+        $('#bird-map').empty();
+        $('#bird-map').append(`${map}`);
+    }
+
+    $('#bird-location').click(function (e) {
+        if (e.target.attributes.getNamedItem('aria-expanded').value === "false") {
+            let carouselIndex = $('.carousel-item.active').index();
+            loadMap(carouselIndex);
+        }
+            
+    });
 });
 
 var Countries = [

@@ -22,6 +22,8 @@
     };
 
     $('.nav-link').click(function (e) {
+        loader(true)
+
         switch ($(e.target).text()) {
             case 'Bird':
                 if (reloadTabs.BIRDS == 0)
@@ -42,6 +44,8 @@
             default:
                 break;
         }
+        loader(false, true);
+
         //alert($(e.target).text());
     })
 
@@ -76,7 +80,7 @@
                 $('#bird-table').append(`${table}`);
                 $('#reload-birds').css('visibility', 'visible');
                 reloadTabs.BIRDS = 1;
-        });
+            });
     };
 
     function loadFamilies() {
@@ -127,6 +131,7 @@
     };
 
     function loadImages() {
+
         var url = "/Admin/GetImageTable";
         $.ajax(
             {
@@ -162,7 +167,7 @@
                 $('#image-table').append(`${table}`);
                 $('#reload-image-data').css('visibility', 'visible');
                 reloadTabs.IMAGES = 1;
-         });
+            });
     };   
 
     function loadStats() {
@@ -229,7 +234,7 @@
                 $('#stats-image-list').append(`${table}${table2}${table3}`);
                 $('#reload-stats').css('visibility', 'visible');
                 reloadTabs.STATS = 1;
-        });
+            });
     };
 
     
@@ -237,7 +242,7 @@
     $('#add-image').click(function (e) {
 
         e.preventDefault();
-
+        loader(true);
         if ($('#addImageForm').valid()) {
 
             var url = "/Admin/AddImage";
@@ -248,6 +253,7 @@
                 Date: $('#date').val(),
                 Country: $('#country').val(),
                 Coordinate: $('#coordinates').val(),
+                Comment: $('#comment').val(),
                 KeyImage: $('#keyImage').prop('checked')
             };
 
@@ -269,12 +275,13 @@
                     }
                 });
         }
+        loader(false, true);
     });   
 
     $('#update-image').click(function (e) {
 
         e.preventDefault();
-
+        loader(true);
         if ($('#updateImageForm').valid()) {
 
             var url = "/Admin/UpdateImage";
@@ -285,6 +292,7 @@
                 Date: $('#image-date').val(),
                 Country: $('#image-country').val(),
                 Coordinate: $('#image-coordinates').val(),
+                Comment: $('#image-comment').val()
             };
 
             $.ajax(
@@ -305,12 +313,14 @@
                     }
                 });
         }
+        loader(false, true);
     });   
 
 
     $('#remove-image').click(function (e) {
 
         e.preventDefault();
+        loader(true);
 
         if ($('#removeImageForm').valid()) {
 
@@ -337,12 +347,13 @@
                     }
                 });
         }
+        loader(false, true);
     });   
 
     $('#add-bird').click(function (e) {
 
         e.preventDefault();
-
+        loader(true);
         if ($('#addBirdForm').valid()) {
 
             var url = "/Admin/AddBird";
@@ -370,6 +381,7 @@
                     }
                 });
         }
+        loader(false, true);
     });   
 
     init();

@@ -15,6 +15,6 @@ namespace AvesTest2.Database.DTO
         public int Country { get; set; }
         public string Coordinate { get; set; } /* comma separated latitude and longitud */
         public bool KeyImage { get; set; }
-        public string Comment { get; set; }
+        public string Comment { get; set; } /* Image comment, may be empty */
     }
 }

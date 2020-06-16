@@ -219,3 +219,6 @@ a.nav-link {
 .table-ext {
   display: flex;
   justify-content: space-between; }
+
+#image-comment {
+  font-style: italic; }

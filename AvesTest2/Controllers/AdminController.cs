@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Text;
 using System.Threading.Tasks;
 using AvesTest2.Database.DTO;
 using AvesTest2.Database.Repositories;
 using AvesTest2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System.IO;
+
+
 
 //TODO: Implement caching
 
@@ -29,6 +35,15 @@ namespace AvesTest2.Controllers
 #else
             return RedirectToAction("Index", "Home");
 #endif
+        }
+
+        private string GetDateFromImage(int BirdId, string FileName)
+        {
+            string File = string.Format("{0}/{1}/{2}/{3}.jpg", Directory.GetCurrentDirectory(),"wwwroot/Images/Birds", BirdId, FileName);
+            Image image = Image.FromFile(File);
+
+            return Encoding.UTF8.GetString(image.GetPropertyItem(0x0132).Value);
+
         }
 
         [HttpGet]
@@ -87,7 +102,7 @@ namespace AvesTest2.Controllers
 
         [HttpPost]
         public int AddImage(int BirdId, string FileName, string Location,
-            DateTime Date, int Country, string Coordinate, bool KeyImage = false)
+            DateTime Date, int Country, string Coordinate, string Comment, bool KeyImage = false)
         {
             ImageDTO image = new ImageDTO();
             int result = 0;
@@ -104,6 +119,7 @@ namespace AvesTest2.Controllers
             image.Country = Country;
             image.Coordinate = (Coordinate == null) ? "" : Coordinate;
             image.KeyImage = KeyImage;
+            image.Comment = (Comment == null) ? "" : Comment;
 
             BirdsRepository repo = new BirdsRepository(Connection);
 
@@ -121,7 +137,7 @@ namespace AvesTest2.Controllers
 
         [HttpPost]
         public int UpdateImage(int ImageId, string FileName, string Location,
-            DateTime Date, int Country, string Coordinate)
+            DateTime Date, int Country, string Coordinate, string Comment)
         {
             ImageDTO image = new ImageDTO();
             int result = 0;
@@ -129,7 +145,7 @@ namespace AvesTest2.Controllers
             // Double-check that params are valid
             if (ImageId == 0 || (FileName == null &&
                 Location == null && Date.Year == 1 && Country == 0 &&
-                Coordinate == null))
+                Coordinate == null && Comment == null))
                 return result;
 
             image.Id = ImageId;
@@ -138,6 +154,7 @@ namespace AvesTest2.Controllers
             image.Date = Date.Year == 1 ? null : Date.ToShortDateString();
             image.Country = Country;
             image.Coordinate = (Coordinate == null) ? "" : Coordinate;
+            image.Comment = (Comment == null) ? "" : Comment;
 
             BirdsRepository repo = new BirdsRepository(Connection);
             result = repo.UpdateImage(image);

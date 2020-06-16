@@ -15,5 +15,6 @@ namespace AvesTest2.Database.DTO
         public string Date { get; set; }
         public int Country { get; set; }
         public string Coordinate { get; set; }
+        public string Comment { get; set; }
     }
 }
