@@ -22,8 +22,6 @@
     };
 
     $('.nav-link').click(function (e) {
-        loader(true)
-
         switch ($(e.target).text()) {
             case 'Bird':
                 if (reloadTabs.BIRDS == 0)
@@ -44,14 +42,13 @@
             default:
                 break;
         }
-        loader(false, true);
-
         //alert($(e.target).text());
     })
 
     // functions to load tables
     function loadBirds() {
         var url = "/Admin/GetBirdTable";
+        loader(true);
         $.ajax(
             {
                 type: 'GET',
@@ -81,10 +78,13 @@
                 $('#reload-birds').css('visibility', 'visible');
                 reloadTabs.BIRDS = 1;
             });
+        loader(false, true);
     };
 
     function loadFamilies() {
         var url = "/Admin/GetFamilyTable";
+        loader(true);
+
         $.ajax(
             {
                 type: 'GET',
@@ -128,11 +128,13 @@
                 $('#reload-families').css('visibility', 'visible');
                 reloadTabs.FAMILIES = 1;
             });
+        loader(false, true);
     };
 
     function loadImages() {
 
         var url = "/Admin/GetImageTable";
+        loader(true);
         $.ajax(
             {
                 type: 'GET',
@@ -168,10 +170,13 @@
                 $('#reload-image-data').css('visibility', 'visible');
                 reloadTabs.IMAGES = 1;
             });
+        loader(false, true);
     };   
 
     function loadStats() {
         var url = "/Admin/GetStats";
+        loader(true);
+
         $.ajax(
             {
                 type: 'GET',
@@ -235,6 +240,7 @@
                 $('#reload-stats').css('visibility', 'visible');
                 reloadTabs.STATS = 1;
             });
+        loader(false, true);
     };
 
     
