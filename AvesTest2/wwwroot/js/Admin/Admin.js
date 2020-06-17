@@ -8,6 +8,9 @@
         STATS: 0
     };
 
+    var loadedStats = null;
+    var sortAscending = 1;
+
     var init = function () {
         $.validator.unobtrusive.parse("#addBirdForm");
         $.validator.unobtrusive.parse("#addImageForm");
@@ -19,6 +22,7 @@
         document.getElementById("reload-families").addEventListener("click", loadFamilies);
         document.getElementById("reload-image-data").addEventListener("click", loadImages);
         document.getElementById("reload-stats").addEventListener("click", loadStats);
+        document.getElementById("sort-stats").addEventListener("click", sortStats);
     };
 
     $('.nav-link').click(function (e) {
@@ -100,8 +104,11 @@
                 var table = `<table style="border:1px solid #fffffe20; padding:0 2px;font-size:14px"><thead><tr>${th}Id</th>${th}Name</th>${th}SciName</th></tr></thead><tbody>`;
                 var table2 = table;
                 var index = 2;
-                // determine number of rows for each of the 2 tables (last one could be larger)
+                // determine number of rows for each of the 2 tables
                 var cutSize = Math.trunc(familyList.length / 2);
+                // max cutSize
+                cutSize += familyList.length % 2 ? 1 : 0;
+
                 // add a row at the time as we iterate through list
                 for (family in familyList) {
                     let id = familyList[family].id;
@@ -173,6 +180,53 @@
         loader(false, true);
     };   
 
+    function buildStatsTable(imagesPerBird) {
+
+        // build 3 html tables with acquired images per bird data
+        let th = `<th style="color:#0366D6;padding-left:2px">`
+        var table = `<table style="border:1px solid #fffffe20; padding:0 2px;font-size:14px"><thead><tr>${th}Bird (Id)</th>${th}Images</th></tr></thead><tbody>`;
+        var table2 = table;
+        var table3 = table;
+        var index = 2;
+        // determine number of rows for each of the 3 tables
+        var cutSize = Math.trunc(imagesPerBird.length / 3);
+        // max cutSize
+        cutSize += imagesPerBird.length % 3 ? 1 : 0;
+        
+        // add a row at the time as we iterate through list
+        for (bird in imagesPerBird) {
+            let id = imagesPerBird[bird].id;
+            let name = imagesPerBird[bird].name;
+            let images = imagesPerBird[bird].images;
+            let td = `<td style="padding-left: 8px; color:#fff">`;
+            let tr = (index++ % 2 === 0) ? `<tr style="background-color:#444">` : `<tr>`;
+            if (bird < cutSize) {
+                table = table.concat(`${tr}${td}${name} (${id})</td>${td}${images}</td></tr>`);
+            }
+            else if (bird >= cutSize && bird < cutSize * 2) {
+                if (bird == cutSize) {
+                    // end first table
+                    table = table.concat(`</tbody></table>`);
+                }
+                table2 = table2.concat(`${tr}${td}${name} (${id})</td>${td}${images}</td></tr>`);
+            }
+            else {
+                if (bird == cutSize * 2) {
+                    // end second table
+                    table2 = table2.concat(`</tbody></table>`);
+                }
+                table3 = table3.concat(`${tr}${td}${name} (${id})</td>${td}${images}</td></tr>`);
+            }
+        }
+        // end 3rd table, clear div and display all tables
+        table3 = table3.concat(`</tbody></table>`);
+        $('#stats-image-list').empty();
+        $('#stats-image-list').append(`${table}${table2}${table3}`);
+        $('#reload-stats').css('visibility', 'visible');
+        $('#sort-stats').css('visibility', 'visible');
+        reloadTabs.STATS = 1;
+    }
+
     function loadStats() {
         var url = "/Admin/GetStats";
         loader(true);
@@ -186,7 +240,12 @@
                 contentType: "application/json; charset=utf-8"
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown + this.url);
+                loadedStats = null;
             }).done(function (stats, textStatus, jqXHR) {
+
+                //save stats for sort usage
+                loadedStats = stats;
+
                 // first build/display top stats list
                 let value = stats.birdCount;
                 let value2 = stats.haveKeyImages;
@@ -200,49 +259,46 @@
                 $('#stats-list').empty();
                 $('#stats-list').append(`${statsList}`);
 
-                // build 3 html tables with acquired images per bird data
-                let th = `<th style="color:#0366D6;padding-left:2px">`
-                var table = `<table style="border:1px solid #fffffe20; padding:0 2px;font-size:14px"><thead><tr>${th}Bird (Id)</th>${th}Images</th></tr></thead><tbody>`;
-                var table2 = table;
-                var table3 = table;
-                var index = 2;
-                // determine number of rows for each of the 3 tables (last one could be larger)
-                var cutSize = Math.trunc(stats.imagesPerBird.length / 3);
-                // add a row at the time as we iterate through list
-                for (bird in stats.imagesPerBird) {
-                    let id = stats.imagesPerBird[bird].id;
-                    let name = stats.imagesPerBird[bird].name;
-                    let images = stats.imagesPerBird[bird].images;
-                    let td = `<td style="padding-left: 8px; color:#fff">`;
-                    let tr = (index++ % 2 === 0) ? `<tr style="background-color:#444">` : `<tr>`;
-                    if (bird < cutSize) {
-                        table = table.concat(`${tr}${td}${name} (${id})</td>${td}${images}</td></tr>`);
-                    }
-                    else if (bird >= cutSize && bird < cutSize * 2) {
-                        if (bird == cutSize) {
-                            // end first table
-                            table = table.concat(`</tbody></table>`);
-                        }
-                        table2 = table2.concat(`${tr}${td}${name} (${id})</td>${td}${images}</td></tr>`);
-                    }
-                    else {
-                        if (bird == cutSize * 2) {
-                            // end second table
-                            table2 = table2.concat(`</tbody></table>`);
-                        }
-                        table3 = table3.concat(`${tr}${td}${name} (${id})</td>${td}${images}</td></tr>`);
-                    }
-                }
-                // end 3rd table, clear div and display all tables
-                table3 = table3.concat(`</tbody></table>`);
-                $('#stats-image-list').empty();
-                $('#stats-image-list').append(`${table}${table2}${table3}`);
-                $('#reload-stats').css('visibility', 'visible');
+                buildStatsTable(stats.imagesPerBird);
+                
                 reloadTabs.STATS = 1;
             });
         loader(false, true);
     };
 
+    // function for (ascending) sorting images per bird count
+    function compareImagesNumber(order = 'asc') {
+        return function compare(a, b) {
+            const imagesA = a.images;
+            const imagesB = b.images;
+
+            let comparison = 0;
+            if (imagesA > imagesB) {
+                comparison = 1;
+            } else if (imagesA < imagesB) {
+                comparison = -1;
+            }
+            return ((order === 'desc') ? (comparison * -1) : comparison);
+        }
+    };
+
+    // sort and rebuild stats table
+    function sortStats() {
+        if (loadedStats == null)
+            return;
+
+        // save sorted list as so
+        var sorted = null;
+        if (sortAscending)
+            sorted = [...loadedStats.imagesPerBird].sort(compareImagesNumber());
+        else
+            sorted = [...loadedStats.imagesPerBird].sort(compareImagesNumber('desc'));
+
+        // reverse sort order for next time
+        sortAscending ^= 1;
+
+        buildStatsTable(sorted);
+    };
     
 
     $('#add-image').click(function (e) {
