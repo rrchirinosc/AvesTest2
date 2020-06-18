@@ -27,15 +27,15 @@
 
     $('.nav-link').click(function (e) {
         switch ($(e.target).text()) {
-            case 'Bird':
+            case 'Birds':
                 if (reloadTabs.BIRDS == 0)
                     loadBirds();
                 break;
-            case 'Family':
+            case 'Families':
                 if (reloadTabs.FAMILIES == 0)
                     loadFamilies();
                 break;
-            case 'Image':
+            case 'Images':
                 if (reloadTabs.IMAGES == 0)
                     loadImages();
                 break;
@@ -247,14 +247,15 @@
                 loadedStats = stats;
 
                 // first build/display top stats list
-                let value = stats.birdCount;
-                let value2 = stats.haveKeyImages;
-                let value3 = stats.birdCount - stats.haveKeyImages;
+                let birdCount = stats.birdCount;
+                let keyImages = stats.haveKeyImages;
+                let noImages = stats.birdCount - stats.haveKeyImages;
+                let noImagesPercent = Math.trunc((noImages * 100) / birdCount);
                 let div = '<div style="padding:0 10px; color:#fff; margin-top:25px">';
                 var statsList = `${div}<ul>` +
-                    `<li> Birds: ${value} </li>` +
-                    `<li> KeyImages: ${value2} </li>` +
-                    `<li> Birds w/o images: ${value3} </li>` +
+                    `<li> Birds: ${birdCount} </li>` +
+                    `<li> KeyImages: ${keyImages} </li>` +
+                    `<li> Birds w/o images: ${noImages} (${noImagesPercent}%)</li>` +
                     `</ul></div>`;
                 $('#stats-list').empty();
                 $('#stats-list').append(`${statsList}`);
