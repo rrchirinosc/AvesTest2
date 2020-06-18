@@ -213,11 +213,21 @@ a.nav-link {
     border-radius:0;
 }
 
-.nav-tabs .nav-link.active {
-    background-color:rgba(255, 255, 221, 0.00);
-    color:#eeeeee;
-    font-weight:600;
+.nav-tabs .nav-link.active{
+    /*    background-color: rgba(255, 255, 221, 0.00);
+    color: #eeeeee;
+    font-weight: 600;*/
+    background-color: $app-select-bk !important;
+    color: $app-font-color !important;
+    border-radius: 0 !important;
 }
+
+.nav-link.active {
+    background-color: $app-select-bk !important;
+    color: $app-font-color !important;
+    border-radius: 0 !important;
+}
+
 
 .card {
     border: none;
@@ -277,3 +287,4 @@ a.nav-link {
 #image-comment {
     font-style: italic;
 }
+

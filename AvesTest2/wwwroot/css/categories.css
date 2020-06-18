@@ -172,9 +172,17 @@ a.nav-link {
   border-radius: 0; }
 
 .nav-tabs .nav-link.active {
-  background-color: rgba(255, 255, 221, 0);
-  color: #eeeeee;
-  font-weight: 600; }
+  /*    background-color: rgba(255, 255, 221, 0.00);
+    color: #eeeeee;
+    font-weight: 600;*/
+  background-color: rgba(72, 72, 106, 0.75) !important;
+  color: #fffff0 !important;
+  border-radius: 0 !important; }
+
+.nav-link.active {
+  background-color: rgba(72, 72, 106, 0.75) !important;
+  color: #fffff0 !important;
+  border-radius: 0 !important; }
 
 .card {
   border: none;
