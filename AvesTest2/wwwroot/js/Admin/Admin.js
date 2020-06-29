@@ -9,7 +9,11 @@
     };
 
     var loadedStats = null;
-    var sortAscending = 1;
+    var loadedBirds = null;
+    var loadedImages = null;
+    var sortStatsAscending = 1;
+    var sortBirdsAscending = 1;
+    var sortImagesByLocation = 1;
 
     var init = function () {
         $.validator.unobtrusive.parse("#addBirdForm");
@@ -23,6 +27,8 @@
         document.getElementById("reload-image-data").addEventListener("click", loadImages);
         document.getElementById("reload-stats").addEventListener("click", loadStats);
         document.getElementById("sort-stats").addEventListener("click", sortStats);
+        document.getElementById("sort-birds").addEventListener("click", sortBirds);
+        document.getElementById("sort-images").addEventListener("click", sortImages);
     };
 
     $('.nav-link').click(function (e) {
@@ -63,24 +69,12 @@
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown + this.url);
             }).done(function (birdList, textStatus, jqXHR) {
+
+                //save bird list for sort usage
+                loadedBirds = birdList;
+
                 // build and display html table with birdList
-                let th = `<th style="color:#0366D6">`
-                var table = `<table><thead><tr>${th}Id</th>${th}Name</th>${th}SciName</th>${th}FamilyId</th></tr></thead><tbody>`;
-                var index = 2;
-                for (bird in birdList) {
-                    let id = birdList[bird].id;
-                    let name = birdList[bird].name;
-                    let sciname = birdList[bird].sciName;
-                    let familyid = birdList[bird].familyId;
-                    let td = '<td style="padding-left: 10px; color:#fff">';
-                    let tr = (index++ % 2 === 0) ? '<tr style="background-color:#444">' : '<tr>';
-                    table = table.concat(`${tr}${td}${id}</td>${td}${name}</td>${td}${sciname}</td>${td}${familyid}</td></tr>`);
-                }
-                table = table.concat(`</tbody></table>`);
-                $('#bird-table').empty();
-                $('#bird-table').append(`${table}`);
-                $('#reload-birds').css('visibility', 'visible');
-                reloadTabs.BIRDS = 1;
+                buildBirdsTable(birdList);                
             });
         loader(false, true);
     };
@@ -152,33 +146,67 @@
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown + this.url);
             }).done(function (imageList, textStatus, jqXHR) {
+
+                //save image list for sort usage
+                loadedImages = imageList;
+
                 // build html table with acquired data
-                let th = `<th style="color:#0366D6">`;
-                var table = `<table style="font-size:14px"><thead><tr>${th}Id</th>${th}BirdId</th>${th}FileName</th>${th}Location</th>${th}Date</th>${th}Country</th>${th}Coordinate</th>${th}Key</th>${th}</tr></thead><tbody>`;
-                var index = 2;
-                // add a row at the time as we iterate through list
-                for (image in imageList) {
-                    let id = imageList[image].id;
-                    let birdid = imageList[image].birdId;
-                    let filename = imageList[image].fileName;
-                    let location = imageList[image].location;
-                    let date = imageList[image].date;
-                    let country = imageList[image].country;
-                    let coordinate = imageList[image].coordinate;
-                    let keyimage = imageList[image].keyImage == true ? 'x' : ' ';
-                    let td = '<td style="padding-left: 10px; color:#fff">';
-                    let tr = (index++ % 2 === 0) ? '<tr style="background-color:#444">' : '<tr>';
-                    table = table.concat(`${tr}${td}${id}</td>${td}${birdid}</td>${td}${filename}</td>${td}${location}</td>` +
-                        `${td}${date}</td>${td}${country}</td>${td}${coordinate}</td>${td}${keyimage}</td></tr>`);
-                }
-                table = table.concat(`</tbody></table>`);
-                $('#image-table').empty();
-                $('#image-table').append(`${table}`);
-                $('#reload-image-data').css('visibility', 'visible');
-                reloadTabs.IMAGES = 1;
+                buildImagesTable(imageList);                
             });
         loader(false, true);
     };   
+
+
+    function buildBirdsTable(birdList) {
+
+        // build and display html table with birdList
+        let th = `<th style="color:#0366D6">`
+        var table = `<table><thead><tr>${th}Id</th>${th}Name</th>${th}SciName</th>${th}FamilyId</th></tr></thead><tbody>`;
+        var index = 2;
+        for (bird in birdList) {
+            let id = birdList[bird].id;
+            let name = birdList[bird].name;
+            let sciname = birdList[bird].sciName;
+            let familyid = birdList[bird].familyId;
+            let td = '<td style="padding-left: 10px; color:#fff">';
+            let tr = (index++ % 2 === 0) ? '<tr style="background-color:#444">' : '<tr>';
+            table = table.concat(`${tr}${td}${id}</td>${td}${name}</td>${td}${sciname}</td>${td}${familyid}</td></tr>`);
+        }
+        table = table.concat(`</tbody></table>`);
+        $('#bird-table').empty();
+        $('#bird-table').append(`${table}`);
+        $('#reload-birds').css('visibility', 'visible');
+        $('#sort-birds').css('visibility', 'visible');
+        reloadTabs.BIRDS = 1;
+    }
+
+    function buildImagesTable(imageList) {
+
+        let th = `<th style="color:#0366D6">`;
+        var table = `<table style="font-size:14px"><thead><tr>${th}Id</th>${th}BirdId</th>${th}FileName</th>${th}Location</th>${th}Date</th>${th}Country</th>${th}Coordinate</th>${th}Key</th>${th}</tr></thead><tbody>`;
+        var index = 2;
+        // add a row at the time as we iterate through list
+        for (image in imageList) {
+            let id = imageList[image].id;
+            let birdid = imageList[image].birdId;
+            let filename = imageList[image].fileName;
+            let location = imageList[image].location;
+            let date = imageList[image].date;
+            let country = imageList[image].country;
+            let coordinate = imageList[image].coordinate;
+            let keyimage = imageList[image].keyImage == true ? 'x' : ' ';
+            let td = '<td style="padding-left: 10px; color:#fff">';
+            let tr = (index++ % 2 === 0) ? '<tr style="background-color:#444">' : '<tr>';
+            table = table.concat(`${tr}${td}${id}</td>${td}${birdid}</td>${td}${filename}</td>${td}${location}</td>` +
+                `${td}${date}</td>${td}${country}</td>${td}${coordinate}</td>${td}${keyimage}</td></tr>`);
+        }
+        table = table.concat(`</tbody></table>`);
+        $('#image-table').empty();
+        $('#image-table').append(`${table}`);
+        $('#reload-image-data').css('visibility', 'visible');
+        $('#sort-images').css('visibility', 'visible');
+        reloadTabs.IMAGES = 1;
+    }
 
     function buildStatsTable(imagesPerBird) {
 
@@ -283,6 +311,39 @@
         }
     };
 
+    // function for (ascending) sorting images by bird id
+    function compareIds(order = 'asc') {
+        return function compare(a, b) {
+            const idA = a.id;
+            const idB = b.id;
+
+            let comparison = 0;
+            if (idA > idB) {
+                comparison = 1;
+            } else if (idA < idB) {
+                comparison = -1;
+            }
+            return ((order === 'desc') ? (comparison * -1) : comparison);
+        }
+    };
+
+    // function for sorting images by image location or country
+    function compareLocations(order = '') {
+        return function compare(a, b) {
+
+            const locA = (order == 'country' ? a.country : a.location);
+            const locB = (order == 'country' ? b.country : b.location);           
+
+            let comparison = 0;
+            if (locA > locB) {
+                comparison = 1;
+            } else if (locA < locB) {
+                comparison = -1;
+            }
+            return comparison;
+        }
+    };
+
     // sort and rebuild stats table
     function sortStats() {
         if (loadedStats == null)
@@ -290,15 +351,51 @@
 
         // save sorted list as so
         var sorted = null;
-        if (sortAscending)
+        if (sortStatsAscending)
             sorted = [...loadedStats.imagesPerBird].sort(compareImagesNumber());
         else
             sorted = [...loadedStats.imagesPerBird].sort(compareImagesNumber('desc'));
 
         // reverse sort order for next time
-        sortAscending ^= 1;
+        sortStatsAscending ^= 1;
 
         buildStatsTable(sorted);
+    };
+
+    // sort and rebuild birds table
+    function sortBirds() {
+        if (loadedBirds == null)
+            return;
+
+        // save sorted list as so
+        var sorted = null;
+        if (sortBirdsAscending)
+            sorted = [...loadedBirds].sort(compareIds());
+        else
+            sorted = [...loadedBirds].sort(compareIds('desc'));
+
+        // reverse sort order for next time
+        sortBirdsAscending ^= 1;
+
+        buildBirdsTable(sorted);
+    };
+
+    // sort and rebuild images table
+    function sortImages() {
+        if (loadedImages == null)
+            return;
+
+        // save sorted list as so
+        var sorted = null;
+        if (sortImagesByLocation)
+            sorted = [...loadedImages].sort(compareLocations());
+        else
+            sorted = [...loadedImages].sort(compareLocations('country'));
+
+        // reverse sort order for next time
+        sortImagesByLocation ^= 1;
+
+        buildImagesTable(sorted);
     };
     
 
