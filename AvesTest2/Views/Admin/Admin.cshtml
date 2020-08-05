@@ -10,6 +10,8 @@
             <a class="nav-link" id="add-bird-tab" data-toggle="pill" href="#add-bird-form" role="tab" aria-controls="add-bird-form" aria-selected="false">Add [Bird]</a>
             <a class="nav-link" id="update-image-tab" data-toggle="pill" href="#update-image-form" role="tab" aria-controls="update-image-form" aria-selected="false">Update [Image]</a>
             <a class="nav-link" id="remove-image-tab" data-toggle="pill" href="#remove-image-form" role="tab" aria-controls="remove-image-form" aria-selected="false">Remove [Image]</a>
+            <a class="nav-link" id="mail-bird-list-tab" data-toggle="pill" href="#mail-bird-list-form" role="tab" aria-controls="mail-bird-list-form" aria-selected="false">Mail Bird List</a>
+
         </div>
         <div class="tab-content border-divider col-lg-6 col-md-12" id="admin-actions-forms">
             @*Add Image*@
@@ -127,6 +129,20 @@
                     <button class="btn btn-primary float-right" id="remove-image" style="margin: 30px 10px">Remove image</button>
                 }
             </div>
+
+            @*Send current bird list by email *@ 
+            <div class="tab-pane fade" id="mail-bird-list-form" role="tabpanel" aria-labelledby="mail-bird-list-tab" style="color:#fff">
+                @using (Html.BeginForm(FormMethod.Post, new { id = "mailBirdListForm" }))
+                {
+                    <div class="form-group p-0">
+                        <input type="text" class="form-control" id="receiver-account" name="Receiver" placeholder="Receiver's mail address" data-val="true" data-val-required="*">
+                    </div>
+                    <div class="form-group p-0">
+                        <input type="password" class="form-control" id="acc-password" name="SenderPassw" placeholder="Site's mail password" data-val="true" data-val-required="*">
+                    </div>
+                    <button class="btn btn-primary float-right" id="mail-bird-list" style="margin: 30px 10px">Mail Bird List</button>
+                }
+            </div>
         </div>
 
         <div class="border-divider col-lg-12">
@@ -208,4 +224,4 @@
         </div>
     </div>
 
-        <script src="/js/Admin/Admin.js" asp-append-version="true"></script>
+        <script src="~/js/Admin/Admin.js" asp-append-version="true"></script>

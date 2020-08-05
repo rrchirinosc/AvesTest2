@@ -11,6 +11,12 @@ using AvesTest2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.IO;
+using ClosedXML.Excel;
+using MimeKit;
+using AvesTest2.Infrastructure.Mail;
+using AvesTest2.Infrastructure.Options;
+using DocumentFormat.OpenXml.Wordprocessing;
+using MailKit.Net.Smtp;
 
 
 
@@ -21,9 +27,12 @@ namespace AvesTest2.Controllers
     public class AdminController : BaseController
     {
         private AdminViewModel model;
+        private MailOptions _mailOptions;
 
-        public AdminController(IOptions<ApplicationOptions> appOptions):base(appOptions)
+        public AdminController(IOptions<ApplicationOptions> appOptions,
+            IOptions<MailOptions> mailOptions):base(appOptions, mailOptions)
         {
+            _mailOptions = mailOptions.Value;
         }
 
         public async Task<IActionResult> Admin()
@@ -175,6 +184,92 @@ namespace AvesTest2.Controllers
             result = repo.RemoveImage(ImageId);
 
             return result;
+        }
+
+        [HttpGet]
+        public  int MailBirdList(string Receiver, string Password)
+        {
+            try
+            {
+                MailMessage message = new MailMessage();
+                message.Sender = new MailboxAddress("OnlyAves", _mailOptions.Sender);
+                message.Receiver = new MailboxAddress("Raul", Receiver);
+                message.Subject = "Current birds list";
+
+                // setup list
+                BirdsRepository repo = new BirdsRepository(Connection);
+                List<BirdDTO> birds = repo.Birds.ToList();
+                string Content = "Current Bird List\n\n";
+
+                foreach (var bird in birds)
+                {
+                    Content += bird.Name + " (" + bird.Id.ToString() + ")";
+                    Content += "\n";
+                }
+
+                message.Content = Content;
+                var mimeMessage = CreateMimeMessage(message);
+                using (SmtpClient smtpClient = new SmtpClient())
+                {
+                    smtpClient.Connect(_mailOptions.SmtpServer, _mailOptions.Port);  //using SSL
+                    smtpClient.Authenticate(_mailOptions.Sender, Password); //check gmail allowances on failure
+                    smtpClient.Send(mimeMessage);
+                    smtpClient.Disconnect(true);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return 0;
+            }
+
+            return 1;
+        }
+
+
+
+        public IActionResult CreateBirdsXLSList()
+        {
+            // get the bird data
+            BirdsRepository repo = new BirdsRepository(Connection);
+            List<BirdDTO> birds = repo.Birds.ToList();
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Bird");
+                var currentRow = 1;
+                worksheet.Cell(currentRow, 1).Value = "Name";
+                worksheet.Cell(currentRow, 2).Value = "SciName";
+                foreach (var bird in birds)
+                {
+                    currentRow++;
+                    worksheet.Cell(currentRow, 1).Value = bird.Name;
+                    worksheet.Cell(currentRow, 2).Value = bird.SciName;
+                }
+
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+
+                    return File(
+                        content,
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        "birds.xlsx");
+                }      
+            }
+        }
+
+        private MimeMessage CreateMimeMessage(MailMessage message)
+        {
+            var mimeMessage = new MimeMessage();
+            mimeMessage.From.Add(message.Sender);
+            mimeMessage.To.Add(message.Receiver);
+            mimeMessage.Subject = message.Subject;
+            mimeMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text)
+                                    { Text = message.Content };
+
+            return mimeMessage;
         }
     }    
  }

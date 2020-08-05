@@ -544,5 +544,38 @@
         loader(false, true);
     });   
 
+    $('#mail-bird-list').click(function (e) {
+
+        e.preventDefault();
+        loader(true);
+        if ($('#mailBirdListForm').valid()) {
+
+            var url = "/Admin/MailBirdList";
+            var data = {
+                Receiver: $('#receiver-account').val(),
+                Password: $('#acc-password').val(),
+            };
+
+            $.ajax(
+                {
+                    type: 'GET',
+                    url: url,
+                    dataType: 'text',
+                    cache: false,
+                    data: data
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown + this.url);
+                }).done(function (res, textStatus, jqXHR) {
+                    if (res === "0") {
+                        alert('Error encounterd while sending mail');
+                    }
+                    else {
+                        $('#mailBirdListForm')[0].reset();
+                    }
+                });
+        }
+        loader(false, true);
+    });   
+
     init();
 });

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using AvesTest2.Models;
 using Microsoft.Extensions.Options;
 using AvesTest2.Infraestructure.Data;
+using AvesTest2.Infrastructure.Options;
 
 namespace AvesTest2.Controllers
 {
@@ -17,7 +18,8 @@ namespace AvesTest2.Controllers
         public IOptions<ApplicationOptions> _appOptions;
 
         public HomeController(ILogger<HomeController> logger, 
-                              IOptions<ApplicationOptions> appOptions) : base(appOptions)
+                              IOptions<ApplicationOptions> appOptions,
+                              IOptions<MailOptions> mailOptions) : base(appOptions, mailOptions)
         {
             _logger = logger;
             _appOptions = appOptions;

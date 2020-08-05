@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using AvesTest2.Infrastructure.Options;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
@@ -12,13 +13,16 @@ namespace AvesTest2.Controllers
     public class BaseController : Controller
     {
         protected ApplicationOptions AppOptions { get; set; }
+        protected MailOptions MailOptions { get; set; }
 
         private SqlConnection _connection;
 
         public BaseController(
-             IOptions<ApplicationOptions> appOptions)
+             IOptions<ApplicationOptions> appOptions,
+             IOptions<MailOptions> mailOptions)
         {
-            AppOptions = appOptions.Value;          
+            AppOptions = appOptions.Value;
+            MailOptions = mailOptions.Value;
         }
 
         public override void OnActionExecuted(ActionExecutedContext context)
