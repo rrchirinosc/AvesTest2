@@ -14,6 +14,7 @@
     var sortStatsAscending = 1;
     var sortBirdsAscending = 1;
     var sortImagesByLocation = 1;
+    var maxTableItems = 50;
 
     var init = function () {
         $.validator.unobtrusive.parse("#addBirdForm");
@@ -29,6 +30,14 @@
         document.getElementById("sort-stats").addEventListener("click", sortStats);
         document.getElementById("sort-birds").addEventListener("click", sortBirds);
         document.getElementById("sort-images").addEventListener("click", sortImages);
+        //event to have the bird pages selector show the clicked on page
+        document.querySelector('body').addEventListener('click', function (e) {
+            e.preventDefault();
+            if (e.target.className === 'page-link') {
+                let val = parseInt(e.target.hash[e.target.hash.length - 1]);
+                showBirdsPage(loadedBirds, val);                
+            }
+        });
     };
 
     $('.nav-link').click(function (e) {
@@ -154,25 +163,85 @@
                 buildImagesTable(imageList);                
             });
         loader(false, true);
-    };   
+    };
 
+   
+    function paginate(birdList, selectedPage) {
+        // find out how to break in pages of 50 items each
+        let pages = Math.trunc(birdList.length / maxTableItems);
+        if (birdList.length - pages * maxTableItems > 0)
+            pages += 1;
+
+        let activePage = `<li class="page-item active">`;
+        let page = `<li class="page-item">`;
+
+        let pagination = `<nav aria-label="Page navigation example mt-3">` +
+            `<ul class="pagination justify-content-start mt-3">`;
+            
+
+        for (i = 0; i < pages; i++) {
+            if(i === selectedPage - 1)
+                pagination = pagination.concat(`${activePage}<a class="page-link" href="#birds-${i + 1}">${i + 1}</a></li>`);
+            else
+                pagination = pagination.concat(`${page}<a class="page-link" href="#birds-${i + 1}">${i + 1}</a></li>`);
+        }
+        pagination = pagination.concat(`</ul></nav>`);
+
+        return pagination;
+    }
 
     function buildBirdsTable(birdList) {
 
+        return showBirdsPage(birdList, 1);
+
+        //let pagination = paginate(birdList);
+        
+        //// build and display html table with birdList
+        //let th = `<th style="color:#0366D6">`
+        //var table = `${pagination}<table><thead><tr>${th}Id</th>${th}Name</th>${th}SciName</th>${th}FamilyId</th></tr></thead><tbody>`;
+        //var index = 2;
+        //for (bird in birdList) {
+        //    let id = birdList[bird].id;
+        //    let name = birdList[bird].name;
+        //    let sciname = birdList[bird].sciName;
+        //    let familyid = birdList[bird].familyId;
+        //    let td = '<td style="padding-left: 10px; color:#fff">';
+        //    let tr = (index++ % 2 === 0) ? '<tr style="background-color:#444">' : '<tr>';
+        //    table = table.concat(`${tr}${td}${id}</td>${td}${name}</td>${td}${sciname}</td>${td}${familyid}</td></tr>`);
+        //}
+        //table = table.concat(`</tbody></table>${pagination}`);
+        //$('#bird-table').empty();
+        //$('#bird-table').append(`${table}`);
+        //$('#reload-birds').css('visibility', 'visible');
+        //$('#sort-birds').css('visibility', 'visible');
+        //reloadTabs.BIRDS = 1;
+    }
+
+
+    function showBirdsPage(birdList, page) {
+
+        let pagination = paginate(birdList, page);
+
         // build and display html table with birdList
         let th = `<th style="color:#0366D6">`
-        var table = `<table><thead><tr>${th}Id</th>${th}Name</th>${th}SciName</th>${th}FamilyId</th></tr></thead><tbody>`;
-        var index = 2;
-        for (bird in birdList) {
-            let id = birdList[bird].id;
-            let name = birdList[bird].name;
-            let sciname = birdList[bird].sciName;
-            let familyid = birdList[bird].familyId;
+        var table = `${pagination}<table><thead><tr>${th}Id</th>${th}Name</th>${th}SciName</th>${th}FamilyId</th></tr></thead><tbody>`;
+        var i = 2;
+        var index = (page - 1) * 50;
+        var last = (page * 50) - 1; 
+
+        // check if we are in the last page and correct the 'last' value
+        last = last > birdList.length ? birdList.length - 1 : last;
+
+        for (index; index <= last; index++) {
+            let id = birdList[index].id;
+            let name = birdList[index].name;
+            let sciname = birdList[index].sciName;
+            let familyid = birdList[index].familyId;
             let td = '<td style="padding-left: 10px; color:#fff">';
-            let tr = (index++ % 2 === 0) ? '<tr style="background-color:#444">' : '<tr>';
+            let tr = (i++ % 2 === 0) ? '<tr style="background-color:#444">' : '<tr>';
             table = table.concat(`${tr}${td}${id}</td>${td}${name}</td>${td}${sciname}</td>${td}${familyid}</td></tr>`);
         }
-        table = table.concat(`</tbody></table>`);
+        table = table.concat(`</tbody></table>${pagination}`);
         $('#bird-table').empty();
         $('#bird-table').append(`${table}`);
         $('#reload-birds').css('visibility', 'visible');
