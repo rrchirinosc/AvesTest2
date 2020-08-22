@@ -30,12 +30,15 @@
         document.getElementById("sort-stats").addEventListener("click", sortStats);
         document.getElementById("sort-birds").addEventListener("click", sortBirds);
         document.getElementById("sort-images").addEventListener("click", sortImages);
-        //event to have the bird pages selector show the clicked on page
+        //event to have the bird/image pages selector show the clicked on page
         document.querySelector('body').addEventListener('click', function (e) {
             e.preventDefault();
             if (e.target.className === 'page-link') {
-                let val = parseInt(e.target.hash[e.target.hash.length - 1]);
-                showBirdsPage(loadedBirds, val);                
+                let val = parseInt(e.target.outerText);
+                if (e.target.hash.includes("birds"))
+                    showBirdsPage(loadedBirds, val);
+                else
+                    showImagesPage(loadedImages, val);
             }
         });
     };
@@ -166,8 +169,8 @@
     };
 
    
-    function paginate(birdList, selectedPage) {
-        // find out how to break in pages of 50 items each
+    function paginateBirds(birdList, selectedPage) {
+        // find out how to break in pages of maxTableItems(50) items each
         let pages = Math.trunc(birdList.length / maxTableItems);
         if (birdList.length - pages * maxTableItems > 0)
             pages += 1;
@@ -175,7 +178,7 @@
         let activePage = `<li class="page-item active">`;
         let page = `<li class="page-item">`;
 
-        let pagination = `<nav aria-label="Page navigation example mt-3">` +
+        let pagination = `<nav aria-label="Birds navigation">` +
             `<ul class="pagination justify-content-start mt-3">`;
             
 
@@ -192,35 +195,13 @@
 
     function buildBirdsTable(birdList) {
 
-        return showBirdsPage(birdList, 1);
-
-        //let pagination = paginate(birdList);
-        
-        //// build and display html table with birdList
-        //let th = `<th style="color:#0366D6">`
-        //var table = `${pagination}<table><thead><tr>${th}Id</th>${th}Name</th>${th}SciName</th>${th}FamilyId</th></tr></thead><tbody>`;
-        //var index = 2;
-        //for (bird in birdList) {
-        //    let id = birdList[bird].id;
-        //    let name = birdList[bird].name;
-        //    let sciname = birdList[bird].sciName;
-        //    let familyid = birdList[bird].familyId;
-        //    let td = '<td style="padding-left: 10px; color:#fff">';
-        //    let tr = (index++ % 2 === 0) ? '<tr style="background-color:#444">' : '<tr>';
-        //    table = table.concat(`${tr}${td}${id}</td>${td}${name}</td>${td}${sciname}</td>${td}${familyid}</td></tr>`);
-        //}
-        //table = table.concat(`</tbody></table>${pagination}`);
-        //$('#bird-table').empty();
-        //$('#bird-table').append(`${table}`);
-        //$('#reload-birds').css('visibility', 'visible');
-        //$('#sort-birds').css('visibility', 'visible');
-        //reloadTabs.BIRDS = 1;
+        return showBirdsPage(birdList, 1);       
     }
 
 
     function showBirdsPage(birdList, page) {
 
-        let pagination = paginate(birdList, page);
+        let pagination = paginateBirds(birdList, page);
 
         // build and display html table with birdList
         let th = `<th style="color:#0366D6">`
@@ -249,32 +230,69 @@
         reloadTabs.BIRDS = 1;
     }
 
-    function buildImagesTable(imageList) {
+    function paginateImages(imageList, selectedPage) {
+        // find out how to break in pages of maxTableItems (50) items each
+        let pages = Math.trunc(imageList.length / maxTableItems);
+        if (imageList.length - pages * maxTableItems > 0)
+            pages += 1;
+
+        let activePage = `<li class="page-item active">`;
+        let page = `<li class="page-item">`;
+
+        let pagination = `<nav aria-label="Images navigation">` +
+            `<ul class="pagination justify-content-start mt-3">`;
+
+        for (i = 0; i < pages; i++) {
+            if (i === selectedPage - 1)
+                pagination = pagination.concat(`${activePage}<a class="page-link" href="#images-${i + 1}">${i + 1}</a></li>`);
+            else
+                pagination = pagination.concat(`${page}<a class="page-link" href="#images-${i + 1}">${i + 1}</a></li>`);
+        }
+        pagination = pagination.concat(`</ul></nav>`);
+
+        return pagination;
+    }
+
+    function showImagesPage(imageList, page) {
+
+        let pagination = paginateImages(imageList, page);
 
         let th = `<th style="color:#0366D6">`;
-        var table = `<table style="font-size:14px"><thead><tr>${th}Id</th>${th}BirdId</th>${th}FileName</th>${th}Location</th>${th}Date</th>${th}Country</th>${th}Coordinate</th>${th}Key</th>${th}</tr></thead><tbody>`;
-        var index = 2;
+        var table = `${pagination}<table style="font-size:14px"><thead><tr>${th}Id</th>${th}BirdId</th>${th}FileName</th>${th}Location</th>${th}Date</th>${th}Country</th>${th}Coordinate</th>${th}Key</th>${th}</tr></thead><tbody>`;
+
+        var i = 2;
+        var index = (page - 1) * 50;
+        var last = (page * 50) - 1;
+
+        // check if we are in the last page and correct the 'last' value
+        last = last > imageList.length ? imageList.length - 1 : last;
+
         // add a row at the time as we iterate through list
-        for (image in imageList) {
-            let id = imageList[image].id;
-            let birdid = imageList[image].birdId;
-            let filename = imageList[image].fileName;
-            let location = imageList[image].location;
-            let date = imageList[image].date;
-            let country = imageList[image].country;
-            let coordinate = imageList[image].coordinate;
-            let keyimage = imageList[image].keyImage == true ? 'x' : ' ';
+        for (index; index <= last; index++) {
+            let id = imageList[index].id;
+            let birdid = imageList[index].birdId;
+            let filename = imageList[index].fileName;
+            let location = imageList[index].location;
+            let date = imageList[index].date;
+            let country = imageList[index].country;
+            let coordinate = imageList[index].coordinate;
+            let keyimage = imageList[index].keyImage == true ? 'x' : ' ';
             let td = '<td style="padding-left: 10px; color:#fff">';
-            let tr = (index++ % 2 === 0) ? '<tr style="background-color:#444">' : '<tr>';
+            let tr = (i++ % 2 === 0) ? '<tr style="background-color:#444">' : '<tr>';
             table = table.concat(`${tr}${td}${id}</td>${td}${birdid}</td>${td}${filename}</td>${td}${location}</td>` +
                 `${td}${date}</td>${td}${country}</td>${td}${coordinate}</td>${td}${keyimage}</td></tr>`);
         }
-        table = table.concat(`</tbody></table>`);
+        table = table.concat(`</tbody></table>${pagination}`);
         $('#image-table').empty();
         $('#image-table').append(`${table}`);
         $('#reload-image-data').css('visibility', 'visible');
         $('#sort-images').css('visibility', 'visible');
         reloadTabs.IMAGES = 1;
+    }
+
+    function buildImagesTable(imageList) {
+
+        return showImagesPage(imageList, 1);       
     }
 
     function buildStatsTable(imagesPerBird) {
